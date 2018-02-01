@@ -8,6 +8,9 @@
 
 @interface UIColor (ColorPalette)
 
-+(UIColor*)navigationBarColor;
++(UIColor*)navigationBarFW;
 
++ (UIColor *)buttonBackgorundFW;
+
++ (UIColor *)buttonTintFW;
 @end

@@ -7,7 +7,10 @@
 //
 
 #import "MainView.h"
+#import "MainViewController.h"
 #import "UILabel+Style.h"
+#import "UIButton+Style.h"
+#import "UIView+GetController.h"
 
 @implementation MainView
 
@@ -15,63 +18,50 @@
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     self = [super initWithFrame:frame];
     self.backgroundColor = UIColor.whiteColor;
+
+    UIViewController *superViewController = [[self superview] getViewController];
+
     
-    CGFloat topInset = 100;
-    CGFloat leftInset = 32;
-    CGFloat rightInset = 32;
+    CGFloat topInset = 24;
+    CGFloat leftInset = 24;
+    CGFloat rightInset = 24;
     CGFloat internalMarginSize = 16;
     CGFloat elementWidth = self.bounds.size.width - leftInset - rightInset;
-    CGFloat elementHeight = 30;
+    CGFloat elementHeight = 32;
     CGFloat halfSizeElementWidth = (elementWidth - internalMarginSize) / 2;
     
-#pragma mark originLabel
-    CGRect originLabelFrame = CGRectMake(leftInset, topInset, elementWidth, elementHeight);
-    UILabel *originLabel = [UILabel newWithFrame:originLabelFrame usingTitle:@"Откуда"];
-    [self addSubview:originLabel];
-    
-#pragma mark originTextField
-    CGRect originTextFieldFrame = CGRectMake(leftInset,
-                                             originLabelFrame.origin.y + originLabelFrame.size.height + internalMarginSize,
-                                             elementWidth,
-                                             elementHeight);
-    UITextField *originTextField = [[UITextField alloc] initWithFrame:originTextFieldFrame];
-    [self applyTextFieldStyleTo:originTextField usingPlaceholder:@"Город или название аэропорта"];
-    [self addSubview:originTextField];
-    
-#pragma mark destinationLabel
-    CGRect destinationLabelFrame = CGRectMake(leftInset,
-                                              originTextFieldFrame.origin.y + originTextFieldFrame.size.height + internalMarginSize,
-                                              elementWidth, elementHeight);
-    UILabel *destinationLabel = [UILabel newWithFrame:destinationLabelFrame usingTitle:@"Куда"];
-    [self addSubview:destinationLabel];
-    
-#pragma mark destinationTextField
-    CGRect destinationTextFieldFrame = CGRectMake(leftInset,
-                                                  destinationLabelFrame.origin.y + destinationLabelFrame.size.height + internalMarginSize,
-                                                  elementWidth,
-                                                  elementHeight);
-    UITextField *destinationTextField = [[UITextField alloc] initWithFrame:destinationTextFieldFrame];
-    [self applyTextFieldStyleTo:destinationTextField usingPlaceholder:@"Город или название аэропорта"];
-    [self addSubview:destinationTextField];
-    
+#pragma mark originButton
+    CGRect originButtonFrame = CGRectMake(leftInset, topInset, elementWidth, elementHeight);
+    UIButton *originButton = [[UIButton alloc] initWithFrame:originButtonFrame title:@"Откуда"];
+    [originButton addTarget:superViewController action:@selector(goSelectOrigin) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:originButton];
+
+#pragma mark destinationButton
+    CGRect destinationButtonFrame = CGRectMake(leftInset,
+            originButtonFrame.origin.y + originButtonFrame.size.height + internalMarginSize,
+            elementWidth, elementHeight);
+    UILabel *destinationButton = [[UIButton alloc] initWithFrame:destinationButtonFrame title:@"Куда"];
+    [originButton addTarget:superViewController action:@selector(goSelectDestination) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:destinationButton];
+
 #pragma mark PERSON COUNT
-    
+
 #pragma mark adultsCountLabel
     CGRect adultsCountLabelFrame = CGRectMake(leftInset,
-                                              destinationTextFieldFrame.origin.y + destinationTextFieldFrame.size.height + 3 * internalMarginSize,
-                                              halfSizeElementWidth,
-                                              elementHeight);
+            destinationButtonFrame.origin.y + destinationButtonFrame.size.height + 3 * internalMarginSize,
+            halfSizeElementWidth,
+            elementHeight);
     UILabel *adultsCountLabel = [UILabel newWithFrame:adultsCountLabelFrame usingTitle:@"Количество взрослых"];
     [self addSubview:adultsCountLabel];
-    
+
 #pragma mark childrenCountLabel
     CGRect childrenCountLabelFrame = CGRectMake(leftInset + halfSizeElementWidth + internalMarginSize,
-                                                destinationTextFieldFrame.origin.y + destinationTextFieldFrame.size.height + 3 * internalMarginSize,
-                                                halfSizeElementWidth,
-                                                elementHeight);
+            destinationButtonFrame.origin.y + destinationButtonFrame.size.height + 3 * internalMarginSize,
+            halfSizeElementWidth,
+            elementHeight);
     UILabel *childrenCountLabel = [UILabel newWithFrame:childrenCountLabelFrame usingTitle:@"Количество детей"];
     [self addSubview:childrenCountLabel];
-    
+
 #pragma mark adultCountStepper
     CGRect adultsCountStepperFrame = CGRectMake(leftInset - internalMarginSize + halfSizeElementWidth / 2,
                                                 adultsCountLabelFrame.origin.y + adultsCountLabelFrame.size.height + internalMarginSize,

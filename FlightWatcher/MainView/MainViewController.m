@@ -60,4 +60,13 @@
     [self.navigationController pushViewController:resultsController animated:YES];
 }
 
+-(void) goSelectOrigin {
+    NSLog(@"YOYOYOYO");
+}
+
+
+-(void) goSelectDestination {
+    NSLog(@"YOYOYOYO");
+}
+
 @end

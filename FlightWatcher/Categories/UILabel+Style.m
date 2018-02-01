@@ -7,7 +7,7 @@
 
 @implementation UILabel (Style)
 
-+(instancetype)newWithFrame:(CGRect)frame usingTitle:(NSString *__nullable)title alignment:(NSTextAlignment)alignment {
++ (instancetype)newWithFrame:(CGRect)frame usingTitle:(NSString *__nullable)title alignment:(NSTextAlignment)alignment {
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.font = [UIFont systemFontOfSize:14];
     label.textColor = UIColor.blackColor;
@@ -20,7 +20,7 @@
     return label;
 }
 
-+(instancetype)newWithFrame:(CGRect)frame usingTitle:(NSString* __nullable)title {
++ (instancetype)newWithFrame:(CGRect)frame usingTitle:(NSString* __nullable)title {
     return [UILabel newWithFrame:frame usingTitle:title alignment:nil];
 }
 
