@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"[MainNavigationController viewDidLoad]");
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     MainViewController *firstViewController = [[MainViewController alloc] init];
     [self setupNavigationOutlook];
     [self pushViewController:firstViewController animated:YES];
@@ -26,6 +26,7 @@
 }
 
 - (void) setupNavigationOutlook {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     self.navigationBar.barTintColor = UIColor.navigationBarColor;
 }
 

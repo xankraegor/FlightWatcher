@@ -19,12 +19,13 @@
 #pragma mark Life cycle
 
 - (void)viewDidLoad {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     [super viewDidLoad];
-    NSLog(@"[MainViewController viewDidLoad]");
     [self performViewInitialization];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     [super viewWillAppear:animated];
     [self.navigationItem setTitle:@"Поиск билетов"];
 
@@ -36,7 +37,7 @@
 #pragma mark - View Initialization
 
 - (void) performViewInitialization {
-    NSLog(@"[MainViewController performViewInitialization]");
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     self.view = [[MainView alloc]initWithFrame:self.view.frame];
 
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc]
@@ -53,6 +54,7 @@
 #pragma mark - Navigation
 
 - (void) presentSearchResultsController {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     [self.navigationItem setTitle:nil];
     SearchResultsTableViewController *resultsController = [[SearchResultsTableViewController alloc] init];
     [self.navigationController pushViewController:resultsController animated:YES];

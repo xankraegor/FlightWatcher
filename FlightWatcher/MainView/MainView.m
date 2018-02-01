@@ -11,7 +11,7 @@
 @implementation MainView
 
 - (id)initWithFrame:(CGRect)frame {
-    NSLog(@"[MainView initWithFrame]");
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     self = [super initWithFrame:frame];
     self.backgroundColor = UIColor.whiteColor;
     

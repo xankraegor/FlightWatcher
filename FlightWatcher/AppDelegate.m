@@ -18,6 +18,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     [self performViewInitialization];
     return YES;
 }
@@ -101,6 +102,7 @@
 # pragma mark - View initialization sequence
 
 - (void) performViewInitialization {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     CGRect frame = [UIScreen mainScreen].bounds;
     self.window = [[UIWindow alloc] initWithFrame:frame];
     MainNavigationController *navigationController = [[MainNavigationController alloc] init];
