@@ -12,4 +12,5 @@
 
 - (id)initWithFrame:(CGRect)frame;
 
+- (void)activateButtons;
 @end

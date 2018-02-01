@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "SearchResultsTableViewController.h"
 #import "MainView.h"
+#import "DataManager.h"
 
 @interface MainViewController ()
 
@@ -20,6 +21,7 @@
 
 - (void)viewDidLoad {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    [[DataManager sharedInstance] loadData];
     [super viewDidLoad];
     [self performViewInitialization];
 }
@@ -28,10 +30,17 @@
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     [super viewWillAppear:animated];
     [self.navigationItem setTitle:@"Поиск билетов"];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataLoadingCompletion)
+                                                 name:kDataManagerLoadDataDidComplete object:nil];
 
     // 'Bar button remains highlighted' bug workaround:
     self.navigationController.navigationBar.tintAdjustmentMode = UIViewTintAdjustmentModeNormal;
     self.navigationController.navigationBar.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kDataManagerLoadDataDidComplete
+                                                  object:nil];
 }
 
 #pragma mark - View Initialization
@@ -49,6 +58,11 @@
 
 }
 
+#pragma mark - Loading data
+
+- (void)dataLoadingCompletion {
+    [self.view performSelector:@selector(activateButtons)];
+}
 
 
 #pragma mark - Navigation
@@ -66,7 +80,7 @@
 
 
 -(void) goSelectDestination {
-    NSLog(@"YOYOYOYO");
+    NSLog(@"BOBOBOBO");
 }
 
 @end

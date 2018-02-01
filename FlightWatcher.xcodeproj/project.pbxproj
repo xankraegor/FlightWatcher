@@ -10,6 +10,7 @@
 		2A0284AA2023CACE004EFC23 /* cities.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A0284A72023CACD004EFC23 /* cities.json */; };
 		2A0284AB2023CACE004EFC23 /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A0284A82023CACE004EFC23 /* countries.json */; };
 		2A0284AC2023CACE004EFC23 /* airports.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A0284A92023CACE004EFC23 /* airports.json */; };
+		2A0284B12023D17A004EFC23 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0284B02023D17A004EFC23 /* DataManager.m */; };
 		2AEEBADF2020ECC9005D5C60 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEBADE2020ECC9005D5C60 /* AppDelegate.m */; };
 		2AEEBAE82020ECC9005D5C60 /* FlightWatcher.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEBAE62020ECC9005D5C60 /* FlightWatcher.xcdatamodeld */; };
 		2AEEBAEA2020ECC9005D5C60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AEEBAE92020ECC9005D5C60 /* Assets.xcassets */; };
@@ -19,16 +20,21 @@
 		2AEEBAFF202101D5005D5C60 /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEBAFE202101D5005D5C60 /* MainNavigationController.m */; };
 		2AEEBB022021125C005D5C60 /* SearchResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEBB012021125C005D5C60 /* SearchResultsTableViewController.m */; };
 		2AEEBB0520214884005D5C60 /* MainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEBB0420214884005D5C60 /* MainView.m */; };
+		3765F0F2FB15B1F66D12007E /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765FDCFB05A542DF29F72E1 /* City.m */; };
 		3765F3E8031042099D980C2C /* UIView+GetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F18A77F6E30F74D0D29B /* UIView+GetController.m */; };
 		3765F446DEB215BDEF74B01E /* UIButton+Style.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F48E218BF8FCD2C3B7E6 /* UIButton+Style.m */; };
 		3765F4E689BF8A5812087D28 /* UILabel+Style.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765FCD364B528ED8519143D /* UILabel+Style.m */; };
 		3765F91D94D71DF3196572BE /* UIColor+ColorPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F08C7DDB7E97E69177A4 /* UIColor+ColorPalette.m */; };
+		3765FBA4EA6471B1F397E8E4 /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F986C01F4FD9E12BA979 /* Country.m */; };
+		3765FC8DA732C14069998FCC /* Airport.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F0B9D09269E9326735BD /* Airport.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2A0284A72023CACD004EFC23 /* cities.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cities.json; sourceTree = "<group>"; };
 		2A0284A82023CACE004EFC23 /* countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countries.json; sourceTree = "<group>"; };
 		2A0284A92023CACE004EFC23 /* airports.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports.json; sourceTree = "<group>"; };
+		2A0284AF2023D17A004EFC23 /* DataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
+		2A0284B02023D17A004EFC23 /* DataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		2AEEBADA2020ECC9005D5C60 /* FlightWatcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlightWatcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AEEBADD2020ECC9005D5C60 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2AEEBADE2020ECC9005D5C60 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -45,14 +51,20 @@
 		2AEEBB0320214884005D5C60 /* MainView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainView.h; sourceTree = "<group>"; };
 		2AEEBB0420214884005D5C60 /* MainView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainView.m; sourceTree = "<group>"; };
 		3765F08C7DDB7E97E69177A4 /* UIColor+ColorPalette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorPalette.m"; sourceTree = "<group>"; };
+		3765F0B9D09269E9326735BD /* Airport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Airport.m; sourceTree = "<group>"; };
 		3765F18A77F6E30F74D0D29B /* UIView+GetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GetController.m"; sourceTree = "<group>"; };
+		3765F2E72F85975A168732B8 /* Country.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Country.h; sourceTree = "<group>"; };
 		3765F40F4D438D47F81EDF26 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		3765F48E218BF8FCD2C3B7E6 /* UIButton+Style.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Style.m"; sourceTree = "<group>"; };
+		3765F4B17A946993AB07BC43 /* Airport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Airport.h; sourceTree = "<group>"; };
 		3765F70F96D8F3B55185B062 /* UILabel+Style.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Style.h"; sourceTree = "<group>"; };
 		3765F95C6A4DB7C1D79E1598 /* UIView+GetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+GetController.h"; sourceTree = "<group>"; };
+		3765F986C01F4FD9E12BA979 /* Country.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Country.m; sourceTree = "<group>"; };
 		3765FAF4EBC7F5FB45C9BD90 /* UIButton+Style.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Style.h"; sourceTree = "<group>"; };
+		3765FC12282EB63718469C73 /* City.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = City.h; sourceTree = "<group>"; };
 		3765FCD364B528ED8519143D /* UILabel+Style.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Style.m"; sourceTree = "<group>"; };
 		3765FCFEC5AB205FFC47DF57 /* UIColor+ColorPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorPalette.h"; sourceTree = "<group>"; };
+		3765FDCFB05A542DF29F72E1 /* City.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = City.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +88,22 @@
 			path = PlacesData;
 			sourceTree = "<group>";
 		};
+		2A0284AE2023D127004EFC23 /* PlacesClasses */ = {
+			isa = PBXGroup;
+			children = (
+				2A0284AD2023CB43004EFC23 /* PlacesData */,
+				3765F986C01F4FD9E12BA979 /* Country.m */,
+				2A0284AF2023D17A004EFC23 /* DataManager.h */,
+				2A0284B02023D17A004EFC23 /* DataManager.m */,
+				3765F2E72F85975A168732B8 /* Country.h */,
+				3765FDCFB05A542DF29F72E1 /* City.m */,
+				3765FC12282EB63718469C73 /* City.h */,
+				3765F0B9D09269E9326735BD /* Airport.m */,
+				3765F4B17A946993AB07BC43 /* Airport.h */,
+			);
+			path = PlacesClasses;
+			sourceTree = "<group>";
+		};
 		2AEEBAD12020ECC9005D5C60 = {
 			isa = PBXGroup;
 			children = (
@@ -97,7 +125,6 @@
 			children = (
 				2AEEBADD2020ECC9005D5C60 /* AppDelegate.h */,
 				2AEEBADE2020ECC9005D5C60 /* AppDelegate.m */,
-				2A0284AD2023CB43004EFC23 /* PlacesData */,
 				2AEEBB07202148BD005D5C60 /* NavigationController */,
 				2AEEBB06202148AA005D5C60 /* MainView */,
 				2AEEBB002021125C005D5C60 /* SearchResultsTableViewController.h */,
@@ -106,6 +133,7 @@
 				2AEEBAF72020ECFF005D5C60 /* Other */,
 				3765F40F4D438D47F81EDF26 /* Info.plist */,
 				2AEEBB0820214BC2005D5C60 /* Categories */,
+				2A0284AE2023D127004EFC23 /* PlacesClasses */,
 			);
 			path = FlightWatcher;
 			sourceTree = "<group>";
@@ -237,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2AEEBAE82020ECC9005D5C60 /* FlightWatcher.xcdatamodeld in Sources */,
+				2A0284B12023D17A004EFC23 /* DataManager.m in Sources */,
 				2AEEBAF02020ECC9005D5C60 /* main.m in Sources */,
 				2AEEBADF2020ECC9005D5C60 /* AppDelegate.m in Sources */,
 				2AEEBB022021125C005D5C60 /* SearchResultsTableViewController.m in Sources */,
@@ -247,6 +276,9 @@
 				3765F4E689BF8A5812087D28 /* UILabel+Style.m in Sources */,
 				3765F446DEB215BDEF74B01E /* UIButton+Style.m in Sources */,
 				3765F3E8031042099D980C2C /* UIView+GetController.m in Sources */,
+				3765FBA4EA6471B1F397E8E4 /* Country.m in Sources */,
+				3765F0F2FB15B1F66D12007E /* City.m in Sources */,
+				3765FC8DA732C14069998FCC /* Airport.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,12 +7,14 @@
 //
 
 #import "MainView.h"
-#import "MainViewController.h"
 #import "UILabel+Style.h"
 #import "UIButton+Style.h"
 #import "UIView+GetController.h"
 
-@implementation MainView
+@implementation MainView {
+    UIButton *originButton;
+    UIButton *destinationButton;
+}
 
 - (id)initWithFrame:(CGRect)frame {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
@@ -21,7 +23,6 @@
 
     UIViewController *superViewController = [[self superview] getViewController];
 
-    
     CGFloat topInset = 24;
     CGFloat leftInset = 24;
     CGFloat rightInset = 24;
@@ -32,16 +33,18 @@
     
 #pragma mark originButton
     CGRect originButtonFrame = CGRectMake(leftInset, topInset, elementWidth, elementHeight);
-    UIButton *originButton = [[UIButton alloc] initWithFrame:originButtonFrame title:@"Откуда"];
+    originButton = [[UIButton alloc] initWithFrame:originButtonFrame title:@"Откуда"];
     [originButton addTarget:superViewController action:@selector(goSelectOrigin) forControlEvents:UIControlEventTouchUpInside];
+    [originButton setEnabled:false];
     [self addSubview:originButton];
 
 #pragma mark destinationButton
     CGRect destinationButtonFrame = CGRectMake(leftInset,
             originButtonFrame.origin.y + originButtonFrame.size.height + internalMarginSize,
             elementWidth, elementHeight);
-    UILabel *destinationButton = [[UIButton alloc] initWithFrame:destinationButtonFrame title:@"Куда"];
-    [originButton addTarget:superViewController action:@selector(goSelectDestination) forControlEvents:UIControlEventTouchUpInside];
+    destinationButton = [[UIButton alloc] initWithFrame:destinationButtonFrame title:@"Куда"];
+    [destinationButton addTarget:superViewController action:@selector(goSelectDestination) forControlEvents:UIControlEventTouchUpInside];
+    [destinationButton setEnabled:false];
     [self addSubview:destinationButton];
 
 #pragma mark PERSON COUNT
@@ -115,12 +118,10 @@
     return self;
 }
 
-
-
--(void)applyTextFieldStyleTo: (UITextField*)textField usingPlaceholder:(NSString* __nullable)placeholder {
-    textField.borderStyle = UITextBorderStyleRoundedRect;
-    textField.font = [UIFont systemFontOfSize:14];
-    textField.placeholder = placeholder;
+-(void)activateButtons {
+    [originButton setEnabled:true];
+    [destinationButton setEnabled:true];
 }
+
 
 @end
