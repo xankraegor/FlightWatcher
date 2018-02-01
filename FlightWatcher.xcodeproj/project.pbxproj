@@ -16,6 +16,7 @@
 		2AEEBAFF202101D5005D5C60 /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEBAFE202101D5005D5C60 /* MainNavigationController.m */; };
 		2AEEBB022021125C005D5C60 /* SearchResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEBB012021125C005D5C60 /* SearchResultsTableViewController.m */; };
 		2AEEBB0520214884005D5C60 /* MainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEBB0420214884005D5C60 /* MainView.m */; };
+		3765F4E689BF8A5812087D28 /* UILabel+Style.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765FCD364B528ED8519143D /* UILabel+Style.m */; };
 		3765F91D94D71DF3196572BE /* UIColor+ColorPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F08C7DDB7E97E69177A4 /* UIColor+ColorPalette.m */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,8 @@
 		2AEEBB0420214884005D5C60 /* MainView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainView.m; sourceTree = "<group>"; };
 		3765F08C7DDB7E97E69177A4 /* UIColor+ColorPalette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorPalette.m"; sourceTree = "<group>"; };
 		3765F40F4D438D47F81EDF26 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
+		3765F70F96D8F3B55185B062 /* UILabel+Style.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Style.h"; sourceTree = "<group>"; };
+		3765FCD364B528ED8519143D /* UILabel+Style.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Style.m"; sourceTree = "<group>"; };
 		3765FCFEC5AB205FFC47DF57 /* UIColor+ColorPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorPalette.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +130,8 @@
 			children = (
 				3765F08C7DDB7E97E69177A4 /* UIColor+ColorPalette.m */,
 				3765FCFEC5AB205FFC47DF57 /* UIColor+ColorPalette.h */,
+				3765FCD364B528ED8519143D /* UILabel+Style.m */,
+				3765F70F96D8F3B55185B062 /* UILabel+Style.h */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -209,6 +214,7 @@
 				2AEEBB0520214884005D5C60 /* MainView.m in Sources */,
 				2AEEBAFF202101D5005D5C60 /* MainNavigationController.m in Sources */,
 				3765F91D94D71DF3196572BE /* UIColor+ColorPalette.m in Sources */,
+				3765F4E689BF8A5812087D28 /* UILabel+Style.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

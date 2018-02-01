@@ -7,6 +7,7 @@
 //
 
 #import "MainView.h"
+#import "UILabel+Style.h"
 
 @implementation MainView
 
@@ -25,8 +26,7 @@
     
 #pragma mark originLabel
     CGRect originLabelFrame = CGRectMake(leftInset, topInset, elementWidth, elementHeight);
-    UILabel *originLabel = [[UILabel alloc] initWithFrame:originLabelFrame];
-    [self applyLabelStyleTo:originLabel usingTitle:@"Откуда"];
+    UILabel *originLabel = [UILabel newWithFrame:originLabelFrame usingTitle:@"Откуда"];
     [self addSubview:originLabel];
     
 #pragma mark originTextField
@@ -42,8 +42,7 @@
     CGRect destinationLabelFrame = CGRectMake(leftInset,
                                               originTextFieldFrame.origin.y + originTextFieldFrame.size.height + internalMarginSize,
                                               elementWidth, elementHeight);
-    UILabel *destinationLabel = [[UILabel alloc] initWithFrame:destinationLabelFrame];
-    [self applyLabelStyleTo:destinationLabel usingTitle:@"Куда"];
+    UILabel *destinationLabel = [UILabel newWithFrame:destinationLabelFrame usingTitle:@"Куда"];
     [self addSubview:destinationLabel];
     
 #pragma mark destinationTextField
@@ -62,8 +61,7 @@
                                               destinationTextFieldFrame.origin.y + destinationTextFieldFrame.size.height + 3 * internalMarginSize,
                                               halfSizeElementWidth,
                                               elementHeight);
-    UILabel *adultsCountLabel = [[UILabel alloc] initWithFrame:adultsCountLabelFrame];
-    [self applyLabelStyleTo:adultsCountLabel usingTitle:@"Количество взрослых"];
+    UILabel *adultsCountLabel = [UILabel newWithFrame:adultsCountLabelFrame usingTitle:@"Количество взрослых"];
     [self addSubview:adultsCountLabel];
     
 #pragma mark childrenCountLabel
@@ -71,8 +69,7 @@
                                                 destinationTextFieldFrame.origin.y + destinationTextFieldFrame.size.height + 3 * internalMarginSize,
                                                 halfSizeElementWidth,
                                                 elementHeight);
-    UILabel *childrenCountLabel = [[UILabel alloc] initWithFrame:childrenCountLabelFrame];
-    [self applyLabelStyleTo:childrenCountLabel usingTitle:@"Количество детей"];
+    UILabel *childrenCountLabel = [UILabel newWithFrame:childrenCountLabelFrame usingTitle:@"Количество детей"];
     [self addSubview:childrenCountLabel];
     
 #pragma mark adultCountStepper
@@ -96,8 +93,7 @@
                                          adultsCountLabelFrame.origin.y + adultsCountLabelFrame.size.height + internalMarginSize,
                                          halfSizeElementWidth / 2 - internalMarginSize / 2,
                                          elementHeight);
-    UILabel *adultsLabel = [[UILabel alloc] initWithFrame:adultsLabelFrame];
-    [self applyLabelStyleTo:adultsLabel usingTitle:@"0"];
+    UILabel *adultsLabel = [UILabel newWithFrame:adultsLabelFrame usingTitle:@"0"];
     [self addSubview:adultsLabel];
     
 #pragma mark childrenLabel
@@ -105,8 +101,7 @@
                                            adultsCountLabelFrame.origin.y + adultsCountLabelFrame.size.height + internalMarginSize,
                                            halfSizeElementWidth / 2  - internalMarginSize / 2,
                                            elementHeight);
-    UILabel *childrenLabel = [[UILabel alloc] initWithFrame:childrenLabelFrame];
-    [self applyLabelStyleTo:childrenLabel usingTitle:@"0"];
+    UILabel *childrenLabel = [UILabel newWithFrame:childrenLabelFrame usingTitle:@"0"];
     [self addSubview:childrenLabel];
     
 #pragma mark TRANSFER COUNT
@@ -116,8 +111,7 @@
                                                 adultsLabelFrame.origin.y + adultsLabelFrame.size.height + 3 * internalMarginSize,
                                                 elementWidth * 2/3,
                                                 elementHeight);
-    UILabel *tansfersCountLabel = [[UILabel alloc]initWithFrame:tansfersCountLabelFrame];
-    [self applyLabelStyleTo:tansfersCountLabel usingTitle:@"Количество пересадок:    0"];
+    UILabel *tansfersCountLabel = [UILabel newWithFrame:tansfersCountLabelFrame usingTitle:@"Количество пересадок:    0"];
     [self addSubview:tansfersCountLabel];
     
 #pragma mark transfersCountStepper
@@ -131,12 +125,7 @@
     return self;
 }
 
--(void)applyLabelStyleTo: (UILabel*)label usingTitle:(NSString* __nullable)title {
-    label.font = [UIFont systemFontOfSize:14];
-    label.textColor = UIColor.blackColor;
-    label.textAlignment = NSTextAlignmentCenter;
-    label.text = title;
-}
+
 
 -(void)applyTextFieldStyleTo: (UITextField*)textField usingPlaceholder:(NSString* __nullable)placeholder {
     textField.borderStyle = UITextBorderStyleRoundedRect;
