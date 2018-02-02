@@ -21,7 +21,7 @@
 }
 
 + (instancetype)newWithFrame:(CGRect)frame usingTitle:(NSString* __nullable)title {
-    return [UILabel newWithFrame:frame usingTitle:title alignment:nil];
+    return [UILabel newWithFrame:frame usingTitle:title alignment:(NSTextAlignmentCenter)];
 }
 
 @end

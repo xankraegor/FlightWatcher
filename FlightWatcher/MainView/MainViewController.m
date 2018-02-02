@@ -10,6 +10,7 @@
 #import "SearchResultsTableViewController.h"
 #import "MainView.h"
 #import "DataManager.h"
+#import "PlacesTableViewController.h"
 
 @interface MainViewController ()
 
@@ -70,17 +71,27 @@
 - (void) presentSearchResultsController {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     [self.navigationItem setTitle:nil];
-    SearchResultsTableViewController *resultsController = [[SearchResultsTableViewController alloc] init];
-    [self.navigationController pushViewController:resultsController animated:YES];
+    SearchResultsTableViewController *controller = [[SearchResultsTableViewController alloc] init];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
--(void) goSelectOrigin {
-    NSLog(@"YOYOYOYO");
+-(void)presentOriginSelectionView {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    [self.navigationItem setTitle:nil];
+    PlacesTableViewController *controller = [[PlacesTableViewController alloc]
+            initWithStyle:UITableViewStylePlain
+           toReturnOrigin:true];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 
--(void) goSelectDestination {
-    NSLog(@"BOBOBOBO");
+-(void)presentDestinationSelectionView {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    [self.navigationItem setTitle:nil];
+    PlacesTableViewController *controller = [[PlacesTableViewController alloc]
+            initWithStyle:UITableViewStylePlain
+           toReturnOrigin:false];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 @end

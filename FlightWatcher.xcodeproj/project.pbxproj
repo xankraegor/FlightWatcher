@@ -11,6 +11,7 @@
 		2A0284AB2023CACE004EFC23 /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A0284A82023CACE004EFC23 /* countries.json */; };
 		2A0284AC2023CACE004EFC23 /* airports.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A0284A92023CACE004EFC23 /* airports.json */; };
 		2A0284B12023D17A004EFC23 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0284B02023D17A004EFC23 /* DataManager.m */; };
+		2A0284B42023D7FF004EFC23 /* PlacesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0284B32023D7FF004EFC23 /* PlacesTableViewController.m */; };
 		2AEEBADF2020ECC9005D5C60 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEBADE2020ECC9005D5C60 /* AppDelegate.m */; };
 		2AEEBAE82020ECC9005D5C60 /* FlightWatcher.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEBAE62020ECC9005D5C60 /* FlightWatcher.xcdatamodeld */; };
 		2AEEBAEA2020ECC9005D5C60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AEEBAE92020ECC9005D5C60 /* Assets.xcassets */; };
@@ -35,6 +36,8 @@
 		2A0284A92023CACE004EFC23 /* airports.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports.json; sourceTree = "<group>"; };
 		2A0284AF2023D17A004EFC23 /* DataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		2A0284B02023D17A004EFC23 /* DataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		2A0284B22023D7FF004EFC23 /* PlacesTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlacesTableViewController.h; sourceTree = "<group>"; };
+		2A0284B32023D7FF004EFC23 /* PlacesTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlacesTableViewController.m; sourceTree = "<group>"; };
 		2AEEBADA2020ECC9005D5C60 /* FlightWatcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlightWatcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AEEBADD2020ECC9005D5C60 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2AEEBADE2020ECC9005D5C60 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -104,6 +107,15 @@
 			path = PlacesClasses;
 			sourceTree = "<group>";
 		};
+		2A0284B52023D807004EFC23 /* PlacesSelectionView */ = {
+			isa = PBXGroup;
+			children = (
+				2A0284B22023D7FF004EFC23 /* PlacesTableViewController.h */,
+				2A0284B32023D7FF004EFC23 /* PlacesTableViewController.m */,
+			);
+			path = PlacesSelectionView;
+			sourceTree = "<group>";
+		};
 		2AEEBAD12020ECC9005D5C60 = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +139,7 @@
 				2AEEBADE2020ECC9005D5C60 /* AppDelegate.m */,
 				2AEEBB07202148BD005D5C60 /* NavigationController */,
 				2AEEBB06202148AA005D5C60 /* MainView */,
+				2A0284B52023D807004EFC23 /* PlacesSelectionView */,
 				2AEEBB002021125C005D5C60 /* SearchResultsTableViewController.h */,
 				2AEEBB012021125C005D5C60 /* SearchResultsTableViewController.m */,
 				2AEEBAF62020ECEF005D5C60 /* CoreData */,
@@ -269,6 +282,7 @@
 				2AEEBAF02020ECC9005D5C60 /* main.m in Sources */,
 				2AEEBADF2020ECC9005D5C60 /* AppDelegate.m in Sources */,
 				2AEEBB022021125C005D5C60 /* SearchResultsTableViewController.m in Sources */,
+				2A0284B42023D7FF004EFC23 /* PlacesTableViewController.m in Sources */,
 				2AEEBAFC2020FCE6005D5C60 /* MainViewController.m in Sources */,
 				2AEEBB0520214884005D5C60 /* MainView.m in Sources */,
 				2AEEBAFF202101D5005D5C60 /* MainNavigationController.m in Sources */,

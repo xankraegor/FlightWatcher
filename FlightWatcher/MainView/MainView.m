@@ -34,7 +34,7 @@
 #pragma mark originButton
     CGRect originButtonFrame = CGRectMake(leftInset, topInset, elementWidth, elementHeight);
     originButton = [[UIButton alloc] initWithFrame:originButtonFrame title:@"Откуда"];
-    [originButton addTarget:superViewController action:@selector(goSelectOrigin) forControlEvents:UIControlEventTouchUpInside];
+    [originButton addTarget:superViewController action:@selector(presentOriginSelectionView) forControlEvents:UIControlEventTouchUpInside];
     [originButton setEnabled:false];
     [self addSubview:originButton];
 
@@ -43,7 +43,7 @@
             originButtonFrame.origin.y + originButtonFrame.size.height + internalMarginSize,
             elementWidth, elementHeight);
     destinationButton = [[UIButton alloc] initWithFrame:destinationButtonFrame title:@"Куда"];
-    [destinationButton addTarget:superViewController action:@selector(goSelectDestination) forControlEvents:UIControlEventTouchUpInside];
+    [destinationButton addTarget:superViewController action:@selector(presentDestinationSelectionView) forControlEvents:UIControlEventTouchUpInside];
     [destinationButton setEnabled:false];
     [self addSubview:destinationButton];
 
