@@ -9,13 +9,10 @@
 #import "Country.h"
 #import "City.h"
 #import "Airport.h"
+#import "DataSourceTypeEnum.h"
 #define  kDataManagerLoadDataDidComplete  @"DataManagerLoadDataDidComplete"
 
-typedef  enum  DataSourceType {
-    DataSourceTypeCountry,
-    DataSourceTypeCity,
-    DataSourceTypeAirport
-}  DataSourceType;
+
 
 @interface  DataManager: NSObject
 + (instancetype) sharedInstance;

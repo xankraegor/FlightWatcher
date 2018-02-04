@@ -7,6 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DataSourceTypeEnum.h"
+#import "SearchResultsTableViewController.h"
+#import "MainView.h"
+#import "DataManager.h"
+#import "PlacesTableViewController.h"
+#import "SearchRequest.h"
 
 @interface MainViewController : UIViewController
 

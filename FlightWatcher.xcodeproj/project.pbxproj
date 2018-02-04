@@ -55,8 +55,10 @@
 		2AEEBB0420214884005D5C60 /* MainView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainView.m; sourceTree = "<group>"; };
 		3765F08C7DDB7E97E69177A4 /* UIColor+ColorPalette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorPalette.m"; sourceTree = "<group>"; };
 		3765F0B9D09269E9326735BD /* Airport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Airport.m; sourceTree = "<group>"; };
+		3765F1478A3AE1C0FD8CDA13 /* SearchRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchRequest.h; sourceTree = "<group>"; };
 		3765F18A77F6E30F74D0D29B /* UIView+GetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GetController.m"; sourceTree = "<group>"; };
 		3765F2E72F85975A168732B8 /* Country.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Country.h; sourceTree = "<group>"; };
+		3765F3B33450BAB89454EFC6 /* DataSourceTypeEnum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSourceTypeEnum.h; sourceTree = "<group>"; };
 		3765F40F4D438D47F81EDF26 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		3765F48E218BF8FCD2C3B7E6 /* UIButton+Style.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Style.m"; sourceTree = "<group>"; };
 		3765F4B17A946993AB07BC43 /* Airport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Airport.h; sourceTree = "<group>"; };
@@ -147,6 +149,8 @@
 				3765F40F4D438D47F81EDF26 /* Info.plist */,
 				2AEEBB0820214BC2005D5C60 /* Categories */,
 				2A0284AE2023D127004EFC23 /* PlacesClasses */,
+				3765F1478A3AE1C0FD8CDA13 /* SearchRequest.h */,
+				3765F3B33450BAB89454EFC6 /* DataSourceTypeEnum.h */,
 			);
 			path = FlightWatcher;
 			sourceTree = "<group>";

@@ -12,9 +12,10 @@
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCNotLocalizedStringInspection"
 @interface PlacesTableViewController ()
-
+@property ( nonatomic , strong ) UISegmentedControl *segmentedControl;
 @property (readonly, atomic) BOOL isOrigin;
 @property DataSourceType dataSourceType;
+
 
 @end
 
@@ -47,6 +48,29 @@ static NSString *cellId = @"PlaceCell";
 -(void) performViewInitialization {
     [[self tableView] registerClass:[UITableViewCell class] forCellReuseIdentifier:cellId];
 
+    _segmentedControl = [[ UISegmentedControl alloc] initWithItems:@[ @"Города" , @"Аэропорты" ]];
+    [_segmentedControl addTarget: self action: @selector (changeSource)
+                forControlEvents: UIControlEventValueChanged ];
+    _segmentedControl.tintColor = [ UIColor blackColor];
+    self .navigationItem.titleView = _segmentedControl;
+    _segmentedControl.selectedSegmentIndex = 0 ;
+    [ self changeSource];
+
+}
+
+-(void)changeSource {
+    switch ([_segmentedControl selectedSegmentIndex]) {
+        case (0):
+            _dataSourceType = DataSourceTypeCity;
+            [[self tableView] reloadData];
+            break;
+        case (1):
+            _dataSourceType = DataSourceTypeAirport;
+            [[self tableView] reloadData];
+            break;
+        default:
+            break;
+    }
 }
 
 
@@ -93,10 +117,25 @@ static NSString *cellId = @"PlaceCell";
 }
 
 
+#pragma mark - Table View Delegate
 
+- ( void )tableView:( UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    id place;
 
+    switch (_dataSourceType) {
+        case DataSourceTypeAirport:
+            place = [[[DataManager sharedInstance] airports] objectAtIndex:indexPath.row];
+            break;
+        case DataSourceTypeCity:
+            place = [[[DataManager sharedInstance] cities] objectAtIndex:indexPath.row];
+            break;
+        case DataSourceTypeCountry:
+            place = [[[DataManager sharedInstance] countries] objectAtIndex:indexPath.row];
+            break;
+    }
 
+    [self.delegate selectPlace:place withType:self.isOrigin andDataType:self.dataSourceType];
+    [self.navigationController popViewControllerAnimated: YES];
 
+}
 @end
-
-#pragma clang diagnostic pop

@@ -7,12 +7,11 @@
 //
 
 #import "MainViewController.h"
-#import "SearchResultsTableViewController.h"
-#import "MainView.h"
-#import "DataManager.h"
-#import "PlacesTableViewController.h"
 
-@interface MainViewController ()
+
+@interface MainViewController () <PlaceViewControllerDelegate>
+
+@property (nonatomic) SearchRequest searchRequest;
 
 @end
 
@@ -81,6 +80,7 @@
     PlacesTableViewController *controller = [[PlacesTableViewController alloc]
             initWithStyle:UITableViewStylePlain
            toReturnOrigin:true];
+    controller.delegate = self;
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -91,7 +91,33 @@
     PlacesTableViewController *controller = [[PlacesTableViewController alloc]
             initWithStyle:UITableViewStylePlain
            toReturnOrigin:false];
+    controller.delegate = self;
     [self.navigationController pushViewController:controller animated:YES];
+}
+
+#pragma mark - PlaceViewControllerDelegate
+- ( void )selectPlace:(id)place withType:(BOOL)isOrigin andDataType:(DataSourceType)dataType {
+    [ self setPlace:place withDataType:dataType andPlaceType:isOrigin];
+}
+- (void)setPlace:( id )place withDataType:(DataSourceType)dataType andPlaceType:(BOOL)isOrigin {
+    NSString *title;
+    NSString *data;
+    if (dataType == DataSourceTypeCity) {
+        City *city = (City *)place;
+        title = city.name;
+        data = city.code;
+    } else if (dataType == DataSourceTypeAirport) {
+        Airport *airport = (Airport *)place;
+        title = airport.name;
+        data = airport.cityCode;
+    }
+    if (isOrigin) {
+        _searchRequest.origin = data;
+    } else {
+        _searchRequest.destionation = data;
+    }
+
+    [(MainView *)self.view setTitle:title forOriginButton:isOrigin];
 }
 
 @end

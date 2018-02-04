@@ -10,7 +10,8 @@
 
 @interface MainView : UIView
 
-- (id)initWithFrame:(CGRect)frame;
 
+- (id)initWithFrame:(CGRect)frame;
 - (void)activateButtons;
+- (void)setTitle:(NSString*)title forOriginButton:(BOOL)isOrigin;
 @end
