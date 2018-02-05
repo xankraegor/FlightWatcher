@@ -17,7 +17,7 @@
         _countryCode = [dictionary valueForKey:@"country_code"];
         _cityCode = [dictionary valueForKey:@"city_code"];
         _code = [dictionary valueForKey:@"code"];
-        _flightable = [dictionary valueForKey:@"flightable"];
+        _flightable = (BOOL) [dictionary valueForKey:@"flightable"];
         NSDictionary *coords = [dictionary valueForKey:@"coordinates"];
         if (coords && ! [coords isEqual:[NSNull null]]) {
             NSNumber *lon = [coords valueForKey:@"lon"];

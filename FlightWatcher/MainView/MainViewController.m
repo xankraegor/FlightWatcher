@@ -114,7 +114,7 @@
     if (isOrigin) {
         _searchRequest.origin = data;
     } else {
-        _searchRequest.destionation = data;
+        _searchRequest.destination = data;
     }
 
     [(MainView *)self.view setTitle:title forOriginButton:isOrigin];

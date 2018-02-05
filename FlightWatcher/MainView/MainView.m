@@ -127,7 +127,7 @@
     if (isOrigin) {
         [originButton setTitle:[[NSString alloc] initWithFormat:@"Откуда: %@", title] forState:UIControlStateNormal];
     } else {
-        [destinationButton setTitle:[[NSString alloc] initWithFormat:@"Откуда: %@", title] forState:UIControlStateNormal];
+        [destinationButton setTitle:[[NSString alloc] initWithFormat:@"Куда: %@", title] forState:UIControlStateNormal];
     }
 }
 

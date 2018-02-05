@@ -12,10 +12,10 @@
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCNotLocalizedStringInspection"
 @interface PlacesTableViewController ()
-@property ( nonatomic , strong ) UISegmentedControl *segmentedControl;
-@property (readonly, atomic) BOOL isOrigin;
-@property DataSourceType dataSourceType;
 
+@property (strong, nonatomic) UISegmentedControl *segmentedControl;
+@property (readonly, nonatomic) BOOL isOrigin;
+@property (nonatomic) DataSourceType dataSourceType;
 
 @end
 
@@ -53,8 +53,8 @@ static NSString *cellId = @"PlaceCell";
                 forControlEvents: UIControlEventValueChanged ];
     _segmentedControl.tintColor = [ UIColor blackColor];
     self .navigationItem.titleView = _segmentedControl;
-    _segmentedControl.selectedSegmentIndex = 0 ;
-    [ self changeSource];
+    _segmentedControl.selectedSegmentIndex = 0;
+    [self changeSource];
 
 }
 
@@ -124,13 +124,13 @@ static NSString *cellId = @"PlaceCell";
 
     switch (_dataSourceType) {
         case DataSourceTypeAirport:
-            place = [[[DataManager sharedInstance] airports] objectAtIndex:indexPath.row];
+            place = DataManager.sharedInstance.airports[indexPath.row];
             break;
         case DataSourceTypeCity:
-            place = [[[DataManager sharedInstance] cities] objectAtIndex:indexPath.row];
+            place = DataManager.sharedInstance.cities[indexPath.row];
             break;
         case DataSourceTypeCountry:
-            place = [[[DataManager sharedInstance] countries] objectAtIndex:indexPath.row];
+            place = DataManager.sharedInstance.countries[indexPath.row];
             break;
     }
 
