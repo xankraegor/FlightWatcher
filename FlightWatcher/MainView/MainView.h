@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UILabel+Style.h"
+#import "UIButton+Style.h"
+#import "UIView+GetController.h"
 
 @interface MainView : UIView
 

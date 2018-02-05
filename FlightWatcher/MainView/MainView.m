@@ -7,9 +7,6 @@
 //
 
 #import "MainView.h"
-#import "UILabel+Style.h"
-#import "UIButton+Style.h"
-#import "UIView+GetController.h"
 
 @implementation MainView {
     UIButton *originButton;

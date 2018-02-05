@@ -7,6 +7,7 @@
 //
 
 #import "PlacesTableViewController.h"
+#import "PlaceTableViewCell.h"
 
 
 #pragma clang diagnostic push
@@ -46,7 +47,7 @@ static NSString *cellId = @"PlaceCell";
 #pragma mark - View initialization
 
 -(void) performViewInitialization {
-    [[self tableView] registerClass:[UITableViewCell class] forCellReuseIdentifier:cellId];
+    [self.tableView registerClass:PlaceTableViewCell.class forCellReuseIdentifier:cellId];
 
     _segmentedControl = [[ UISegmentedControl alloc] initWithItems:@[ @"Города" , @"Аэропорты" ]];
     [_segmentedControl addTarget: self action: @selector (changeSource)
@@ -95,11 +96,7 @@ static NSString *cellId = @"PlaceCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-    }
 
     switch (_dataSourceType) {
         case DataSourceTypeAirport:
