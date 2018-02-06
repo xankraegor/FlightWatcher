@@ -4,10 +4,11 @@
 //
 
 #import "APIManager.h"
+#import "Ticket.h"
 
-#define API_URL_CHEAP @ "https://api.travelpayouts.com/v1/prices/cheap"
-#define API_URL_IP_ADDRESS @ "https://api.ipify.org/?format=json"
-#define API_URL_CITY_FROM_IP @ "https://www.travelpayouts.com/whereami?ip="
+#define API_MAIN_HOST   @"api.travelpayouts.com/v1/prices/cheap"
+#define API_GET_IP      @"https://api.ipify.org/?format=json"
+#define API_CITY_FOR_IP @"https://www.travelpayouts.com/whereami?ip="
 
 
 @interface APIManager ()
@@ -25,7 +26,7 @@
         shared = [[APIManager alloc] init];
 
         NSString *path = [NSBundle.mainBundle pathForResource:@"apikey"
-                                                        ofType:@"plist"];
+                                                       ofType:@"plist"];
         NSDictionary *apiPlist = [NSDictionary dictionaryWithContentsOfFile:path];
         shared.apikey = apiPlist[@"apiToken"];
     });
@@ -34,8 +35,8 @@
 
 - (void)cityForCurrentIP:(void (^)(City *city))completion {
     [self IPAddressWithCompletion:^(NSString *ipAddress) {
-        NSString *urlString = [NSString stringWithFormat:@"%@%@", API_URL_CITY_FROM_IP, ipAddress];
-        [self load:urlString withCompletion:^(id result) {
+        NSString *urlString = [NSString stringWithFormat:@"%@%@", API_CITY_FOR_IP, ipAddress];
+        [self loadFromAPIWithURL:urlString completion:^(id result) {
             NSDictionary *json = result;
             NSString *cityCode = [json valueForKey:@"iata"];
             if (!cityCode) return;
@@ -49,15 +50,15 @@
 }
 
 - (void)IPAddressWithCompletion:(void (^)(NSString *ipAddress))completion {
-    [self load:API_URL_IP_ADDRESS withCompletion:^(id _Nullable result) {
+    [self loadFromAPIWithURL:API_GET_IP completion:^(id _Nullable result) {
         NSDictionary *json = result;
         NSLog(@"My ip address is: %@", [json valueForKey:@"ip"]);
         completion([json valueForKey:@"ip"]);
     }];
 }
 
-- (void)load:(NSString *)urlString withCompletion:(void (^)(id _Nullable result))completion {
-    NSURL *url = [NSURL URLWithString:urlString];
+- (void)loadFromAPIWithURL:(NSURL *)url completion:(void (^)(id _Nullable result))completion {
+
     [UIApplication.sharedApplication setNetworkActivityIndicatorVisible:YES];
     [[NSURLSession.sharedSession
             dataTaskWithURL:url
@@ -72,5 +73,69 @@
           }] resume];
 }
 
+#pragma mark Tickets request
+
+- (void)ticketsWithRequest:(SearchRequest)request withCompletion:(void (^)(NSArray *tickets))completion {
+
+    NSURL *url = [self urlForSearchRequest:request];
+    NSLog(@"Requset URL is: %@", url);
+
+    [self loadFromAPIWithURL:url completion:^(id result) {
+
+        NSDictionary *json = [[(NSDictionary *) result valueForKey:@"data"] valueForKey:request.destination];
+        if (!json) {
+            NSLog(@"JSON object not found");
+            return;
+        }
+
+        NSMutableArray *array = [NSMutableArray new];
+        for (NSString *key in json) {
+            NSDictionary *value = [json valueForKey:key];
+            Ticket *ticket = [[Ticket alloc] initWithDictionary:value];
+            ticket.from = request.origin;
+            ticket.to = request.destination;
+            [array addObject:ticket];
+        }
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(array);
+        });
+    }];
+
+}
+
+- (NSURL *)urlForSearchRequest:(SearchRequest)request {
+    NSURLComponents *components = [NSURLComponents new];
+    components.scheme = @"https";
+    components.host = API_MAIN_HOST;
+
+    NSMutableArray *queryItems = [NSMutableArray new];
+
+    NSURLQueryItem *token = [[NSURLQueryItem alloc] initWithName:@"token" value:_apikey];
+    [queryItems addObject:token];
+
+    NSURLQueryItem *origin = [[NSURLQueryItem alloc] initWithName:@"origin" value:request.origin];
+    [queryItems addObject:origin];
+
+    NSURLQueryItem *destination = [[NSURLQueryItem alloc] initWithName:@"destination" value:request.destination];
+    [queryItems addObject:destination];
+
+    if (request.departDate && request.returnDate) {
+        NSDateFormatter *dateFormatter = [NSDateFormatter new];
+        dateFormatter.dateFormat = @"yyyy-MM";
+
+        NSString *departDateString = [dateFormatter stringFromDate:request.departDate];
+        NSURLQueryItem *departDate = [[NSURLQueryItem alloc] initWithName:@"depart_date" value:departDateString];
+        [queryItems addObject:departDate];
+
+        NSString *returnDateString = [dateFormatter stringFromDate:request.returnDate];
+        NSURLQueryItem *destination = [[NSURLQueryItem alloc] initWithName:@"return_date" value:returnDateString];
+        [queryItems addObject:destination];
+    }
+
+    components.queryItems = queryItems;
+
+    return [components URL];
+}
 
 @end
