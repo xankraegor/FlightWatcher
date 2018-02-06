@@ -4,8 +4,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Ticket.h
+#import "Ticket.h"
 
 @interface TicketTableViewCell : UITableViewCell
-@property (nonatomic, strong) Ticket *ticket;
+@property(nonatomic, strong) Ticket *ticket;
 @end

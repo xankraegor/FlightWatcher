@@ -7,13 +7,19 @@
 //
 
 #import "MainViewController.h"
+#import "DataSourceTypeEnum.h"
+#import "SearchResultsTableViewController.h"
+#import "MainView.h"
+#import "DataManager.h"
+#import "PlacesTableViewController.h"
+#import "SearchRequest.h"
+#import "APIManager.h"
 
 
 @interface MainViewController () <PlaceViewControllerDelegate>
-
 @property(nonatomic) SearchRequest searchRequest;
-
 @end
+
 
 @implementation MainViewController
 
@@ -70,8 +76,25 @@
 
 - (void)presentSearchResultsController {
     [self.navigationItem setTitle:nil];
-    SearchResultsTableViewController *controller = [[SearchResultsTableViewController alloc] init];
-    [self.navigationController pushViewController:controller animated:YES];
+    [APIManager.sharedInstance ticketsWithRequest:_searchRequest withCompletion:^(NSArray *tickets) {
+        if (tickets.count > 0) {
+            SearchResultsTableViewController *controller =
+                    [[SearchResultsTableViewController alloc] initWithTickets:tickets];
+            [self.navigationController pushViewController:controller animated:YES];
+        } else {
+            UIAlertController *alertController =
+                    [UIAlertController alertControllerWithTitle:@""
+                                                        message:@"По данному направлению билетов не найдено"
+                                                 preferredStyle:UIAlertControllerStyleAlert];
+
+            [alertController addAction:[UIAlertAction actionWithTitle:@"Закрыть"
+                                                                style:(UIAlertActionStyleDefault) handler:nil]];
+
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
+    }];
+
+
 }
 
 - (void)presentOriginSelectionView {

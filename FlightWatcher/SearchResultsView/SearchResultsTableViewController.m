@@ -10,14 +10,14 @@
 #import "TicketTableViewCell.h"
 
 @interface SearchResultsTableViewController ()
-@property (nonatomic, strong) NSArray *tickets;
+@property(nonatomic, strong) NSArray *tickets;
 @end
 
 @implementation SearchResultsTableViewController
 
 #pragma mark Life cycle
 
--(instancetype)initWithTickets:(NSArray *)tickets {
+- (instancetype)initWithTickets:(NSArray *)tickets {
     self = [super init];
     if (!self) return nil;
     _tickets = tickets;
@@ -28,9 +28,11 @@
 #pragma mark - View Initialization
 
 - (void)performViewInitialization {
+    [self.tableView registerClass:TicketTableViewCell.class forCellReuseIdentifier:@"TicketCellIdentifier"];
     self.view.backgroundColor = UIColor.whiteColor;
-    [self.navigationItem setTitle:@"Билеты"];
-    [self.navigationItem.backBarButtonItem setTitle:@"Назад"];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.navigationItem.title = @"Билеты";
+    self.navigationItem.backBarButtonItem.title = @"Назад";
 }
 
 #pragma mark - Table view data source
@@ -46,17 +48,16 @@
 #pragma mark - Table view delegate
 
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TicketTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TicketCellIdentifier"
                                                                 forIndexPath:indexPath];
     cell.ticket = _tickets[(NSUInteger) indexPath.row];
     return cell;
 }
 
--(CGFloat)tableView :(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 140.0;
 }
-
 
 
 @end

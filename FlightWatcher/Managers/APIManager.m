@@ -77,7 +77,7 @@
 
 - (void)ticketsWithRequest:(SearchRequest)request withCompletion:(void (^)(NSArray *tickets))completion {
 
-    NSString *urlString = [[self urlForSearchRequest:request] absoluteString];
+    NSString *urlString = [[[self urlForSearchRequest:request] absoluteString] stringByRemovingPercentEncoding];
     NSLog(@"Requset URL String is: %@", urlString);
 
     [self loadWithURLString:urlString completion:^(id result) {
