@@ -9,24 +9,23 @@
 #import "DataManager.h"
 
 @interface DataManager ()
-@property (nonatomic, strong) NSMutableArray *countriesArray;
-@property (nonatomic, strong) NSMutableArray *citiesArray;
-@property (nonatomic, strong) NSMutableArray *airportsArray;
+@property(nonatomic, strong) NSMutableArray *countriesArray;
+@property(nonatomic, strong) NSMutableArray *citiesArray;
+@property(nonatomic, strong) NSMutableArray *airportsArray;
 @end
 
-@implementation  DataManager
+@implementation DataManager
 
-+ (instancetype) sharedInstance {
-    static  DataManager * instance;
-    static  dispatch_once_t onceToken;
-    dispatch_once( &onceToken, ^ {
-        instance  = [[DataManager alloc] init];
++ (instancetype)sharedInstance {
+    static DataManager *instance;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [[DataManager alloc] init];
     });
     return instance;
 }
 
-- (void)loadData
-{
+- (void)loadData {
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0), ^{
         NSArray *countriesJsonArray = [self arrayFromFileName:@"countries" ofType:@"json"];
         _countriesArray = [self createObjectsFromArray:countriesJsonArray withType:DataSourceTypeCountry];
@@ -43,21 +42,18 @@
 }
 
 
-- (NSMutableArray *)createObjectsFromArray:(NSArray *)array withType:(DataSourceType)type
-{
+- (NSMutableArray *)createObjectsFromArray:(NSArray *)array withType:(DataSourceType)type {
     NSMutableArray *results = [NSMutableArray new];
     for (NSDictionary *jsonObject in array) {
         if (type == DataSourceTypeCountry) {
-            Country *country = [[Country alloc] initWithDictionary: jsonObject];
-            [results addObject: country];
-        }
-        else if (type == DataSourceTypeCity) {
-            City *city = [[City alloc] initWithDictionary: jsonObject];
-            [results addObject: city];
-        }
-        else if (type == DataSourceTypeAirport) {
-            Airport *airport = [[Airport alloc] initWithDictionary: jsonObject];
-            [results addObject: airport];
+            Country *country = [[Country alloc] initWithDictionary:jsonObject];
+            [results addObject:country];
+        } else if (type == DataSourceTypeCity) {
+            City *city = [[City alloc] initWithDictionary:jsonObject];
+            [results addObject:city];
+        } else if (type == DataSourceTypeAirport) {
+            Airport *airport = [[Airport alloc] initWithDictionary:jsonObject];
+            [results addObject:airport];
         }
     }
     return results;
@@ -67,7 +63,7 @@
     NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:type];
     NSData *data = [NSData dataWithContentsOfFile:path];
     return [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers
-                                              error:nil];
+                                             error:nil];
 }
 
 - (NSArray *)countries {

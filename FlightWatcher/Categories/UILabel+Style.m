@@ -20,7 +20,7 @@
     return label;
 }
 
-+ (instancetype)newWithFrame:(CGRect)frame usingTitle:(NSString* __nullable)title {
++ (instancetype)newWithFrame:(CGRect)frame usingTitle:(NSString *__nullable)title {
     return [UILabel newWithFrame:frame usingTitle:title alignment:(NSTextAlignmentCenter)];
 }
 

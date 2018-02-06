@@ -20,7 +20,6 @@
 }
 
 
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -89,12 +88,11 @@
 
 #pragma mark - View Initialization
 
--(void) performViewInitialization {
+- (void)performViewInitialization {
     self.view.backgroundColor = UIColor.whiteColor;
     [self.navigationItem setTitle:@"Результаты поиска"];
     [self.navigationItem.backBarButtonItem setTitle:@"Назад"];
 }
-
 
 
 @end

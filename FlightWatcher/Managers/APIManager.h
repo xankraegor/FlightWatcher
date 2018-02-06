@@ -5,10 +5,12 @@
 
 #import <Foundation/Foundation.h>
 #import "DataManager.h"
+#import "SearchRequest.h"
 
 @interface APIManager : NSObject
 
 + (instancetype)sharedInstance;
+
 - (void)cityForCurrentIP:(void (^)(City *city))completion;
 
 @end

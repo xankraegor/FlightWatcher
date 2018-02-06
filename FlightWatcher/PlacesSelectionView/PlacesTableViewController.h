@@ -11,10 +11,11 @@
 
 
 @protocol PlaceViewControllerDelegate <NSObject>
-- ( void )selectPlace:(id)place withType:(bool)isOrigin andDataType:(DataSourceType)dataType;
+- (void)selectPlace:(id)place withType:(bool)isOrigin andDataType:(DataSourceType)dataType;
 @end
 
 @interface PlacesTableViewController : UITableViewController
-@property (nonatomic, strong) id <PlaceViewControllerDelegate>delegate;
+@property(nonatomic, strong) id <PlaceViewControllerDelegate> delegate;
+
 - (instancetype)initWithStyle:(UITableViewStyle)style toReturnOrigin:(bool)isOrigin;
 @end

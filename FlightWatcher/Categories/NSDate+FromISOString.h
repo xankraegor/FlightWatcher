@@ -7,6 +7,6 @@
 
 @interface NSDate (FromISOString)
 
--(instancetype)initWithISOString:(NSString*)dateString;
+- (instancetype)initWithISOString:(NSString *)dateString;
 
 @end

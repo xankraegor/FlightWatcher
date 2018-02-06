@@ -10,17 +10,19 @@
 #import "City.h"
 #import "Airport.h"
 #import "DataSourceTypeEnum.h"
+
 #define kDataManagerLoadDataDidComplete  @"DataManagerLoadDataDidComplete"
 
 
+@interface DataManager : NSObject
++ (instancetype)sharedInstance;
 
-@interface  DataManager: NSObject
-+ (instancetype) sharedInstance;
 - (void)loadData;
-@property (nonatomic, strong, readonly) NSArray *countries;
+
+@property(nonatomic, strong, readonly) NSArray *countries;
 
 - (City *)cityForCityCode:(NSString *)iata;
 
-@property (nonatomic, strong, readonly) NSArray *cities;
-@property (nonatomic, strong, readonly) NSArray *airports;
+@property(nonatomic, strong, readonly) NSArray *cities;
+@property(nonatomic, strong, readonly) NSArray *airports;
 @end

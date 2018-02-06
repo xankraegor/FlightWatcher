@@ -12,11 +12,12 @@
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCNotLocalizedStringInspection"
+
 @interface PlacesTableViewController ()
 
-@property (strong, nonatomic) UISegmentedControl *segmentedControl;
-@property (readonly, nonatomic) BOOL isOrigin;
-@property (nonatomic) DataSourceType dataSourceType;
+@property(strong, nonatomic) UISegmentedControl *segmentedControl;
+@property(readonly, nonatomic) BOOL isOrigin;
+@property(nonatomic) DataSourceType dataSourceType;
 
 @end
 
@@ -28,7 +29,7 @@ static NSString *cellId = @"PlaceCell";
 
 #pragma mark - Initialization
 
--(instancetype)initWithStyle:(UITableViewStyle)style toReturnOrigin:(BOOL)isOrigin {
+- (instancetype)initWithStyle:(UITableViewStyle)style toReturnOrigin:(BOOL)isOrigin {
     self = [super initWithStyle:style];
     _isOrigin = isOrigin;
     _dataSourceType = DataSourceTypeCity;
@@ -45,20 +46,20 @@ static NSString *cellId = @"PlaceCell";
 
 #pragma mark - View initialization
 
--(void) performViewInitialization {
+- (void)performViewInitialization {
     [self.tableView registerClass:PlaceTableViewCell.class forCellReuseIdentifier:cellId];
 
-    _segmentedControl = [[ UISegmentedControl alloc] initWithItems:@[ @"Города" , @"Аэропорты" ]];
-    [_segmentedControl addTarget: self action: @selector (changeSource)
-                forControlEvents: UIControlEventValueChanged ];
-    _segmentedControl.tintColor = [ UIColor blackColor];
-    self .navigationItem.titleView = _segmentedControl;
+    _segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Города", @"Аэропорты"]];
+    [_segmentedControl addTarget:self action:@selector(changeSource)
+                forControlEvents:UIControlEventValueChanged];
+    _segmentedControl.tintColor = [UIColor blackColor];
+    self.navigationItem.titleView = _segmentedControl;
     _segmentedControl.selectedSegmentIndex = 0;
     [self changeSource];
 
 }
 
--(void)changeSource {
+- (void)changeSource {
     switch ([_segmentedControl selectedSegmentIndex]) {
         case (0):
             _dataSourceType = DataSourceTypeCity;
@@ -115,7 +116,7 @@ static NSString *cellId = @"PlaceCell";
 
 #pragma mark - Table View Delegate
 
-- ( void )tableView:( UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     id place;
     switch (_dataSourceType) {
         case DataSourceTypeAirport:
@@ -130,7 +131,7 @@ static NSString *cellId = @"PlaceCell";
     }
 
     [self.delegate selectPlace:place withType:self.isOrigin andDataType:self.dataSourceType];
-    [self.navigationController popViewControllerAnimated: YES];
+    [self.navigationController popViewControllerAnimated:YES];
 
 }
 @end

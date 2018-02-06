@@ -25,7 +25,7 @@
 
 }
 
-- (void) setupNavigationOutlook {
+- (void)setupNavigationOutlook {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     self.navigationBar.barTintColor = UIColor.navigationBarFW;
     self.navigationBar.translucent = false;

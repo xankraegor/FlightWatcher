@@ -9,10 +9,9 @@
 #import "MainViewController.h"
 
 
-
 @interface MainViewController () <PlaceViewControllerDelegate>
 
-@property (nonatomic) SearchRequest searchRequest;
+@property(nonatomic) SearchRequest searchRequest;
 
 @end
 
@@ -27,7 +26,7 @@
     [self performViewInitialization];
 }
 
--(void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationItem setTitle:@"Поиск билетов"];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataLoadingCompletion)
@@ -45,14 +44,14 @@
 
 #pragma mark - View Initialization
 
-- (void) performViewInitialization {
-    self.view = [[MainView alloc]initWithFrame:self.view.frame];
+- (void)performViewInitialization {
+    self.view = [[MainView alloc] initWithFrame:self.view.frame];
 
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc]
-                                        initWithTitle:@"Найти"
-                                        style:UIBarButtonItemStylePlain
-                                        target:self
-                                        action:@selector(presentSearchResultsController)];
+            initWithTitle:@"Найти"
+                    style:UIBarButtonItemStylePlain
+                   target:self
+                   action:@selector(presentSearchResultsController)];
     [self.navigationItem setRightBarButtonItem:rightButtonItem animated:NO];
 
 }
@@ -69,13 +68,13 @@
 
 #pragma mark - Navigation
 
-- (void) presentSearchResultsController {
+- (void)presentSearchResultsController {
     [self.navigationItem setTitle:nil];
     SearchResultsTableViewController *controller = [[SearchResultsTableViewController alloc] init];
     [self.navigationController pushViewController:controller animated:YES];
 }
 
--(void)presentOriginSelectionView {
+- (void)presentOriginSelectionView {
     [self.navigationItem setTitle:nil];
     PlacesTableViewController *controller = [[PlacesTableViewController alloc]
             initWithStyle:UITableViewStylePlain
@@ -85,7 +84,7 @@
 }
 
 
--(void)presentDestinationSelectionView {
+- (void)presentDestinationSelectionView {
     [self.navigationItem setTitle:nil];
     PlacesTableViewController *controller = [[PlacesTableViewController alloc]
             initWithStyle:UITableViewStylePlain
@@ -95,18 +94,20 @@
 }
 
 #pragma mark - PlaceViewControllerDelegate
-- ( void )selectPlace:(id)place withType:(BOOL)isOrigin andDataType:(DataSourceType)dataType {
+
+- (void)selectPlace:(id)place withType:(BOOL)isOrigin andDataType:(DataSourceType)dataType {
     [self setPlace:place ofType:dataType isOrigin:isOrigin];
 }
+
 - (void)setPlace:(id)place ofType:(DataSourceType)dataType isOrigin:(BOOL)isOrigin {
     NSString *title;
     NSString *data;
     if (dataType == DataSourceTypeCity) {
-        City *city = (City *)place;
+        City *city = (City *) place;
         title = city.name;
         data = city.code;
     } else if (dataType == DataSourceTypeAirport) {
-        Airport *airport = (Airport *)place;
+        Airport *airport = (Airport *) place;
         title = airport.name;
         data = airport.cityCode;
     }
@@ -116,7 +117,7 @@
         _searchRequest.destination = data;
     }
 
-    [(MainView *)self.view setTitle:title forOriginButton:isOrigin];
+    [(MainView *) self.view setTitle:title forOriginButton:isOrigin];
 }
 
 @end

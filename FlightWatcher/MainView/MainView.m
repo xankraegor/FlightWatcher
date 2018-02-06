@@ -28,7 +28,7 @@
     CGFloat buttonHeight = 54;
     CGFloat elementHeight = 32;
     CGFloat halfSizeElementWidth = (elementWidth - internalMarginSize) / 2;
-    
+
 #pragma mark originButton
     CGRect originButtonFrame = CGRectMake(leftInset, topInset, elementWidth, buttonHeight);
     originButton = [[UIButton alloc] initWithFrame:originButtonFrame title:@"Откуда"];
@@ -65,63 +65,63 @@
 
 #pragma mark adultCountStepper
     CGRect adultsCountStepperFrame = CGRectMake(leftInset - internalMarginSize + halfSizeElementWidth / 2,
-                                                adultsCountLabelFrame.origin.y + adultsCountLabelFrame.size.height + internalMarginSize,
-                                                halfSizeElementWidth / 2,
-                                                elementHeight);
-    UIStepper *adultCountStepper = [[UIStepper alloc]initWithFrame:adultsCountStepperFrame];
+            adultsCountLabelFrame.origin.y + adultsCountLabelFrame.size.height + internalMarginSize,
+            halfSizeElementWidth / 2,
+            elementHeight);
+    UIStepper *adultCountStepper = [[UIStepper alloc] initWithFrame:adultsCountStepperFrame];
     [self addSubview:adultCountStepper];
-    
+
 #pragma mark childrenCountStepper
     CGRect childrenCountStepperFrame = CGRectMake(leftInset + halfSizeElementWidth + halfSizeElementWidth / 2,
-                                                  childrenCountLabelFrame.origin.y + childrenCountLabelFrame.size.height + internalMarginSize,
-                                                  halfSizeElementWidth / 2,
-                                                  elementHeight);
-    UIStepper *childrenCountStepper = [[UIStepper alloc]initWithFrame:childrenCountStepperFrame];
+            childrenCountLabelFrame.origin.y + childrenCountLabelFrame.size.height + internalMarginSize,
+            halfSizeElementWidth / 2,
+            elementHeight);
+    UIStepper *childrenCountStepper = [[UIStepper alloc] initWithFrame:childrenCountStepperFrame];
     [self addSubview:childrenCountStepper];
-    
+
 #pragma mark adultsLabel
     CGRect adultsLabelFrame = CGRectMake(leftInset,
-                                         adultsCountLabelFrame.origin.y + adultsCountLabelFrame.size.height + internalMarginSize,
-                                         halfSizeElementWidth / 2 - internalMarginSize / 2,
-                                         elementHeight);
+            adultsCountLabelFrame.origin.y + adultsCountLabelFrame.size.height + internalMarginSize,
+            halfSizeElementWidth / 2 - internalMarginSize / 2,
+            elementHeight);
     UILabel *adultsLabel = [UILabel newWithFrame:adultsLabelFrame usingTitle:@"0"];
     [self addSubview:adultsLabel];
-    
+
 #pragma mark childrenLabel
     CGRect childrenLabelFrame = CGRectMake(leftInset + halfSizeElementWidth + internalMarginSize,
-                                           adultsCountLabelFrame.origin.y + adultsCountLabelFrame.size.height + internalMarginSize,
-                                           halfSizeElementWidth / 2  - internalMarginSize / 2,
-                                           elementHeight);
+            adultsCountLabelFrame.origin.y + adultsCountLabelFrame.size.height + internalMarginSize,
+            halfSizeElementWidth / 2 - internalMarginSize / 2,
+            elementHeight);
     UILabel *childrenLabel = [UILabel newWithFrame:childrenLabelFrame usingTitle:@"0"];
     [self addSubview:childrenLabel];
-    
+
 #pragma mark TRANSFER COUNT
-    
+
 #pragma mark transfersCountLabel
     CGRect tansfersCountLabelFrame = CGRectMake(leftInset,
-                                                adultsLabelFrame.origin.y + adultsLabelFrame.size.height + 3 * internalMarginSize,
-                                                elementWidth * 2/3,
-                                                elementHeight);
+            adultsLabelFrame.origin.y + adultsLabelFrame.size.height + 3 * internalMarginSize,
+            elementWidth * 2 / 3,
+            elementHeight);
     UILabel *tansfersCountLabel = [UILabel newWithFrame:tansfersCountLabelFrame usingTitle:@"Количество пересадок:    0"];
     [self addSubview:tansfersCountLabel];
-    
+
 #pragma mark transfersCountStepper
-    CGRect tansfersCountStepperFrame = CGRectMake(leftInset + elementWidth * 2/3,
-                                                  adultsLabelFrame.origin.y + adultsLabelFrame.size.height + 3 * internalMarginSize,
-                                                  elementWidth * 1/3,
-                                                  elementHeight);
-    UIStepper *tansfersCountStepper = [[UIStepper alloc]initWithFrame:tansfersCountStepperFrame];
+    CGRect tansfersCountStepperFrame = CGRectMake(leftInset + elementWidth * 2 / 3,
+            adultsLabelFrame.origin.y + adultsLabelFrame.size.height + 3 * internalMarginSize,
+            elementWidth * 1 / 3,
+            elementHeight);
+    UIStepper *tansfersCountStepper = [[UIStepper alloc] initWithFrame:tansfersCountStepperFrame];
     [self addSubview:tansfersCountStepper];
-    
+
     return self;
 }
 
--(void)activateButtons {
+- (void)activateButtons {
     [originButton setEnabled:true];
     [destinationButton setEnabled:true];
 }
 
-- (void) setTitle:(NSString*)title forOriginButton:(BOOL)isOrigin {
+- (void)setTitle:(NSString *)title forOriginButton:(BOOL)isOrigin {
     if (isOrigin) {
         [originButton setTitle:[[NSString alloc] initWithFormat:@"Откуда: %@", title] forState:UIControlStateNormal];
     } else {

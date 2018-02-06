@@ -9,7 +9,7 @@
 
 @implementation UIButton (Style)
 
--(instancetype)initWithFrame:(CGRect)frame title:(NSString *)title background:(UIColor *)bgcolor tint:(UIColor*)tintClr {
+- (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title background:(UIColor *)bgcolor tint:(UIColor *)tintClr {
     self = [[UIButton alloc] initWithFrame:frame];
 
     if (title) {
@@ -30,7 +30,7 @@
     return self;
 }
 
--(instancetype)initWithFrame:(CGRect)frame title:(NSString *)title {
+- (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title {
     self = [[UIButton alloc] initWithFrame:frame
                                      title:title
                                 background:UIColor.buttonBackgorundFW

@@ -5,8 +5,8 @@
 
 #import <Foundation/Foundation.h>
 
-typedef  enum  DataSourceType {
+typedef enum DataSourceType {
     DataSourceTypeCountry,
     DataSourceTypeCity,
     DataSourceTypeAirport
-}  DataSourceType;
+} DataSourceType;

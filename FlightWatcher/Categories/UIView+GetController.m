@@ -7,11 +7,11 @@
 
 @implementation UIView (GetController)
 
-- (UIViewController*)getViewController {
-    for (UIView* next = [self superview]; next; next = next.superview) {
-        UIResponder* nextResponder = [next nextResponder];
+- (UIViewController *)getViewController {
+    for (UIView *next = [self superview]; next; next = next.superview) {
+        UIResponder *nextResponder = [next nextResponder];
         if ([nextResponder isMemberOfClass:[UIViewController class]]) {
-            return (UIViewController*)nextResponder;
+            return (UIViewController *) nextResponder;
         }
     }
     return nil;

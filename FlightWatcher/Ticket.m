@@ -10,14 +10,14 @@
 
 }
 
-- (instancetype)initWithDictionary:( NSDictionary *)dictionary {
-    self = [super init ];
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary {
+    self = [super init];
     if (self) {
         _airline = dictionary[@"airline"];
-        _expires = [[NSDate alloc] initWithISOString:dictionary[@"expires_at" ]];
+        _expires = [[NSDate alloc] initWithISOString:dictionary[@"expires_at"]];
         _departure = [[NSDate alloc] initWithISOString:dictionary[@"departure_at"]];
-        _flightNumber = [dictionary valueForKey : @"flight_number"];
-        _price = [dictionary valueForKey : @"price"];
+        _flightNumber = [dictionary valueForKey:@"flight_number"];
+        _price = [dictionary valueForKey:@"price"];
         _returnDate = [[NSDate alloc] initWithISOString:dictionary[@"return_at"]];
     }
     return self;
