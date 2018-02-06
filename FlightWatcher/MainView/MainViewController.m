@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 
 
+
 @interface MainViewController () <PlaceViewControllerDelegate>
 
 @property (nonatomic) SearchRequest searchRequest;
@@ -20,14 +21,13 @@
 #pragma mark Life cycle
 
 - (void)viewDidLoad {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
-    [[DataManager sharedInstance] loadData];
+//    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     [super viewDidLoad];
+    [DataManager.sharedInstance loadData];
     [self performViewInitialization];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     [super viewWillAppear:animated];
     [self.navigationItem setTitle:@"Поиск билетов"];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataLoadingCompletion)
@@ -46,7 +46,6 @@
 #pragma mark - View Initialization
 
 - (void) performViewInitialization {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     self.view = [[MainView alloc]initWithFrame:self.view.frame];
 
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc]
@@ -62,20 +61,21 @@
 
 - (void)dataLoadingCompletion {
     [self.view performSelector:@selector(activateButtons)];
+    [APIManager.sharedInstance cityForCurrentIP:^(City *city) {
+        [self setPlace:city ofType:DataSourceTypeCity isOrigin:YES];
+    }];
 }
 
 
 #pragma mark - Navigation
 
 - (void) presentSearchResultsController {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     [self.navigationItem setTitle:nil];
     SearchResultsTableViewController *controller = [[SearchResultsTableViewController alloc] init];
     [self.navigationController pushViewController:controller animated:YES];
 }
 
 -(void)presentOriginSelectionView {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     [self.navigationItem setTitle:nil];
     PlacesTableViewController *controller = [[PlacesTableViewController alloc]
             initWithStyle:UITableViewStylePlain
@@ -86,7 +86,6 @@
 
 
 -(void)presentDestinationSelectionView {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     [self.navigationItem setTitle:nil];
     PlacesTableViewController *controller = [[PlacesTableViewController alloc]
             initWithStyle:UITableViewStylePlain
@@ -97,9 +96,9 @@
 
 #pragma mark - PlaceViewControllerDelegate
 - ( void )selectPlace:(id)place withType:(BOOL)isOrigin andDataType:(DataSourceType)dataType {
-    [ self setPlace:place withDataType:dataType andPlaceType:isOrigin];
+    [self setPlace:place ofType:dataType isOrigin:isOrigin];
 }
-- (void)setPlace:( id )place withDataType:(DataSourceType)dataType andPlaceType:(BOOL)isOrigin {
+- (void)setPlace:(id)place ofType:(DataSourceType)dataType isOrigin:(BOOL)isOrigin {
     NSString *title;
     NSString *data;
     if (dataType == DataSourceTypeCity) {

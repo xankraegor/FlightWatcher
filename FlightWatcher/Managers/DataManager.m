@@ -82,4 +82,14 @@
     return _airportsArray;
 }
 
+
+- (City *)cityForCityCode:(NSString *)code {
+    if (!code) return nil;
+    for (City *city in _citiesArray) {
+        if (city.code == code) {
+            return city;
+        }
+    }
+    return nil;
+}
 @end

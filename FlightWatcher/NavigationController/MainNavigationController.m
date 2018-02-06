@@ -29,6 +29,7 @@
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     self.navigationBar.barTintColor = UIColor.navigationBarFW;
     self.navigationBar.translucent = false;
+    self.navigationBar.prefersLargeTitles = true;
 }
 
 @end

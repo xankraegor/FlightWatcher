@@ -5,7 +5,7 @@
 
 #import "UIButton+Style.h"
 #import "UIColor+ColorPalette.h"
-
+#import <CoreGraphics/CoreGraphics.h>
 
 @implementation UIButton (Style)
 
@@ -20,9 +20,13 @@
         [self setTitle:@"Unnamed" forState:UIControlStateDisabled];
     }
 
-    [self setBackgroundColor:(bgcolor ? bgcolor : UIColor.clearColor)];
-    [self setTintColor:(tintClr ? tintClr : [UIColor colorWithRed:0.0 green:122.0 / 255.0 blue:1.0 alpha:1.0])];
-    [self.layer setCornerRadius:7.0];
+    UIColor *mainColor = (bgcolor ? bgcolor : UIColor.clearColor);
+    self.backgroundColor = mainColor;
+    self.tintColor = (tintClr ? tintClr : [UIColor colorWithRed:0.0 green:122.0 / 255.0 blue:1.0 alpha:1.0]);
+    self.layer.cornerRadius = 15.0;
+    self.layer.shadowColor = [mainColor CGColor];
+    self.layer.shadowOpacity = 1;
+    self.layer.shadowRadius = 10;
     return self;
 }
 
@@ -33,6 +37,5 @@
                                       tint:UIColor.buttonTintFW];
     return self;
 }
-
 
 @end

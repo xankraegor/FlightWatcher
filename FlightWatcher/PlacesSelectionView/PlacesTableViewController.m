@@ -35,7 +35,6 @@ static NSString *cellId = @"PlaceCell";
     return self;
 }
 
-
 #pragma mark - Life cycle
 
 - (void)viewDidLoad {
@@ -97,16 +96,16 @@ static NSString *cellId = @"PlaceCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
-
+    DataManager *man = DataManager.sharedInstance;
     switch (_dataSourceType) {
         case DataSourceTypeAirport:
-            [[cell textLabel] setText:[[[DataManager sharedInstance] airports][(NSUInteger) indexPath.row] name]];
+            [[cell textLabel] setText:[man.airports[(NSUInteger) indexPath.row] name]];
             break;
         case DataSourceTypeCity:
-            [[cell textLabel] setText:[[[DataManager sharedInstance] cities][(NSUInteger) indexPath.row] name]];
+            [[cell textLabel] setText:[man.cities[(NSUInteger) indexPath.row] name]];
             break;
         case DataSourceTypeCountry:
-            [[cell textLabel] setText:[[[DataManager sharedInstance] countries][(NSUInteger) indexPath.row] name]];
+            [[cell textLabel] setText:[man.countries[(NSUInteger) indexPath.row] name]];
             break;
     }
 
@@ -118,16 +117,15 @@ static NSString *cellId = @"PlaceCell";
 
 - ( void )tableView:( UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     id place;
-
     switch (_dataSourceType) {
         case DataSourceTypeAirport:
-            place = DataManager.sharedInstance.airports[indexPath.row];
+            place = DataManager.sharedInstance.airports[(NSUInteger) indexPath.row];
             break;
         case DataSourceTypeCity:
-            place = DataManager.sharedInstance.cities[indexPath.row];
+            place = DataManager.sharedInstance.cities[(NSUInteger) indexPath.row];
             break;
         case DataSourceTypeCountry:
-            place = DataManager.sharedInstance.countries[indexPath.row];
+            place = DataManager.sharedInstance.countries[(NSUInteger) indexPath.row];
             break;
     }
 

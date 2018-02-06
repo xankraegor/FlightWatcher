@@ -25,11 +25,12 @@
     CGFloat rightInset = 24;
     CGFloat internalMarginSize = 16;
     CGFloat elementWidth = self.bounds.size.width - leftInset - rightInset;
+    CGFloat buttonHeight = 54;
     CGFloat elementHeight = 32;
     CGFloat halfSizeElementWidth = (elementWidth - internalMarginSize) / 2;
     
 #pragma mark originButton
-    CGRect originButtonFrame = CGRectMake(leftInset, topInset, elementWidth, elementHeight);
+    CGRect originButtonFrame = CGRectMake(leftInset, topInset, elementWidth, buttonHeight);
     originButton = [[UIButton alloc] initWithFrame:originButtonFrame title:@"Откуда"];
     [originButton addTarget:superViewController action:@selector(presentOriginSelectionView) forControlEvents:UIControlEventTouchUpInside];
     [originButton setEnabled:false];
@@ -38,7 +39,7 @@
 #pragma mark destinationButton
     CGRect destinationButtonFrame = CGRectMake(leftInset,
             originButtonFrame.origin.y + originButtonFrame.size.height + internalMarginSize,
-            elementWidth, elementHeight);
+            elementWidth, buttonHeight);
     destinationButton = [[UIButton alloc] initWithFrame:destinationButtonFrame title:@"Куда"];
     [destinationButton addTarget:superViewController action:@selector(presentDestinationSelectionView) forControlEvents:UIControlEventTouchUpInside];
     [destinationButton setEnabled:false];

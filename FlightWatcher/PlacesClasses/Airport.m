@@ -7,8 +7,7 @@
 
 @implementation Airport
 
--(instancetype) initWithDictionary:(NSDictionary *)dictionary
-{
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
         _timezone = [dictionary valueForKey:@"time_zone"];
@@ -19,14 +18,15 @@
         _code = [dictionary valueForKey:@"code"];
         _flightable = (BOOL) [dictionary valueForKey:@"flightable"];
         NSDictionary *coords = [dictionary valueForKey:@"coordinates"];
-        if (coords && ! [coords isEqual:[NSNull null]]) {
+        if (coords && ![coords isEqual:[NSNull null]]) {
             NSNumber *lon = [coords valueForKey:@"lon"];
             NSNumber *lat = [coords valueForKey:@"lat"];
             if (![lon isEqual:[NSNull null]] && ![lat isEqual:[NSNull null]]) {
                 _coordinate = CLLocationCoordinate2DMake([lat doubleValue], [lon doubleValue]);
             }
         }
-    } return self;
+    }
+    return self;
 }
 
 @end
