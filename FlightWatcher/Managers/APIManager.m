@@ -36,7 +36,7 @@
 - (void)cityForCurrentIP:(void (^)(City *city))completion {
     [self IPAddressWithCompletion:^(NSString *ipAddress) {
         NSString *urlString = [NSString stringWithFormat:@"%@%@", API_CITY_FOR_IP, ipAddress];
-        [self loadFromAPIWithURL:urlString completion:^(id result) {
+        [self loadWithURLString:urlString completion:^(id result) {
             NSDictionary *json = result;
             NSString *cityCode = [json valueForKey:@"iata"];
             if (!cityCode) return;
@@ -50,22 +50,22 @@
 }
 
 - (void)IPAddressWithCompletion:(void (^)(NSString *ipAddress))completion {
-    [self loadFromAPIWithURL:API_GET_IP completion:^(id _Nullable result) {
+    [self loadWithURLString:API_GET_IP completion:^(id _Nullable result) {
         NSDictionary *json = result;
         NSLog(@"My ip address is: %@", [json valueForKey:@"ip"]);
         completion([json valueForKey:@"ip"]);
     }];
 }
 
-- (void)loadFromAPIWithURL:(NSURL *)url completion:(void (^)(id _Nullable result))completion {
-
-    [UIApplication.sharedApplication setNetworkActivityIndicatorVisible:YES];
+- (void)loadWithURLString:(NSString *)urlString completion:(void (^)(id _Nullable result))completion {
+    NSURL *url = [[NSURL alloc] initWithString:urlString];
+    UIApplication.sharedApplication.networkActivityIndicatorVisible = YES;
     [[NSURLSession.sharedSession
             dataTaskWithURL:url
           completionHandler:^(
                   NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
               dispatch_async(dispatch_get_main_queue(), ^{
-                  [UIApplication.sharedApplication setNetworkActivityIndicatorVisible:NO];
+                  UIApplication.sharedApplication.networkActivityIndicatorVisible = NO;
               });
               completion([NSJSONSerialization JSONObjectWithData:data
                                                          options:NSJSONReadingMutableContainers
@@ -77,10 +77,10 @@
 
 - (void)ticketsWithRequest:(SearchRequest)request withCompletion:(void (^)(NSArray *tickets))completion {
 
-    NSURL *url = [self urlForSearchRequest:request];
-    NSLog(@"Requset URL is: %@", url);
+    NSString *urlString = [[self urlForSearchRequest:request] absoluteString];
+    NSLog(@"Requset URL String is: %@", urlString);
 
-    [self loadFromAPIWithURL:url completion:^(id result) {
+    [self loadWithURLString:urlString completion:^(id result) {
 
         NSDictionary *json = [[(NSDictionary *) result valueForKey:@"data"] valueForKey:request.destination];
         if (!json) {
@@ -129,13 +129,17 @@
         [queryItems addObject:departDate];
 
         NSString *returnDateString = [dateFormatter stringFromDate:request.returnDate];
-        NSURLQueryItem *destination = [[NSURLQueryItem alloc] initWithName:@"return_date" value:returnDateString];
-        [queryItems addObject:destination];
+        NSURLQueryItem *returnDate = [[NSURLQueryItem alloc] initWithName:@"return_date" value:returnDateString];
+        [queryItems addObject:returnDate];
     }
 
     components.queryItems = queryItems;
 
     return [components URL];
+}
+
+- (NSURL *)urlWithAirlineLogoForIATACode:(NSString *)code {
+    return [NSURL URLWithString:[NSString stringWithFormat:@ "https://pics.avs.io/200/200/%@.png", code]];
 }
 
 @end
