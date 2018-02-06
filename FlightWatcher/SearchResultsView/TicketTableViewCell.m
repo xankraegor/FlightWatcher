@@ -6,6 +6,7 @@
 #import "TicketTableViewCell.h"
 #import <YYWebImage/YYWebImage.h>
 #import "APIManager.h"
+#import "UIColor+ColorPalette.h"
 
 @interface TicketTableViewCell ()
 @property(nonatomic, strong) UIImageView *airlineLogoView;
@@ -20,11 +21,11 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (!self) return nil;
 
-    self.contentView.layer.shadowColor = [[[UIColor blackColor] colorWithAlphaComponent:0.2] CGColor];
+    self.contentView.layer.shadowColor = [[UIColor cellShadowColorFW] CGColor];
     self.contentView.layer.shadowOffset = CGSizeMake(1.0, 1.0);
-    self.contentView.layer.shadowRadius = 10.0;
-    self.contentView.layer.shadowOpacity = 1.0;
-    self.contentView.layer.cornerRadius = 6.0;
+    self.contentView.layer.shadowRadius = 7.0;
+    self.contentView.layer.shadowOpacity = 1;
+    self.contentView.layer.cornerRadius = 15;
     self.contentView.backgroundColor = [UIColor whiteColor];
 
     _priceLabel = [[UILabel alloc] initWithFrame:self.bounds];
@@ -51,11 +52,11 @@
     [super layoutSubviews];
     self.contentView.frame = CGRectMake(10.0, 10.0,
             [UIScreen mainScreen].bounds.size.width - 20.0, self.frame.size.height - 20.0);
-    _priceLabel.frame = CGRectMake(10.0, 10.0, self.contentView.frame.size.width - 110.0, 40.0);
-    _airlineLogoView.frame = CGRectMake(CGRectGetMaxX(_priceLabel.frame) + 10.0, 10.0, 80.0, 80.0);
-    _placesLabel.frame = CGRectMake(10.0, CGRectGetMaxY(_priceLabel.frame) + 16.0, 100.0, 20.0);
+    _airlineLogoView.frame = CGRectMake(self.contentView.frame.size.width - 110, 10.0, 100.0, 100.0);
+    _priceLabel.frame = CGRectMake(10.0, 10.0, self.contentView.frame.size.width - _airlineLogoView.frame.size.width - 20, 40.0);
+    _placesLabel.frame = CGRectMake(10.0, CGRectGetMaxY(_priceLabel.frame) + 16.0, self.contentView.frame.size.width - _airlineLogoView.frame.size.width - 20, 20.0);
     _dateLabel.frame = CGRectMake(10.0, CGRectGetMaxY(_placesLabel.frame) + 8.0,
-            self.contentView.frame.size.width - 20.0, 20.0);
+            self.contentView.frame.size.width - _airlineLogoView.frame.size.width - 20, 20.0);
 }
 
 - (void)setTicket:(Ticket *)ticket {

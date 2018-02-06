@@ -17,7 +17,12 @@
 }
 
 + (UIColor *)buttonTintFW {
-    return [UIColor colorWithRed:1 green:1 blue:1 alpha:1.0];
+    return [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
 }
+
++ (UIColor *)cellShadowColorFW {
+    return [UIColor colorWithRed:0.0/255.0 green:122.0/255.0 blue:1.0 alpha:0.55];
+}
+
 
 @end

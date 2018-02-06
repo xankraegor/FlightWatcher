@@ -13,4 +13,6 @@
 + (UIColor *)buttonBackgorundFW;
 
 + (UIColor *)buttonTintFW;
+
++ (UIColor *)cellShadowColorFW;
 @end
