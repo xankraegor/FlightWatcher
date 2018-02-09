@@ -18,4 +18,6 @@
 + (instancetype)sharedInstance;
 - (void)loadData;
 - (City *)cityForCityCode:(NSString *)iata;
+
+- (City *)cityForLocation:(CLLocation *)location;
 @end

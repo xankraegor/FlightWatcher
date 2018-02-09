@@ -6,13 +6,12 @@
 #import "APIManager.h"
 #import "Ticket.h"
 #import "DataManager.h"
-#import "SearchRequest.h"
-#import "City.h"
+#import "MapPrice.h"
 
-#define API_MAIN_HOST   @"api.travelpayouts.com/v1/prices/cheap"
-#define API_GET_IP      @"https://api.ipify.org/?format=json"
-#define API_CITY_FOR_IP @"https://www.travelpayouts.com/whereami?ip="
-
+#define API_MAIN_HOST       @"api.travelpayouts.com/v1/prices/cheap"
+#define API_GET_IP          @"https://api.ipify.org/?format=json"
+#define API_CITY_FOR_IP     @"https://www.travelpayouts.com/whereami?ip="
+#define API_URL_MAP_PRICE   @"http://map.aviasales.ru/prices.json?origin_iata="
 
 @interface APIManager ()
 @property(nonatomic, strong) id apikey;
@@ -144,5 +143,27 @@
 - (NSURL *)urlWithAirlineLogoForIATACode:(NSString *)code {
     return [NSURL URLWithString:[NSString stringWithFormat:@ "https://pics.avs.io/200/200/%@.png", code]];
 }
+
+- (void)mapPricesFor:(City *)origin withCompletion:(void (^)(NSArray *prices))completion {
+    static BOOL isLoading;
+    if (isLoading) {return;}
+    isLoading = YES;
+    NSString *urlString = [NSString stringWithFormat:@"%@%@", API_URL_MAP_PRICE, origin.cityCode];
+    [self loadWithURLString:urlString completion:^(id _Nullable result) {
+        NSArray *array = result;
+        NSMutableArray *prices = [NSMutableArray new];
+        if (array) {
+            for (NSDictionary *mapPriceDictionary in array) {
+                MapPrice *mapPrice = [[MapPrice alloc] initWithDictionary:mapPriceDictionary withOrigin:origin];
+                [prices addObject:mapPrice];
+            }
+            isLoading = NO;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(prices);
+            });
+        }
+    }];
+}
+
 
 @end

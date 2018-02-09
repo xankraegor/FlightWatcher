@@ -9,6 +9,8 @@
 #import "MainNavigationController.h"
 #import "MainViewController.h"
 #import "UIColor+ColorPalette.h"
+#import "MainViewController.h"
+#import "../MapView/MapViewController.h"
 
 @interface MainNavigationController ()
 
@@ -18,15 +20,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
-    MainViewController *firstViewController = [[MainViewController alloc] init];
+//    MainViewController *firstViewController = [[MainViewController alloc] init];
+    MapViewController *firstViewController = [[MapViewController alloc] init];
+
     [self setupNavigationOutlook];
     [self pushViewController:firstViewController animated:YES];
-
 }
 
 - (void)setupNavigationOutlook {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     self.navigationBar.barTintColor = UIColor.navigationBarFW;
     self.navigationBar.translucent = false;
     self.navigationBar.prefersLargeTitles = true;
