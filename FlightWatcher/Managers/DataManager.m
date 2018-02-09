@@ -94,7 +94,7 @@
 - (City *)cityForCityCode:(NSString *)code {
     if (!code) return nil;
     for (City *city in _citiesArray) {
-        if (city.code == code) {
+        if (city.cityCode == code) {
             return city;
         }
     }

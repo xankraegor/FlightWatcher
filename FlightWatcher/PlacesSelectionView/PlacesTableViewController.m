@@ -9,6 +9,7 @@
 #import "PlacesTableViewController.h"
 #import "PlaceTableViewCell.h"
 #import "DataManager.h"
+#import "Airport.h"
 
 @interface PlacesTableViewController ()
 
@@ -94,16 +95,19 @@ static NSString *cellId = @"PlaceCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
-    DataManager *man = DataManager.sharedInstance;
+    DataManager *manager = DataManager.sharedInstance;
     switch (_dataSourceType) {
         case DataSourceTypeAirport:
-            [[cell textLabel] setText:[man.airports[(NSUInteger) indexPath.row] name]];
+            cell.textLabel.text = [manager.airports[(NSUInteger) indexPath.row] name];
+            cell.detailTextLabel.text = [manager.airports[(NSUInteger) indexPath.row] cityCode];
             break;
         case DataSourceTypeCity:
-            [[cell textLabel] setText:[man.cities[(NSUInteger) indexPath.row] name]];
+
+            cell.textLabel.text = [manager.cities[(NSUInteger) indexPath.row] name];
+            cell.detailTextLabel.text = [manager.cities[(NSUInteger) indexPath.row] cityCode];
             break;
         case DataSourceTypeCountry:
-            [[cell textLabel] setText:[man.countries[(NSUInteger) indexPath.row] name]];
+            cell.textLabel.text = [manager.countries[(NSUInteger) indexPath.row] name];
             break;
     }
 

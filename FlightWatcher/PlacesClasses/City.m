@@ -15,7 +15,7 @@
         _translations = [dictionary valueForKey:@  "name_translations"];
         _name = [dictionary valueForKey:@"name"];
         _countryCode = [dictionary valueForKey:@"country_code"];
-        _code = [dictionary valueForKey:@"code"];
+        _cityCode = [dictionary valueForKey:@"code"];
         NSDictionary *coords = [dictionary valueForKey:@"coordinates"];
         if (coords && ![coords isEqual:[NSNull null]]) {
             NSNumber *lon = [coords valueForKey:@"lon"];

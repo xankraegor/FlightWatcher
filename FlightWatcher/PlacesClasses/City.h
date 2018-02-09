@@ -11,7 +11,7 @@
 @property(nonatomic, strong) NSString *timezone;
 @property(nonatomic, strong) NSDictionary *translations;
 @property(nonatomic, strong) NSString *countryCode;
-@property(nonatomic, strong) NSString *code;
+@property(nonatomic, strong) NSString *cityCode;
 @property(nonatomic) CLLocationCoordinate2D coordinate;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;

@@ -13,7 +13,7 @@
         _currency = [dictionary valueForKey:@"currency"];
         _translations = [dictionary valueForKey:@  "name_translations"];
         _name = [dictionary valueForKey:@"name"];
-        _code = [dictionary valueForKey:@"code"];
+        _countryCode = [dictionary valueForKey:@"code"];
     }
     return self;
 }

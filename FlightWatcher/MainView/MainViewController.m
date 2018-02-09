@@ -129,7 +129,7 @@
     if (dataType == DataSourceTypeCity) {
         City *city = (City *) place;
         title = city.name;
-        data = city.code;
+        data = city.cityCode;
     } else if (dataType == DataSourceTypeAirport) {
         Airport *airport = (Airport *) place;
         title = airport.name;
