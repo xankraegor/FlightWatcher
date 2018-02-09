@@ -5,7 +5,6 @@
 
 #import "UIButton+Style.h"
 #import "UIColor+ColorPalette.h"
-#import <CoreGraphics/CoreGraphics.h>
 
 @implementation UIButton (Style)
 

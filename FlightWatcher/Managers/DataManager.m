@@ -7,6 +7,9 @@
 //
 
 #import "DataManager.h"
+#import "Country.h"
+#import "Airport.h"
+#import "DataSourceTypeEnum.h"
 
 @interface DataManager ()
 @property(nonatomic, strong) NSMutableArray *countriesArray;

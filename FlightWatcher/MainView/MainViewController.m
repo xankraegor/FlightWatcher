@@ -14,6 +14,7 @@
 #import "PlacesTableViewController.h"
 #import "SearchRequest.h"
 #import "APIManager.h"
+#import "Airport.h"
 
 
 @interface MainViewController () <PlaceViewControllerDelegate>

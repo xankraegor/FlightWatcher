@@ -4,8 +4,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Ticket.h"
 
 @interface TicketTableViewCell : UITableViewCell
-@property(nonatomic, strong) Ticket *ticket;
+@property(nonatomic, strong) UILabel *priceLabel;
+@property(nonatomic, strong) UILabel *placesLabel;
+@property(nonatomic, strong) UILabel *dateLabel;
+@property(nonatomic, strong) UIImageView *airlineLogoView;
 @end

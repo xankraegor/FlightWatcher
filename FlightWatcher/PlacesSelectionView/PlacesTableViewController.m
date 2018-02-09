@@ -8,10 +8,7 @@
 
 #import "PlacesTableViewController.h"
 #import "PlaceTableViewCell.h"
-
-
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "OCNotLocalizedStringInspection"
+#import "DataManager.h"
 
 @interface PlacesTableViewController ()
 

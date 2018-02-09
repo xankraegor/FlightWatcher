@@ -5,7 +5,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface Ticket : NSObject
 
 @property(nonatomic, strong) NSNumber *price;

@@ -5,7 +5,6 @@
 
 #import "UIColor+ColorPalette.h"
 
-
 @implementation UIColor (ColorPalette)
 
 + (UIColor *)navigationBarFW {

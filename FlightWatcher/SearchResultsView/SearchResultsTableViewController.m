@@ -8,6 +8,10 @@
 
 #import "SearchResultsTableViewController.h"
 #import "TicketTableViewCell.h"
+#import "APIManager.h"
+#import "YYWebImageManager.h"
+#import "YYWebImage.h"
+#import "Ticket.h"
 
 @interface SearchResultsTableViewController ()
 @property(nonatomic, strong) NSArray *tickets;
@@ -15,12 +19,16 @@
 
 @implementation SearchResultsTableViewController
 
+NSDateFormatter *dateFormatter;
+
 #pragma mark Life cycle
 
 - (instancetype)initWithTickets:(NSArray *)tickets {
     self = [super init];
     if (!self) return nil;
     _tickets = tickets;
+    dateFormatter = [NSDateFormatter new];
+    dateFormatter.dateFormat = @"dd MMMM yyyy hh:mm";
     [self performViewInitialization];
     return self;
 }
@@ -51,7 +59,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TicketTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TicketCellIdentifier"
                                                                 forIndexPath:indexPath];
-    cell.ticket = _tickets[(NSUInteger) indexPath.row];
+    Ticket *ticket = _tickets[(NSUInteger) indexPath.row];
+    cell.priceLabel.text = [NSString stringWithFormat:@"%@ руб.", ticket.price];
+    cell.placesLabel.text = [NSString stringWithFormat:@"%@ - %@", ticket.from, ticket.to];
+    cell.dateLabel.text = [dateFormatter stringFromDate:ticket.departure];
+    NSURL *urlLogo = [APIManager.sharedInstance urlWithAirlineLogoForIATACode:ticket.airline];
+    [cell.airlineLogoView yy_setImageWithURL:urlLogo
+                                 options:YYWebImageOptionSetImageWithFadeAnimation];
     return cell;
 }
 

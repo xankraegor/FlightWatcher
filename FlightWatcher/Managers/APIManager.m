@@ -5,6 +5,9 @@
 
 #import "APIManager.h"
 #import "Ticket.h"
+#import "DataManager.h"
+#import "SearchRequest.h"
+#import "City.h"
 
 #define API_MAIN_HOST   @"api.travelpayouts.com/v1/prices/cheap"
 #define API_GET_IP      @"https://api.ipify.org/?format=json"

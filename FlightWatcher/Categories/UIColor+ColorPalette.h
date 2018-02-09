@@ -3,16 +3,11 @@
 // Copyright (c) 2018 Xan Kraegor. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
 @interface UIColor (ColorPalette)
-
 + (UIColor *)navigationBarFW;
-
 + (UIColor *)buttonBackgorundFW;
-
 + (UIColor *)buttonTintFW;
-
 + (UIColor *)cellShadowColorFW;
 @end

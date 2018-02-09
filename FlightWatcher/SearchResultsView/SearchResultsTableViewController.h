@@ -9,6 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SearchResultsTableViewController : UITableViewController
-
 - (instancetype)initWithTickets:(NSArray *)tickets;
 @end

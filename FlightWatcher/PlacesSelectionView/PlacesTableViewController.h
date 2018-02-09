@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DataManager.h"
+#import "DataSourceTypeEnum.h"
 
 
 @protocol PlaceViewControllerDelegate <NSObject>
