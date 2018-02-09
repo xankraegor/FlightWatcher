@@ -30,12 +30,21 @@
 
 - (void)loadData {
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0), ^{
+
+        NSSortDescriptor *byName = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:true];
+
         NSArray *countriesJsonArray = [self arrayFromFileName:@"countries" ofType:@"json"];
+        countriesJsonArray = [countriesJsonArray sortedArrayUsingDescriptors:@[byName]];
         _countriesArray = [self createObjectsFromArray:countriesJsonArray withType:DataSourceTypeCountry];
+
         NSArray *citiesJsonArray = [self arrayFromFileName:@"cities" ofType:@"json"];
+        citiesJsonArray = [citiesJsonArray sortedArrayUsingDescriptors:@[byName]];
         _citiesArray = [self createObjectsFromArray:citiesJsonArray withType:DataSourceTypeCity];
+
         NSArray *airportsJsonArray = [self arrayFromFileName:@"airports" ofType:@"json"];
+        airportsJsonArray = [airportsJsonArray sortedArrayUsingDescriptors:@[byName]];
         _airportsArray = [self createObjectsFromArray:airportsJsonArray withType:DataSourceTypeAirport];
+
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:kDataManagerLoadDataDidComplete
                                                                 object:nil];
