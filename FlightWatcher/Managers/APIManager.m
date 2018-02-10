@@ -72,8 +72,10 @@
               } else if (data.length == 0) {
                   NSLog(@"[%@ %@]: download error: server responded with empty data block", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
               }
+              dispatch_async(dispatch_get_main_queue(), ^{
+                  UIApplication.sharedApplication.networkActivityIndicatorVisible = NO;
+              });
 
-              UIApplication.sharedApplication.networkActivityIndicatorVisible = NO;
               completion([NSJSONSerialization JSONObjectWithData:data
                                                          options:NSJSONReadingMutableContainers
                                                            error:nil]);
@@ -155,6 +157,9 @@
     isLoading = YES;
     NSString *urlString = [NSString stringWithFormat:@"%@%@", API_URL_MAP_PRICE, origin.cityCode];
     [self loadWithURLString:urlString completion:^(id _Nullable result) {
+
+        NSLog(@"%@", result);
+
         NSArray *array = result;
         NSMutableArray *prices = [NSMutableArray new];
         if (array) {

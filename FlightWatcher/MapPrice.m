@@ -11,11 +11,13 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary withOrigin:(City *)origin {
     self = [super init];
     if (self) {
-        _destination = [DataManager.sharedInstance cityForCityCode:[dictionary[@"destination"] stringValue]];
+        NSLog(@"Dictionary contents: %@", dictionary);
+        NSString *destinationCode = dictionary[@"destination"];
+        _destination = [DataManager.sharedInstance cityForCityCode:destinationCode];
         _origin = origin;
-        _departure = [self dateFromString:[dictionary valueForKey:@"depart_date"]];
-        _returnDate = [self dateFromString:[dictionary valueForKey:@"return_date"]];
-        _numberOfChanges = [[dictionary valueForKey:@"number_of_changes"] integerValue];
+        _departure = [self dateFromString:dictionary[@"depart_date"]];
+        _returnDate = [self dateFromString:dictionary[@"return_date"]];
+        _numberOfChanges = [dictionary[@"number_of_changes"] integerValue];
         _value = [dictionary[@"value"] integerValue];
         _distance = [dictionary[@"distance"] integerValue];
         _actual = [dictionary[@"actual"] boolValue];

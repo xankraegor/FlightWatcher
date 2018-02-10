@@ -10,10 +10,11 @@
 #import "MapPrice.h"
 
 @interface MapViewController () <MKMapViewDelegate>
-@property(strong, nonatomic) MKMapView *mapView;
+@property(nonatomic, strong) MKMapView *mapView;
 @property(nonatomic, strong) LocationService *locationService;
 @property(nonatomic, strong) City *origin;
 @property(nonatomic, strong) NSArray *prices;
+@property(strong) UILabel *currentLocationLabel;
 @end
 
 @implementation MapViewController
@@ -28,7 +29,15 @@
                                                name:kDataManagerLoadDataDidComplete object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(updateCurrentLocation:)
                                                name:kLocationServiceDidUpdateCurrentLocation object:nil];
+
+    CGRect currentLocationFrame = CGRectMake(16, 16, _mapView.bounds.size.width - 32, 24.0);
+    _currentLocationLabel = [[UILabel alloc] initWithFrame:currentLocationFrame];
+    _currentLocationLabel.backgroundColor = [UIColor.whiteColor colorWithAlphaComponent:0.5];
+    _currentLocationLabel.layer.cornerRadius = 10.0;
+    _currentLocationLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:_currentLocationLabel];
 }
+
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -40,6 +49,7 @@
 
 - (void)updateCurrentLocation:(NSNotification *)notification {
     CLLocation *currentLocation = notification.object;
+
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(currentLocation.coordinate,
             1000000, 1000000);
     [_mapView setRegion:region animated:YES];
@@ -51,6 +61,10 @@
             }];
         }
     }
+
+    [_locationService cityNameForLocation:currentLocation completeWithName:^(NSString *name) {
+        _currentLocationLabel.text = name;
+    }];
 }
 
 - (void)setPrices:(NSArray *)prices {
@@ -67,4 +81,5 @@
         });
     }
 }
+
 @end

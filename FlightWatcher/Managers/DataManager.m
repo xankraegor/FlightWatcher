@@ -98,6 +98,7 @@
             return city;
         }
     }
+    NSLog(@"[%@ %@] city not found for code %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd), code);
     return nil;
 }
 
