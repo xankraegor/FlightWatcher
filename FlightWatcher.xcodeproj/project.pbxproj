@@ -11,6 +11,7 @@
 		2A0284AB2023CACE004EFC23 /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A0284A82023CACE004EFC23 /* countries.json */; };
 		2A0284AC2023CACE004EFC23 /* airports.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A0284A92023CACE004EFC23 /* airports.json */; };
 		2A0284B42023D7FF004EFC23 /* PlacesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0284B32023D7FF004EFC23 /* PlacesTableViewController.m */; };
+		2A2F6016202E61A9007962F7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A2F6015202E61A9007962F7 /* MapKit.framework */; };
 		2AEE4A342027F1340008F968 /* PlaceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AEE4A332027F1340008F968 /* PlaceTableViewCell.m */; };
 		2AEEBADF2020ECC9005D5C60 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEBADE2020ECC9005D5C60 /* AppDelegate.m */; };
 		2AEEBAE82020ECC9005D5C60 /* FlightWatcher.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEBAE62020ECC9005D5C60 /* FlightWatcher.xcdatamodeld */; };
@@ -46,6 +47,7 @@
 		2A0284A92023CACE004EFC23 /* airports.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports.json; sourceTree = "<group>"; };
 		2A0284B22023D7FF004EFC23 /* PlacesTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlacesTableViewController.h; sourceTree = "<group>"; };
 		2A0284B32023D7FF004EFC23 /* PlacesTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlacesTableViewController.m; sourceTree = "<group>"; };
+		2A2F6015202E61A9007962F7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		2AEE4A322027F1340008F968 /* PlaceTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaceTableViewCell.h; sourceTree = "<group>"; };
 		2AEE4A332027F1340008F968 /* PlaceTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaceTableViewCell.m; sourceTree = "<group>"; };
 		2AEEBADA2020ECC9005D5C60 /* FlightWatcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlightWatcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A2F6016202E61A9007962F7 /* MapKit.framework in Frameworks */,
 				8AB65C77CA6D4424DDD1B10C /* libPods-FlightWatcher.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -252,6 +255,7 @@
 		33A19D4812002F90F5A4E657 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2A2F6015202E61A9007962F7 /* MapKit.framework */,
 				931DF525AB9F6B292ACADF2A /* libPods-FlightWatcher.a */,
 			);
 			name = Frameworks;
@@ -334,6 +338,11 @@
 					2AEEBAD92020ECC9005D5C60 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};

@@ -66,9 +66,14 @@
             dataTaskWithURL:url
           completionHandler:^(
                   NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
-              dispatch_async(dispatch_get_main_queue(), ^{
-                  UIApplication.sharedApplication.networkActivityIndicatorVisible = NO;
-              });
+
+              if (error) {
+                  NSLog(@"[%@ %@]: download error:%@", NSStringFromClass(self.class), NSStringFromSelector(_cmd), error);
+              } else if (data.length == 0) {
+                  NSLog(@"[%@ %@]: download error: server responded with empty data block", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+              }
+
+              UIApplication.sharedApplication.networkActivityIndicatorVisible = NO;
               completion([NSJSONSerialization JSONObjectWithData:data
                                                          options:NSJSONReadingMutableContainers
                                                            error:nil]);
