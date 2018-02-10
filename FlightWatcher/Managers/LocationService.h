@@ -8,5 +8,5 @@
 #define kLocationServiceDidUpdateCurrentLocation @"LocationServiceDidUpdateCurrentLocation"
 
 @interface LocationService : NSObject
-- (void)cityNameForLocation:(CLLocation *)location completeWithName:(void (^)(NSString *))locality;
+- (void)cityNameForLocation:(CLLocation *)location completeWithName:(void (^)(NSString *))completion;
 @end

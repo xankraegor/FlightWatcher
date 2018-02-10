@@ -23,6 +23,7 @@
     self.title = @"Карта цен";
     _mapView = [[MKMapView alloc] initWithFrame:self.view.bounds];
     _mapView.showsUserLocation = YES;
+    _mapView.delegate = self;
     [self.view addSubview:_mapView];
     [DataManager.sharedInstance loadData];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(dataLoadedSuccessfully)
@@ -82,4 +83,17 @@
     }
 }
 
+// MARK: - Map view delegate
+
+-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+    if (annotation == mapView.userLocation) {
+        return nil;
+    }
+
+    MKPinAnnotationView *annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"AnnotationReuseIdentifier"];
+    annotationView.canShowCallout = true;
+    annotationView.enabled = true;
+
+    return annotationView;
+}
 @end

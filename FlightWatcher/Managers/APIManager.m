@@ -158,8 +158,6 @@
     NSString *urlString = [NSString stringWithFormat:@"%@%@", API_URL_MAP_PRICE, origin.cityCode];
     [self loadWithURLString:urlString completion:^(id _Nullable result) {
 
-        NSLog(@"%@", result);
-
         NSArray *array = result;
         NSMutableArray *prices = [NSMutableArray new];
         if (array) {

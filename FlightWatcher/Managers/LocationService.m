@@ -50,7 +50,7 @@
     }
 }
 
-- (void)cityNameForLocation:(CLLocation *)location completeWithName:(void(^)(NSString * name))locality {
+- (void)cityNameForLocation:(CLLocation *)location completeWithName:(void(^)(NSString * name))completion {
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> *placemarks, NSError *error) {
         if (error) {
@@ -58,7 +58,7 @@
             return;
         }
         dispatch_async(dispatch_get_main_queue(), ^{
-            locality(placemarks.firstObject.locality);
+            completion(placemarks.firstObject.locality);
         });
     }];
 }
