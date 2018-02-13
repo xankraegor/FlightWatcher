@@ -109,6 +109,7 @@
         NSDictionary *json = [[(NSDictionary *) result valueForKey:@"data"] valueForKey:request.destination];
         if (!json) {
             NSLog(@"JSON object not found");
+            completion(@[]);
             return;
         }
 
