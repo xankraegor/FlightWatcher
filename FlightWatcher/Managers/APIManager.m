@@ -59,7 +59,7 @@
     }];
 }
 
-- (void)loadWithURLString:(NSString *)urlString completion:(void (^)(id _Nullable result))completion {
+- (void)loadWithURLString:(NSString *)urlString completion:(void (^)(id _Nonnull result))completion {
     NSURL *url = [[NSURL alloc] initWithString:urlString];
     UIApplication.sharedApplication.networkActivityIndicatorVisible = YES;
     [[NSURLSession.sharedSession
@@ -69,16 +69,40 @@
 
               if (error) {
                   NSLog(@"[%@ %@]: download error:%@", NSStringFromClass(self.class), NSStringFromSelector(_cmd), error);
+                  dispatch_async(dispatch_get_main_queue(), ^{
+                      UIApplication.sharedApplication.networkActivityIndicatorVisible = NO;
+                  });
+                  return;
               } else if (data.length == 0) {
-                  NSLog(@"[%@ %@]: download error: server responded with empty data block", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+                  NSLog(@"[%@ %@]: download error: server responded with empty data block",
+                          NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+                  dispatch_async(dispatch_get_main_queue(), ^{
+                      UIApplication.sharedApplication.networkActivityIndicatorVisible = NO;
+                  });
+                  return;
               }
-              dispatch_async(dispatch_get_main_queue(), ^{
-                  UIApplication.sharedApplication.networkActivityIndicatorVisible = NO;
-              });
 
-              completion([NSJSONSerialization JSONObjectWithData:data
-                                                         options:NSJSONReadingMutableContainers
-                                                           error:nil]);
+              NSError *serializationError;
+              NSDictionary *contents = [NSJSONSerialization JSONObjectWithData:data
+                                                                       options:NSJSONReadingMutableContainers
+                                                                         error:&serializationError];
+              if (serializationError) {
+                  NSLog(@"Answer serialization error: %@", serializationError.description);
+                  dispatch_async(dispatch_get_main_queue(), ^{
+                      UIApplication.sharedApplication.networkActivityIndicatorVisible = NO;
+                  });
+                  return;
+              }
+
+              if (contents[@"errors"]) {
+                  NSLog(@"Error returned from server: %@", contents[@"errors"]);
+                  dispatch_async(dispatch_get_main_queue(), ^{
+                      UIApplication.sharedApplication.networkActivityIndicatorVisible = NO;
+                  });
+                  return;
+              }
+
+              completion(contents);
           }] resume];
 }
 
