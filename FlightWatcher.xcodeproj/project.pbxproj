@@ -102,6 +102,7 @@
 		3765FAF4EBC7F5FB45C9BD90 /* UIButton+Style.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Style.h"; sourceTree = "<group>"; };
 		3765FB8D6178C200EB77F038 /* SearchResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsTableViewController.h; sourceTree = "<group>"; };
 		3765FC12282EB63718469C73 /* City.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = City.h; sourceTree = "<group>"; };
+		3765FC90B497202D854371CF /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
 		3765FCD364B528ED8519143D /* UILabel+Style.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Style.m"; sourceTree = "<group>"; };
 		3765FCE2EA8120BB2C3C85A6 /* NSDate+FromISOString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+FromISOString.h"; sourceTree = "<group>"; };
 		3765FCFEC5AB205FFC47DF57 /* UIColor+ColorPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorPalette.h"; sourceTree = "<group>"; };
@@ -148,6 +149,7 @@
 				3765FC12282EB63718469C73 /* City.h */,
 				3765F0B9D09269E9326735BD /* Airport.m */,
 				3765F4B17A946993AB07BC43 /* Airport.h */,
+				3765FC90B497202D854371CF /* Place.h */,
 			);
 			path = PlacesClasses;
 			sourceTree = "<group>";

@@ -9,7 +9,6 @@
 #import "PlacesTableViewController.h"
 #import "PlaceTableViewCell.h"
 #import "DataManager.h"
-#import "Airport.h"
 
 
 @interface PlacesTableViewController () <UISearchResultsUpdating>
@@ -116,9 +115,10 @@ static NSString *cellId = @"PlaceCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
-    id object = [self isSearching] ? _searchArray[(NSUInteger) indexPath.row] : _currentArray[(NSUInteger) indexPath.row];
-    cell.textLabel.text = [object valueForKey:@"name"];
-    cell.detailTextLabel.text = [object valueForKey:@"code"];
+    NSObject <Place> *place = [self isSearching] ?
+            _searchArray[(NSUInteger) indexPath.row] : _currentArray[(NSUInteger) indexPath.row];
+    cell.textLabel.text = place.name;
+    cell.detailTextLabel.text = place.code;
     return cell;
 }
 
@@ -126,7 +126,6 @@ static NSString *cellId = @"PlaceCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
-    self.navigationItem.searchController.searchBar.resignFirstResponder;
     id place = (_searchController.isActive &&_searchArray.count > 0) ? _searchArray[(NSUInteger) indexPath.row] : _currentArray[(NSUInteger) indexPath.row];
     [self.delegate selectPlace:place withType:self.isOrigin andDataType:self.dataSourceType];
     [self.navigationController popViewControllerAnimated:YES];

@@ -5,8 +5,9 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
+#import "Place.h"
 
-@interface City : NSObject
+@interface City : NSObject <Place>
 @property(nonatomic, strong) NSString *name;
 @property(nonatomic, strong) NSString *timezone;
 @property(nonatomic, strong) NSDictionary *translations;
