@@ -174,7 +174,7 @@
     static BOOL isLoading;
     if (isLoading) {return;}
     isLoading = YES;
-    NSString *urlString = [NSString stringWithFormat:@"%@%@", API_URL_MAP_PRICE, origin.cityCode];
+    NSString *urlString = [NSString stringWithFormat:@"%@%@", API_URL_MAP_PRICE, origin.code];
     [self loadWithURLString:urlString completion:^(id _Nullable result) {
 
         NSDictionary *dictionary = result;

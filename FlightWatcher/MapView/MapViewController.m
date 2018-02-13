@@ -81,7 +81,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
             annotation.title = [NSString stringWithFormat:@"%@ (%@)", price.destination.name,
-                                                          price.destination.cityCode];
+                                                          price.destination.code];
             annotation.subtitle = [NSString stringWithFormat:@"%ld руб.", (long) price.value];
             annotation.coordinate = price.destination.coordinate;
             [_mapView addAnnotation:annotation];

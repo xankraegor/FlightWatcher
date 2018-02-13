@@ -12,10 +12,10 @@
     self = [super init];
     if (self) {
         _timezone = [dictionary valueForKey:@"time_zone"];
-        _translations = [dictionary valueForKey:@  "name_translations"];
+        _translations = [dictionary valueForKey:@"name_translations"];
         _name = [dictionary valueForKey:@"name"];
         _countryCode = [dictionary valueForKey:@"country_code"];
-        _cityCode = [dictionary valueForKey:@"code"];
+        _code = [dictionary valueForKey:@"code"];
         NSDictionary *coords = [dictionary valueForKey:@"coordinates"];
         if (coords && ![coords isEqual:[NSNull null]]) {
             NSNumber *lon = [coords valueForKey:@"lon"];

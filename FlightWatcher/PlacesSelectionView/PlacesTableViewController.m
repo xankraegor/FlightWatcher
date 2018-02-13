@@ -11,11 +11,15 @@
 #import "DataManager.h"
 #import "Airport.h"
 
-@interface PlacesTableViewController ()
+
+@interface PlacesTableViewController () <UISearchResultsUpdating>
 
 @property(strong, nonatomic) UISegmentedControl *segmentedControl;
 @property(readonly, nonatomic) BOOL isOrigin;
 @property(nonatomic) DataSourceType dataSourceType;
+@property(nonatomic, strong) NSArray *currentArray;
+@property(nonatomic, strong) NSArray *searchArray;
+@property(nonatomic, strong) UISearchController *searchController;
 
 @end
 
@@ -28,111 +32,104 @@ static NSString *cellId = @"PlaceCell";
 #pragma mark - Initialization
 
 - (instancetype)initWithStyle:(UITableViewStyle)style toReturnOrigin:(BOOL)isOrigin {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     self = [super initWithStyle:style];
     _isOrigin = isOrigin;
     _dataSourceType = DataSourceTypeCity;
+
     return self;
 }
 
 #pragma mark - Life cycle
 
 - (void)viewDidLoad {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     [super viewDidLoad];
     [self performViewInitialization];
-
 }
 
 #pragma mark - View initialization
 
 - (void)performViewInitialization {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     [self.tableView registerClass:PlaceTableViewCell.class forCellReuseIdentifier:cellId];
 
+    self.title = _isOrigin ? @"Откуда" : @"Куда";
+
+    _searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    _searchController.dimsBackgroundDuringPresentation = NO;
+    _searchController.searchResultsUpdater = self;
+    _searchArray = [NSArray new];
+
+    if (@available(iOS 11.0, *)) {
+        self.navigationItem.searchController = _searchController;
+        self.navigationItem.hidesSearchBarWhenScrolling = NO;
+    } else {
+        self.tableView.tableHeaderView = _searchController.searchBar;
+    }
+
     _segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Города", @"Аэропорты"]];
-    [_segmentedControl addTarget:self action:@selector(changeSource)
-                forControlEvents:UIControlEventValueChanged];
+    [_segmentedControl addTarget:self action:@selector(setSource) forControlEvents:UIControlEventValueChanged];
     _segmentedControl.tintColor = [UIColor blackColor];
     self.navigationItem.titleView = _segmentedControl;
     _segmentedControl.selectedSegmentIndex = 0;
-    [self changeSource];
-
+    [self setSource];
 }
 
-- (void)changeSource {
-    switch ([_segmentedControl selectedSegmentIndex]) {
-        case (0):
-            _dataSourceType = DataSourceTypeCity;
-            [[self tableView] reloadData];
+- (void)setSource {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    switch (_segmentedControl.selectedSegmentIndex) {
+        case 0:
+            _currentArray = DataManager.sharedInstance.cities;
             break;
-        case (1):
-            _dataSourceType = DataSourceTypeAirport;
-            [[self tableView] reloadData];
+        case 1:
+            _currentArray = DataManager.sharedInstance.airports;
             break;
         default:
             break;
     }
+    [self.tableView reloadData];
 }
 
+#pragma mark - UISearchResultsUpdating
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    if (searchController.searchBar.text) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.name CONTAINS[cd] %@",
+                                                                  searchController.searchBar.text];
+
+        _searchArray = [_currentArray filteredArrayUsingPredicate:predicate];
+        [self.tableView reloadData];
+    }
+}
+
+-(BOOL)isSearching {
+    return _searchController.isActive &&_searchArray.count > 0;
+}
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    switch (_dataSourceType) {
-        case DataSourceTypeAirport:
-            return [[[DataManager sharedInstance] airports] count];
-        case DataSourceTypeCity:
-            return [[[DataManager sharedInstance] cities] count];
-        case DataSourceTypeCountry:
-            return [[[DataManager sharedInstance] countries] count];
-    }
-    return 0;
+    return [self isSearching] ? [_searchArray count] : [_currentArray count];
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
-    DataManager *manager = DataManager.sharedInstance;
-    switch (_dataSourceType) {
-        case DataSourceTypeAirport:
-            cell.textLabel.text = [manager.airports[(NSUInteger) indexPath.row] name];
-            cell.detailTextLabel.text = [manager.airports[(NSUInteger) indexPath.row] cityCode];
-            break;
-        case DataSourceTypeCity:
-
-            cell.textLabel.text = [manager.cities[(NSUInteger) indexPath.row] name];
-            cell.detailTextLabel.text = [manager.cities[(NSUInteger) indexPath.row] cityCode];
-            break;
-        case DataSourceTypeCountry:
-            cell.textLabel.text = [manager.countries[(NSUInteger) indexPath.row] name];
-            break;
-    }
-
+    id object = [self isSearching] ? _searchArray[(NSUInteger) indexPath.row] : _currentArray[(NSUInteger) indexPath.row];
+    cell.textLabel.text = [object valueForKey:@"name"];
+    cell.detailTextLabel.text = [object valueForKey:@"code"];
     return cell;
 }
-
 
 #pragma mark - Table View Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    id place;
-    switch (_dataSourceType) {
-        case DataSourceTypeAirport:
-            place = DataManager.sharedInstance.airports[(NSUInteger) indexPath.row];
-            break;
-        case DataSourceTypeCity:
-            place = DataManager.sharedInstance.cities[(NSUInteger) indexPath.row];
-            break;
-        case DataSourceTypeCountry:
-            place = DataManager.sharedInstance.countries[(NSUInteger) indexPath.row];
-            break;
-    }
-
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    self.navigationItem.searchController.searchBar.resignFirstResponder;
+    id place = (_searchController.isActive &&_searchArray.count > 0) ? _searchArray[(NSUInteger) indexPath.row] : _currentArray[(NSUInteger) indexPath.row];
     [self.delegate selectPlace:place withType:self.isOrigin andDataType:self.dataSourceType];
     [self.navigationController popViewControllerAnimated:YES];
-
 }
+
 @end

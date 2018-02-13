@@ -50,8 +50,8 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:kDataManagerLoadDataDidComplete
                                                                 object:nil];
+            NSLog(@"Data loading complete");
         });
-        NSLog(@"Data loading completed");
     });
 }
 
@@ -100,7 +100,7 @@
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     if (!code) return nil;
     for (City *city in _citiesArray) {
-        if (city.cityCode == code) {
+        if (city.code == code) {
             return city;
         }
     }
