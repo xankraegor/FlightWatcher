@@ -186,7 +186,7 @@
 			children = (
 				2AEEBADD2020ECC9005D5C60 /* AppDelegate.h */,
 				2AEEBADE2020ECC9005D5C60 /* AppDelegate.m */,
-				2AEEBB07202148BD005D5C60 /* NavigationController */,
+				2AEEBB07202148BD005D5C60 /* NavigationControllers */,
 				2AEEBB06202148AA005D5C60 /* MainView */,
 				2A0284B52023D807004EFC23 /* PlacesSelectionView */,
 				2AEEBAF62020ECEF005D5C60 /* CoreData */,
@@ -203,8 +203,6 @@
 				3765F8DBCFB2F53CB3C4683C /* MapPrice.m */,
 				3765F134090B0CE3FF9E87FC /* MapPrice.h */,
 				3765F92BB07C90055E86FD33 /* MapView */,
-				3765F6166EEB61D9E823CE54 /* TabBarController.m */,
-				3765FD1275AB7E0BF4BADE63 /* TabBarController.h */,
 				3765F240F40762F845BB7921 /* map.png */,
 				3765F39F3DD26180EEC0C8B6 /* search.png */,
 				3765F5FB2CB8C6A744E8591F /* search_selected.png */,
@@ -243,13 +241,15 @@
 			path = MainView;
 			sourceTree = "<group>";
 		};
-		2AEEBB07202148BD005D5C60 /* NavigationController */ = {
+		2AEEBB07202148BD005D5C60 /* NavigationControllers */ = {
 			isa = PBXGroup;
 			children = (
 				2AEEBAFD202101D5005D5C60 /* MainNavigationController.h */,
 				2AEEBAFE202101D5005D5C60 /* MainNavigationController.m */,
+				3765F6166EEB61D9E823CE54 /* TabBarController.m */,
+				3765FD1275AB7E0BF4BADE63 /* TabBarController.h */,
 			);
-			path = NavigationController;
+			path = NavigationControllers;
 			sourceTree = "<group>";
 		};
 		2AEEBB0820214BC2005D5C60 /* Categories */ = {
