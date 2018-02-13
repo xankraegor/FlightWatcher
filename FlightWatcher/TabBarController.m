@@ -16,7 +16,9 @@
     if (self) {
         self.viewControllers = [self createViewControllers];
         self.tabBar.tintColor = [UIColor blackColor];
-        self.tabBar.backgroundColor = [UIColor navigationBarFW];
+        self.tabBar.translucent = false;
+        self.tabBar.barTintColor = [UIColor navigationBarFW];
+
     }
     return self;
 }
