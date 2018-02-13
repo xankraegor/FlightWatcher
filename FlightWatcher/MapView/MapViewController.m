@@ -18,7 +18,9 @@
 @end
 
 @implementation MapViewController
+
 - (void)viewDidLoad {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     [super viewDidLoad];
     self.title = @"Карта цен";
     _mapView = [[MKMapView alloc] initWithFrame:self.view.bounds];
@@ -41,14 +43,17 @@
 
 
 - (void)dealloc {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)dataLoadedSuccessfully {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     _locationService = [[LocationService alloc] init];
 }
 
 - (void)updateCurrentLocation:(NSNotification *)notification {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     CLLocation *currentLocation = notification.object;
 
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(currentLocation.coordinate,
@@ -69,6 +74,7 @@
 }
 
 - (void)setPrices:(NSArray *)prices {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     _prices = prices;
     [_mapView removeAnnotations:_mapView.annotations];
     for (MapPrice *price in prices) {
@@ -86,6 +92,7 @@
 // MARK: - Map view delegate
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     if (annotation == mapView.userLocation) {
         return nil;
     }

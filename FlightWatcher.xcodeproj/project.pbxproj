@@ -32,6 +32,7 @@
 		3765F8D5D82135DFC8107553 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F308CAB0C90184815846 /* APIManager.m */; };
 		3765F91D94D71DF3196572BE /* UIColor+ColorPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F08C7DDB7E97E69177A4 /* UIColor+ColorPalette.m */; };
 		3765F9995BEB8D82E2995F8F /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765FA84A551792C993791F9 /* DataManager.m */; };
+		3765FA20EF3FAE7653C8BA18 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F6166EEB61D9E823CE54 /* TabBarController.m */; };
 		3765FADE4946A5907C260AE5 /* MapPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F8DBCFB2F53CB3C4683C /* MapPrice.m */; };
 		3765FBA4EA6471B1F397E8E4 /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F986C01F4FD9E12BA979 /* Country.m */; };
 		3765FC2B3EF77302215487ED /* Ticket.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765FDC2483F02382766E13C /* Ticket.m */; };
@@ -80,6 +81,7 @@
 		3765F4163F7E8E81D0957B2C /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		3765F48E218BF8FCD2C3B7E6 /* UIButton+Style.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Style.m"; sourceTree = "<group>"; };
 		3765F4B17A946993AB07BC43 /* Airport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Airport.h; sourceTree = "<group>"; };
+		3765F6166EEB61D9E823CE54 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		3765F6255D82BCAE76E57CDE /* LocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationService.h; sourceTree = "<group>"; };
 		3765F70F96D8F3B55185B062 /* UILabel+Style.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Style.h"; sourceTree = "<group>"; };
 		3765F8DBCFB2F53CB3C4683C /* MapPrice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapPrice.m; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 		3765FCE2EA8120BB2C3C85A6 /* NSDate+FromISOString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+FromISOString.h"; sourceTree = "<group>"; };
 		3765FCFEC5AB205FFC47DF57 /* UIColor+ColorPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorPalette.h"; sourceTree = "<group>"; };
 		3765FD0BE73ED4E6FF26453A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
+		3765FD1275AB7E0BF4BADE63 /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		3765FD8E8026A82F531421FC /* NSDate+FromISOString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+FromISOString.m"; sourceTree = "<group>"; };
 		3765FDC2483F02382766E13C /* Ticket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ticket.m; sourceTree = "<group>"; };
 		3765FDCFB05A542DF29F72E1 /* City.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = City.m; sourceTree = "<group>"; };
@@ -192,6 +195,8 @@
 				3765F8DBCFB2F53CB3C4683C /* MapPrice.m */,
 				3765F134090B0CE3FF9E87FC /* MapPrice.h */,
 				3765F92BB07C90055E86FD33 /* MapView */,
+				3765F6166EEB61D9E823CE54 /* TabBarController.m */,
+				3765FD1275AB7E0BF4BADE63 /* TabBarController.h */,
 			);
 			path = FlightWatcher;
 			sourceTree = "<group>";
@@ -460,6 +465,7 @@
 				3765F14F3950028573B60396 /* LocationService.m in Sources */,
 				3765FADE4946A5907C260AE5 /* MapPrice.m in Sources */,
 				3765F4CBF3F5C2C53BF2ACD7 /* MapViewController.m in Sources */,
+				3765FA20EF3FAE7653C8BA18 /* TabBarController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

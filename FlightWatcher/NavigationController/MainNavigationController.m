@@ -7,10 +7,9 @@
 //
 
 #import "MainNavigationController.h"
-#import "MainViewController.h"
 #import "UIColor+ColorPalette.h"
-#import "MainViewController.h"
-#import "../MapView/MapViewController.h"
+
+
 
 @interface MainNavigationController ()
 
@@ -18,13 +17,14 @@
 
 @implementation MainNavigationController
 
+-(instancetype)initWithRootViewController:(UIViewController *)rootViewController {
+    self = [super initWithRootViewController:rootViewController];
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    MainViewController *firstViewController = [[MainViewController alloc] init];
-    MapViewController *firstViewController = [[MapViewController alloc] init];
-
     [self setupNavigationOutlook];
-    [self pushViewController:firstViewController animated:YES];
 }
 
 - (void)setupNavigationOutlook {

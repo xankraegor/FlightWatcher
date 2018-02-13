@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MainNavigationController.h"
-
+#import "TabBarController.h"
 
 @interface AppDelegate ()
 
@@ -106,8 +106,8 @@
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     CGRect frame = [UIScreen mainScreen].bounds;
     self.window = [[UIWindow alloc] initWithFrame:frame];
-    MainNavigationController *navigationController = [[MainNavigationController alloc] init];
-    self.window.rootViewController = navigationController;
+    TabBarController *firstController = [[TabBarController alloc] init];
+    self.window.rootViewController = firstController;
     [self.window makeKeyAndVisible];
 }
 

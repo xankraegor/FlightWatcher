@@ -22,6 +22,7 @@
 }
 
 + (instancetype)sharedInstance {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     static APIManager *shared;
     static dispatch_once_t dispatchOperation;
     dispatch_once(&dispatchOperation, ^{
@@ -36,6 +37,7 @@
 }
 
 - (void)cityForCurrentIP:(void (^)(City *city))completion {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     [self IPAddressWithCompletion:^(NSString *ipAddress) {
         NSString *urlString = [NSString stringWithFormat:@"%@%@", API_CITY_FOR_IP, ipAddress];
         [self loadWithURLString:urlString completion:^(id result) {
@@ -52,6 +54,7 @@
 }
 
 - (void)IPAddressWithCompletion:(void (^)(NSString *ipAddress))completion {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     [self loadWithURLString:API_GET_IP completion:^(id _Nullable result) {
         NSDictionary *json = result;
         NSLog(@"My ip address is: %@", [json valueForKey:@"ip"]);
@@ -60,8 +63,13 @@
 }
 
 - (void)loadWithURLString:(NSString *)urlString completion:(void (^)(id _Nonnull result))completion {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     NSURL *url = [[NSURL alloc] initWithString:urlString];
-    UIApplication.sharedApplication.networkActivityIndicatorVisible = YES;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIApplication.sharedApplication.networkActivityIndicatorVisible = YES;
+    });
+
+
     [[NSURLSession.sharedSession
             dataTaskWithURL:url
           completionHandler:^(
@@ -82,33 +90,16 @@
                   return;
               }
 
-              NSError *serializationError;
-              NSDictionary *contents = [NSJSONSerialization JSONObjectWithData:data
-                                                                       options:NSJSONReadingMutableContainers
-                                                                         error:&serializationError];
-              if (serializationError) {
-                  NSLog(@"Answer serialization error: %@", serializationError.description);
-                  dispatch_async(dispatch_get_main_queue(), ^{
-                      UIApplication.sharedApplication.networkActivityIndicatorVisible = NO;
-                  });
-                  return;
-              }
-
-              if (contents[@"errors"]) {
-                  NSLog(@"Error returned from server: %@", contents[@"errors"]);
-                  dispatch_async(dispatch_get_main_queue(), ^{
-                      UIApplication.sharedApplication.networkActivityIndicatorVisible = NO;
-                  });
-                  return;
-              }
-
-              completion(contents);
+              completion([NSJSONSerialization JSONObjectWithData:data
+                                                         options:NSJSONReadingMutableContainers
+                                                           error:nil]);
           }] resume];
 }
 
 #pragma mark Tickets request
 
 - (void)ticketsWithRequest:(SearchRequest)request withCompletion:(void (^)(NSArray *tickets))completion {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
 
     NSString *urlString = [[[self urlForSearchRequest:request] absoluteString] stringByRemovingPercentEncoding];
     NSLog(@"Requset URL String is: %@", urlString);
@@ -138,6 +129,7 @@
 }
 
 - (NSURL *)urlForSearchRequest:(SearchRequest)request {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     NSURLComponents *components = [NSURLComponents new];
     components.scheme = @"https";
     components.host = API_MAIN_HOST;
@@ -172,15 +164,25 @@
 }
 
 - (NSURL *)urlWithAirlineLogoForIATACode:(NSString *)code {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     return [NSURL URLWithString:[NSString stringWithFormat:@ "https://pics.avs.io/200/200/%@.png", code]];
 }
 
 - (void)mapPricesFor:(City *)origin withCompletion:(void (^)(NSArray *prices))completion {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     static BOOL isLoading;
     if (isLoading) {return;}
     isLoading = YES;
     NSString *urlString = [NSString stringWithFormat:@"%@%@", API_URL_MAP_PRICE, origin.cityCode];
     [self loadWithURLString:urlString completion:^(id _Nullable result) {
+
+        NSDictionary *dictionary = result;
+        if ([result isKindOfClass:NSDictionary.class]) {
+            if (dictionary[@"errors"]) {
+                NSLog(@"Error received from server: %@", dictionary[@"errors"]);
+                return;
+            }
+        }
 
         NSArray *array = result;
         NSMutableArray *prices = [NSMutableArray new];
