@@ -35,16 +35,8 @@ static NSString *cellId = @"PlaceCell";
     self = [super initWithStyle:style];
     _isOrigin = isOrigin;
     _dataSourceType = DataSourceTypeCity;
-
-    return self;
-}
-
-#pragma mark - Life cycle
-
-- (void)viewDidLoad {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
-    [super viewDidLoad];
     [self performViewInitialization];
+    return self;
 }
 
 #pragma mark - View initialization

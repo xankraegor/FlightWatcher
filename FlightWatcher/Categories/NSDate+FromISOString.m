@@ -8,14 +8,14 @@
 
 @implementation NSDate (FromISOString)
 
-- (instancetype)initWithISOString:(NSString *)dateString {
+-(instancetype)initWithISOString:(NSString *)dateString {
     if (!dateString) return nil;
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     NSString *replacedString = [[dateString
             stringByReplacingOccurrencesOfString:@"T" withString:@" "]
             stringByReplacingOccurrencesOfString:@"Z" withString:@" "];
     dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-    self = [dateFormatter dateFromString:replacedString];
+    self = [self initWithTimeIntervalSinceReferenceDate:[[dateFormatter dateFromString:replacedString] timeIntervalSinceReferenceDate]];
     return self;
 }
 
