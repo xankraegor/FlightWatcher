@@ -8,7 +8,7 @@
 
 #import "MainViewController.h"
 #import "DataSourceTypeEnum.h"
-#import "SearchResultsTableViewController.h"
+#import "SearchResultsCollectionViewController.h"
 #import "MainView.h"
 #import "DataManager.h"
 #import "PlacesTableViewController.h"
@@ -84,8 +84,8 @@
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     [APIManager.sharedInstance ticketsWithRequest:_searchRequest withCompletion:^(NSArray *tickets) {
         if (tickets.count > 0) {
-            SearchResultsTableViewController *controller =
-                    [[SearchResultsTableViewController alloc] initWithTickets:tickets];
+            SearchResultsCollectionViewController *controller =
+                    [[SearchResultsCollectionViewController alloc] initWithTickets:tickets];
             [self.navigationController pushViewController:controller animated:YES];
         } else {
             UIAlertController *alertController =

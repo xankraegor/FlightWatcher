@@ -6,39 +6,42 @@
 //  Copyright © 2018 Xan Kraegor. All rights reserved.
 //
 
-#import "SearchResultsViewController.h"
+#import "SearchResultsCollectionViewController.h"
 #import "TicketCollectionViewCell.h"
 #import "APIManager.h"
 #import "YYWebImageManager.h"
 #import "YYWebImage.h"
 #import "Ticket.h"
 
-@interface SearchResultsViewController ()
+@interface SearchResultsCollectionViewController () <UICollectionViewDelegateFlowLayout>
 @property(nonatomic, strong) NSArray *tickets;
+@property(nonatomic) CGSize itemSize;
 @end
 
-@implementation SearchResultsViewController
+@implementation SearchResultsCollectionViewController
 
 NSDateFormatter *dateFormatter;
 
 #pragma mark Life cycle
 
 - (instancetype)initWithTickets:(NSArray *)tickets {
-    self = [super init];
-    if (!self) return nil;
-    _tickets = tickets;
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+
+    self = [super initWithCollectionViewLayout:flowLayout];
     dateFormatter = [NSDateFormatter new];
     dateFormatter.dateFormat = @"dd MMMM yyyy hh:mm";
-    [self performViewInitialization];
+    _tickets = tickets;
+
     return self;
 }
 
-#pragma mark - View Initialization
-
-- (void)performViewInitialization {
-    [self.collectionView registerClass:UICollectionViewCell.class forCellWithReuseIdentifier:@"TicketCellIdentifier"];
-    self.view.backgroundColor = UIColor.whiteColor;
-
+-(void)viewDidLoad {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    [self.collectionView registerClass:TicketCollectionViewCell.class forCellWithReuseIdentifier:@"TicketCellIdentifier"];
+    self.collectionView.backgroundColor = UIColor.whiteColor;
+    self.collectionView.delegate = self;
     self.navigationItem.title = @"Билеты";
     self.navigationItem.backBarButtonItem.title = @"Назад";
 }
@@ -48,7 +51,6 @@ NSDateFormatter *dateFormatter;
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
-
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return _tickets.count;
@@ -66,6 +68,27 @@ NSDateFormatter *dateFormatter;
                                      options:YYWebImageOptionSetImageWithFadeAnimation];
     return cell;
 }
+
+#pragma mark <UICollectionViewDelegateFlowLayout>
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat width = self.collectionView.bounds.size.width;
+    if (width > 350) width = 350;
+    return CGSizeMake(width, 150);
+}
+
+-(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 0;
+}
+
+-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    if (@available(iOS 11, *)) {
+        return self.view.safeAreaInsets;
+    } else {
+        return UIEdgeInsetsMake(8, 8, 8, 8);
+    }
+}
+
 
 #pragma mark <UICollectionViewDelegate>
 

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SearchResultsViewController : UICollectionViewController
+@interface SearchResultsCollectionViewController : UICollectionViewController
+
 - (instancetype)initWithTickets:(NSArray *)tickets;
 @end
