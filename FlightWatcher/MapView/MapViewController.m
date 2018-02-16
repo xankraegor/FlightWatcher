@@ -41,6 +41,12 @@
     [self.view addSubview:_currentLocationLabel];
 }
 
+-(void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    _mapView.frame = self.view.bounds;
+    _currentLocationLabel.frame = CGRectMake(16, 16, _mapView.bounds.size.width - 32, 24.0);
+}
+
 
 - (void)dealloc {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
@@ -102,5 +108,11 @@
     annotationView.enabled = true;
 
     return annotationView;
+}
+
+// MARK: - Memory management
+
+-(void)didReceiveMemoryWarning {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
 }
 @end

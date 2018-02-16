@@ -6,8 +6,15 @@
 #import "TabBarController.h"
 #import "MainViewController.h"
 #import "MapViewController.h"
-#import "MainNavigationController.h"
 #import "UIColor+ColorPalette.h"
+
+
+@interface TabBarController () <UITabBarControllerDelegate>
+@property(strong) UINavigationController *mainNavigationController;
+@property(strong) MainViewController *mainViewController;
+@property(strong) UINavigationController *mapNavigationController;
+@property(strong) MapViewController *mapViewController;
+@end
 
 @implementation TabBarController
 
@@ -18,28 +25,49 @@
         self.tabBar.tintColor = [UIColor blackColor];
         self.tabBar.translucent = false;
         self.tabBar.barTintColor = [UIColor navigationBarFW];
-
+        self.delegate = self;
     }
     return self;
 }
 
 - (NSArray <UIViewController *> *)createViewControllers {
-    NSMutableArray < UIViewController * > *controllers = [NSMutableArray new];
-    MainViewController *mainViewController = [[MainViewController alloc] init];
-    mainViewController.tabBarItem =
+    _mainViewController = [[MainViewController alloc] init];
+    _mainViewController.tabBarItem =
             [[UITabBarItem alloc] initWithTitle:@"Поиск"
                                           image:[UIImage imageNamed:@"search"]
                                   selectedImage:[UIImage imageNamed:@"search_selected"]];
-    MainNavigationController *mainNavigationController = [[MainNavigationController alloc]
-            initWithRootViewController:mainViewController];
-    [controllers addObject:mainNavigationController];
-    MapViewController *mapViewController = [[MapViewController alloc] init];
-    mapViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Карта цен"
-                                                                 image:[UIImage imageNamed:@"map"] selectedImage:[UIImage imageNamed:@"map_selected"]];
-    MainNavigationController *mapNavigationController = [[MainNavigationController alloc]
-            initWithRootViewController:mapViewController];
-    [controllers addObject:mapNavigationController];
-    return controllers;
+    _mainNavigationController = [[UINavigationController alloc]
+            initWithRootViewController:_mainViewController];
+    [self configuteNavigationController:_mainNavigationController];
+
+
+    _mapViewController = [[MapViewController alloc] init];
+    _mapViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Карта цен"
+                                                                  image:[UIImage imageNamed:@"map"]
+                                                          selectedImage:[UIImage imageNamed:@"map_selected"]];
+    _mapNavigationController = [[UINavigationController alloc]
+            initWithRootViewController:_mapViewController];
+    [self configuteNavigationController:_mapNavigationController];
+
+    return @[_mainNavigationController, _mapNavigationController];
+}
+
+- (void)configuteNavigationController:(__kindof UINavigationController *)controller {
+    controller.navigationBar.barTintColor = UIColor.navigationBarFW;
+    controller.navigationBar.translucent = false;
+    controller.navigationBar.prefersLargeTitles = true;
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    NSLog(@"View controller selected: %@ of class %@", viewController, NSStringFromClass(viewController.class));
+    NSLog(@"Child view controllers: %@", viewController.childViewControllers);
+}
+
+// MARK: - Memory management
+
+-(void)didReceiveMemoryWarning {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
 }
 
 @end

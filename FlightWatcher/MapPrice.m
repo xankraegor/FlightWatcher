@@ -11,7 +11,6 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary withOrigin:(City *)origin {
     self = [super init];
     if (self) {
-        NSLog(@"Dictionary contents: %@", dictionary);
         NSString *destinationCode = dictionary[@"destination"];
         _destination = [DataManager.sharedInstance cityForCityCode:destinationCode];
         _origin = origin;

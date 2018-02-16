@@ -21,7 +21,6 @@
 		2AEEBAED2020ECC9005D5C60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AEEBAEB2020ECC9005D5C60 /* LaunchScreen.storyboard */; };
 		2AEEBAF02020ECC9005D5C60 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEBAEF2020ECC9005D5C60 /* main.m */; };
 		2AEEBAFC2020FCE6005D5C60 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEBAFB2020FCE6005D5C60 /* MainViewController.m */; };
-		2AEEBAFF202101D5005D5C60 /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEBAFE202101D5005D5C60 /* MainNavigationController.m */; };
 		2AEEBB0520214884005D5C60 /* MainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEBB0420214884005D5C60 /* MainView.m */; };
 		3765F0F2FB15B1F66D12007E /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765FDCFB05A542DF29F72E1 /* City.m */; };
 		3765F0F54C4988F1F3917995 /* apikey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3765F230C67C08BAF6B25DCD /* apikey.plist */; };
@@ -68,8 +67,6 @@
 		2AEEBAEF2020ECC9005D5C60 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2AEEBAFA2020FCE6005D5C60 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		2AEEBAFB2020FCE6005D5C60 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		2AEEBAFD202101D5005D5C60 /* MainNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainNavigationController.h; sourceTree = "<group>"; };
-		2AEEBAFE202101D5005D5C60 /* MainNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainNavigationController.m; sourceTree = "<group>"; };
 		2AEEBB0320214884005D5C60 /* MainView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainView.h; sourceTree = "<group>"; };
 		2AEEBB0420214884005D5C60 /* MainView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainView.m; sourceTree = "<group>"; };
 		3765F08C7DDB7E97E69177A4 /* UIColor+ColorPalette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorPalette.m"; sourceTree = "<group>"; };
@@ -246,8 +243,6 @@
 		2AEEBB07202148BD005D5C60 /* NavigationControllers */ = {
 			isa = PBXGroup;
 			children = (
-				2AEEBAFD202101D5005D5C60 /* MainNavigationController.h */,
-				2AEEBAFE202101D5005D5C60 /* MainNavigationController.m */,
 				3765F6166EEB61D9E823CE54 /* TabBarController.m */,
 				3765FD1275AB7E0BF4BADE63 /* TabBarController.h */,
 			);
@@ -465,7 +460,6 @@
 				2A0284B42023D7FF004EFC23 /* PlacesTableViewController.m in Sources */,
 				2AEEBAFC2020FCE6005D5C60 /* MainViewController.m in Sources */,
 				2AEEBB0520214884005D5C60 /* MainView.m in Sources */,
-				2AEEBAFF202101D5005D5C60 /* MainNavigationController.m in Sources */,
 				3765F91D94D71DF3196572BE /* UIColor+ColorPalette.m in Sources */,
 				3765F4E689BF8A5812087D28 /* UILabel+Style.m in Sources */,
 				3765F446DEB215BDEF74B01E /* UIButton+Style.m in Sources */,

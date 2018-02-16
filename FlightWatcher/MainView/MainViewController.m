@@ -18,34 +18,33 @@
 
 
 @interface MainViewController () <PlaceViewControllerDelegate>
-@property(nonatomic) SearchRequest searchRequest;
+@property (nonatomic) SearchRequest searchRequest;
+@property (strong) SearchResultsCollectionViewController *searchResultsCollectionViewController;
 @end
 
 
 @implementation MainViewController
 
-#pragma mark Life cycle
+// MARK: - Life cycle
 
 - (void)viewDidLoad {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     [super viewDidLoad];
     [DataManager.sharedInstance loadData];
     [self performViewInitialization];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataLoadingCompletion)
+                                                 name:kDataManagerLoadDataDidComplete object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataLoadingCompletion)
-                                                 name:kDataManagerLoadDataDidComplete object:nil];
 
     self.navigationController.navigationBarHidden = NO;
 
     // 'Bar button remains highlighted' bug workaround:
     self.navigationController.navigationBar.tintAdjustmentMode = UIViewTintAdjustmentModeNormal;
     self.navigationController.navigationBar.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;
-
-
 }
 
 - (void)dealloc {
@@ -53,7 +52,7 @@
                                                   object:nil];
 }
 
-#pragma mark - View Initialization
+// MARK: - View Initialization
 
 - (void)performViewInitialization {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
@@ -67,7 +66,7 @@
     [self.navigationItem setRightBarButtonItem:rightButtonItem animated:NO];
 }
 
-#pragma mark - Loading data
+// MARK: - Loading data
 
 - (void)dataLoadingCompletion {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
@@ -78,15 +77,15 @@
 }
 
 
-#pragma mark - Navigation
+// MARK: - Navigation
 
 - (void)searchButtonPressed {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     [APIManager.sharedInstance ticketsWithRequest:_searchRequest withCompletion:^(NSArray *tickets) {
         if (tickets.count > 0) {
-            SearchResultsCollectionViewController *controller =
+            _searchResultsCollectionViewController =
                     [[SearchResultsCollectionViewController alloc] initWithTickets:tickets];
-            [self.navigationController pushViewController:controller animated:YES];
+            [self.navigationController pushViewController:_searchResultsCollectionViewController animated:YES];
         } else {
             UIAlertController *alertController =
                     [UIAlertController alertControllerWithTitle:@""
@@ -122,7 +121,7 @@
     [self.navigationController pushViewController:controller animated:YES];
 }
 
-#pragma mark - PlaceViewControllerDelegate
+// MARK: - PlaceViewControllerDelegate
 
 - (void)selectPlace:(id)place withType:(BOOL)isOrigin andDataType:(DataSourceType)dataType {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
@@ -149,6 +148,12 @@
     }
 
     [(MainView *) self.view setTitle:title forOriginButton:isOrigin];
+}
+
+// MARK: - Memory management
+
+-(void)didReceiveMemoryWarning {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
 }
 
 @end
