@@ -7,6 +7,7 @@
 #import "MainViewController.h"
 #import "MapViewController.h"
 #import "UIColor+ColorPalette.h"
+#import "TicketsCollectionViewController.h"
 
 
 @interface TabBarController () <UITabBarControllerDelegate>
@@ -14,6 +15,8 @@
 @property(strong) MainViewController *mainViewController;
 @property(strong) UINavigationController *mapNavigationController;
 @property(strong) MapViewController *mapViewController;
+@property(strong) UINavigationController *favoritesNavigationController;
+@property(strong) TicketsCollectionViewController* favoriteViewController;
 @end
 
 @implementation TabBarController
@@ -40,7 +43,6 @@
             initWithRootViewController:_mainViewController];
     [self configuteNavigationController:_mainNavigationController];
 
-
     _mapViewController = [[MapViewController alloc] init];
     _mapViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Карта цен"
                                                                   image:[UIImage imageNamed:@"map"]
@@ -49,7 +51,13 @@
             initWithRootViewController:_mapViewController];
     [self configuteNavigationController:_mapNavigationController];
 
-    return @[_mainNavigationController, _mapNavigationController];
+    _favoriteViewController = [[TicketsCollectionViewController alloc] initWithFavoriteTickets];
+    _favoriteViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Избранное"
+                                                                      image:[UIImage imageNamed:@"favorite"]
+                                                              selectedImage:[UIImage imageNamed:@"favorite_selected"]];
+    _favoritesNavigationController = [[UINavigationController alloc] initWithRootViewController:_favoriteViewController];
+
+    return @[_mainNavigationController, _mapNavigationController, _favoritesNavigationController];
 }
 
 - (void)configuteNavigationController:(__kindof UINavigationController *)controller {
@@ -66,7 +74,7 @@
 
 // MARK: - Memory management
 
--(void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
 }
 

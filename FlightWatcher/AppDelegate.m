@@ -53,7 +53,7 @@
 }
 
 
-#pragma mark - Core Data stack
+// MARK: - Core Data stack
 
 @synthesize persistentContainer = _persistentContainer;
 
@@ -85,7 +85,7 @@
     return _persistentContainer;
 }
 
-#pragma mark - Core Data Saving support
+// MARK: - Core Data Saving support
 
 - (void)saveContext {
     NSManagedObjectContext *context = self.persistentContainer.viewContext;

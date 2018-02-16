@@ -96,7 +96,7 @@
           }] resume];
 }
 
-#pragma mark Tickets request
+// MARK: Tickets request
 
 - (void)ticketsWithRequest:(SearchRequest)request withCompletion:(void (^)(NSArray *tickets))completion {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));

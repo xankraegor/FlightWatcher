@@ -28,7 +28,7 @@
 
 static NSString *cellId = @"PlaceCell";
 
-#pragma mark - Initialization
+// MARK: - Initialization
 
 - (instancetype)initWithStyle:(UITableViewStyle)style toReturnOrigin:(BOOL)isOrigin {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
@@ -38,8 +38,6 @@ static NSString *cellId = @"PlaceCell";
     [self performViewInitialization];
     return self;
 }
-
-#pragma mark - View initialization
 
 - (void)performViewInitialization {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
@@ -82,7 +80,7 @@ static NSString *cellId = @"PlaceCell";
     [self.tableView reloadData];
 }
 
-#pragma mark - UISearchResultsUpdating
+// MARK: - UISearchResultsUpdating
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
@@ -99,7 +97,7 @@ static NSString *cellId = @"PlaceCell";
     return _searchController.isActive &&_searchArray.count > 0;
 }
 
-#pragma mark - Table view data source
+// MARK: - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self isSearching] ? [_searchArray count] : [_currentArray count];
@@ -114,7 +112,7 @@ static NSString *cellId = @"PlaceCell";
     return cell;
 }
 
-#pragma mark - Table View Delegate
+// MARK: - Table View Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));

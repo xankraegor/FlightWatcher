@@ -29,26 +29,23 @@
     UIViewController *superViewController = [[self superview] getViewController];
 
 
-#pragma mark originButton
+// MARK: originButton
     originButton = [[UIButton alloc] initWithFrame:self.bounds title:@"Откуда"];
     [originButton addTarget:superViewController action:@selector(presentOriginSelectionView) forControlEvents:UIControlEventTouchUpInside];
     [originButton setEnabled:false];
     [self addSubview:originButton];
 
-#pragma mark destinationButton
+// MARK: destinationButton
     destinationButton = [[UIButton alloc] initWithFrame:self.bounds title:@"Куда"];
     [destinationButton addTarget:superViewController action:@selector(presentDestinationSelectionView) forControlEvents:UIControlEventTouchUpInside];
     [destinationButton setEnabled:false];
     [self addSubview:destinationButton];
 
-
-#pragma mark TRANSFER COUNT
-
-#pragma mark transfersCountLabel
+// MARK: transfersCountLabel
     tansfersCountLabel = [UILabel newWithFrame:self.bounds usingTitle:@"Количество пересадок: 0"];
     [self addSubview:tansfersCountLabel];
 
-#pragma mark transfersCountStepper
+// MARK: transfersCountStepper
     tansfersCountStepper = [[UIStepper alloc] initWithFrame:self.bounds];
     [self addSubview:tansfersCountStepper];
 
