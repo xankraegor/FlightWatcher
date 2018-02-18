@@ -36,18 +36,14 @@ NSDateFormatter *dateFormatter;
 
 - (instancetype)initWithTickets:(NSArray *)tickets diplayingFavorites:(BOOL)favorites {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
-    displayingFavorites = favorites;
-    _tickets = displayingFavorites ? CoreDataHelper.sharedInstance.favorites : tickets;
-
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-
+    self = [super initWithCollectionViewLayout:flowLayout];
+    self.title = favorites ? @"Избранные" : @"Билеты";
+    displayingFavorites = favorites;
+    _tickets = displayingFavorites ? CoreDataHelper.sharedInstance.favorites : tickets;
     dateFormatter = [NSDateFormatter new];
     dateFormatter.dateFormat = @"dd MMMM yyyy hh:mm";
-
-    self.title = favorites ? @"Избранные" : @"Билеты";
-
-    self = [super initWithCollectionViewLayout:flowLayout];
     return self;
 }
 
@@ -63,7 +59,10 @@ NSDateFormatter *dateFormatter;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-
+    if(displayingFavorites) {
+        _tickets = CoreDataHelper.sharedInstance.favorites;
+        [self.collectionView reloadData];
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -95,7 +94,7 @@ NSDateFormatter *dateFormatter;
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
-    if (displayingFavorites) return;
+
 
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@ "Действия с билетом"
                                                                              message:@"Что необходимо сделать с выбранным билетом?"
@@ -107,8 +106,13 @@ NSDateFormatter *dateFormatter;
                                                 handler:^(UIAlertAction *_Nonnull action) {
                                                     [CoreDataHelper.sharedInstance
                                                             removeFromFavorite:_tickets[(NSUInteger) indexPath.row]];
+                                                    __weak typeof(self) welf = self;
+                                                    if (displayingFavorites) {
+                                                        _tickets = CoreDataHelper.sharedInstance.favorites;
+                                                        [welf.collectionView reloadData];
+                                                    }
                                                 }];
-    } else {
+    } else if (!displayingFavorites) {
         favoriteAction = [UIAlertAction actionWithTitle:@ "Добавить в избранное"
                                                   style:UIAlertActionStyleDefault
                                                 handler:
@@ -140,7 +144,7 @@ NSDateFormatter *dateFormatter;
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     if (@available(iOS 11, *)) {
-        return self.view.safeAreaInsets;
+        return UIEdgeInsetsMake(8, self.view.safeAreaInsets.left, 8, self.view.safeAreaInsets.right);
     } else {
         return UIEdgeInsetsMake(8, 8, 8, 8);
     }

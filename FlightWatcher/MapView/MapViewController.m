@@ -8,6 +8,7 @@
 #import "DataManager.h"
 #import "MapViewController.h"
 #import "MapPrice.h"
+#import "CoreDataHelper.h"
 
 @interface MapViewController () <MKMapViewDelegate>
 @property(nonatomic, strong) MKMapView *mapView;
@@ -86,9 +87,8 @@
     for (MapPrice *price in prices) {
         dispatch_async(dispatch_get_main_queue(), ^{
             MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-            annotation.title = [NSString stringWithFormat:@"%@ (%@)", price.destination.name,
-                                                          price.destination.code];
-            annotation.subtitle = [NSString stringWithFormat:@"%ld руб.", (long) price.value];
+            annotation.title = [NSString stringWithFormat:@"%@", price.destination.name];
+            annotation.subtitle = [NSString stringWithFormat:@"%ld₽", price.value];
             annotation.coordinate = price.destination.coordinate;
             [_mapView addAnnotation:annotation];
         });
@@ -102,12 +102,46 @@
     if (annotation == mapView.userLocation) {
         return nil;
     }
-
-    MKPinAnnotationView *annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"AnnotationReuseIdentifier"];
-    annotationView.canShowCallout = true;
-    annotationView.enabled = true;
+    MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"AnnotationReuseIdentifier"];
 
     return annotationView;
+}
+
+-(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    for (MapPrice *price in _prices) {
+        if (price.destination.name == view.annotation.title) {
+            [APIManager.sharedInstance requestTicketWithMapPrice:price completion:^(Ticket *ticket) {
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@ "Действия с билетом"
+                                                                                         message:@"Что необходимо сделать с выбранным билетом?"
+                                                                                  preferredStyle:UIAlertControllerStyleActionSheet];
+                UIAlertAction *favoriteAction;
+                if ([CoreDataHelper.sharedInstance isFavorite:ticket]) {
+                    favoriteAction = [UIAlertAction actionWithTitle:@ "Удалить из избранного"
+                                                              style:UIAlertActionStyleDestructive
+                                                            handler:^(UIAlertAction *_Nonnull action) {
+                                                                [CoreDataHelper.sharedInstance
+                                                                        removeFromFavorite:ticket];
+                                                            }];
+                } else {
+                    favoriteAction = [UIAlertAction actionWithTitle:@ "Добавить в избранное"
+                                                              style:UIAlertActionStyleDefault
+                                                            handler:
+                                                                    ^(UIAlertAction *_Nonnull action) {
+                                                                        [CoreDataHelper.sharedInstance
+                                                                                addToFavorite:ticket];
+                                                                    }];
+                }
+
+                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Закрыть"
+                                                                       style:UIAlertActionStyleCancel
+                                                                     handler:nil];
+                [alertController addAction:favoriteAction];
+                [alertController addAction:cancelAction];
+                [self presentViewController:alertController animated:YES completion:nil];
+            }];
+        }
+    }
 }
 
 // MARK: - Memory management

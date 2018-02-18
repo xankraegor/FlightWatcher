@@ -7,10 +7,16 @@
 #import "City.h"
 #import "SearchRequest.h"
 
+@class MapPrice;
+@class Ticket;
+
 @interface APIManager : NSObject
 + (instancetype)sharedInstance;
 - (void)cityForCurrentIP:(void (^)(City *city))completion;
 - (void)ticketsWithRequest:(SearchRequest)request withCompletion:(void (^)(NSArray *tickets))completion;
+
+- (void)requestTicketWithMapPrice:(MapPrice *)mapPrice completion:(void (^)(Ticket *ticket))completion;
+
 - (NSURL *)urlWithAirlineLogoForIATACode:(NSString *)code;
 
 - (void)mapPricesFor:(City *)origin withCompletion:(void (^)(NSArray *prices))completion;

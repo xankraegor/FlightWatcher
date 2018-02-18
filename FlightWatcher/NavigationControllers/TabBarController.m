@@ -70,6 +70,9 @@
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     NSLog(@"View controller selected: %@ of class %@", viewController, NSStringFromClass(viewController.class));
     NSLog(@"Child view controllers: %@", viewController.childViewControllers);
+//    if ([viewController isKindOfClass:TicketsCollectionViewController.class]) {
+//        
+//    }
 }
 
 // MARK: - Memory management

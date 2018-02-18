@@ -11,15 +11,9 @@
 		2A0284AB2023CACE004EFC23 /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A0284A82023CACE004EFC23 /* countries.json */; };
 		2A0284AC2023CACE004EFC23 /* airports.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A0284A92023CACE004EFC23 /* airports.json */; };
 		2A0284B42023D7FF004EFC23 /* PlacesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0284B32023D7FF004EFC23 /* PlacesTableViewController.m */; };
-		2A09C699203768BE004863BD /* MapPriceObject+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A09C689203768BD004863BD /* MapPriceObject+CoreDataProperties.m */; };
 		2A09C69A203768BE004863BD /* FavoriteTicket+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A09C68A203768BD004863BD /* FavoriteTicket+CoreDataClass.m */; };
-		2A09C69B203768BE004863BD /* MapPriceObject+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A09C68B203768BD004863BD /* MapPriceObject+CoreDataClass.m */; };
-		2A09C69C203768BE004863BD /* CityObject+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A09C68C203768BD004863BD /* CityObject+CoreDataProperties.m */; };
 		2A09C69E203768BE004863BD /* FavoriteTicket+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A09C694203768BE004863BD /* FavoriteTicket+CoreDataProperties.m */; };
 		2A09C69F203768BE004863BD /* FlightWatcher.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2A09C695203768BE004863BD /* FlightWatcher.xcdatamodeld */; };
-		2A09C6A0203768BE004863BD /* CityObject+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A09C697203768BE004863BD /* CityObject+CoreDataClass.m */; };
-		2A281C85203768270018C50E /* CityObject+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A281C7F203768270018C50E /* CityObject+CoreDataProperties.m */; };
-		2A281C86203768270018C50E /* MapPriceObject+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A281C81203768270018C50E /* MapPriceObject+CoreDataProperties.m */; };
 		2A2F6016202E61A9007962F7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A2F6015202E61A9007962F7 /* MapKit.framework */; };
 		2A5E39E9203388F900FAB50B /* TicketsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A5E39E8203388F900FAB50B /* TicketsCollectionViewController.m */; };
 		2A5E39EC20338B8F00FAB50B /* TicketCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A5E39EB20338B8F00FAB50B /* TicketCollectionViewCell.m */; };
@@ -62,21 +56,11 @@
 		2A0284A92023CACE004EFC23 /* airports.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports.json; sourceTree = "<group>"; };
 		2A0284B22023D7FF004EFC23 /* PlacesTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlacesTableViewController.h; sourceTree = "<group>"; };
 		2A0284B32023D7FF004EFC23 /* PlacesTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlacesTableViewController.m; sourceTree = "<group>"; };
-		2A09C689203768BD004863BD /* MapPriceObject+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MapPriceObject+CoreDataProperties.m"; sourceTree = "<group>"; };
 		2A09C68A203768BD004863BD /* FavoriteTicket+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FavoriteTicket+CoreDataClass.m"; sourceTree = "<group>"; };
-		2A09C68B203768BD004863BD /* MapPriceObject+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MapPriceObject+CoreDataClass.m"; sourceTree = "<group>"; };
-		2A09C68C203768BD004863BD /* CityObject+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CityObject+CoreDataProperties.m"; sourceTree = "<group>"; };
 		2A09C68D203768BD004863BD /* FavoriteTicket+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FavoriteTicket+CoreDataClass.h"; sourceTree = "<group>"; };
-		2A09C68E203768BE004863BD /* MapPriceObject+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MapPriceObject+CoreDataClass.h"; sourceTree = "<group>"; };
-		2A09C68F203768BE004863BD /* CityObject+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CityObject+CoreDataProperties.h"; sourceTree = "<group>"; };
-		2A09C690203768BE004863BD /* MapPriceObject+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MapPriceObject+CoreDataProperties.h"; sourceTree = "<group>"; };
-		2A09C691203768BE004863BD /* CityObject+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CityObject+CoreDataClass.h"; sourceTree = "<group>"; };
 		2A09C694203768BE004863BD /* FavoriteTicket+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FavoriteTicket+CoreDataProperties.m"; sourceTree = "<group>"; };
 		2A09C696203768BE004863BD /* FlightWatcher.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FlightWatcher.xcdatamodel; sourceTree = "<group>"; };
-		2A09C697203768BE004863BD /* CityObject+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CityObject+CoreDataClass.m"; sourceTree = "<group>"; };
 		2A09C698203768BE004863BD /* FavoriteTicket+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FavoriteTicket+CoreDataProperties.h"; sourceTree = "<group>"; };
-		2A281C7F203768270018C50E /* CityObject+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CityObject+CoreDataProperties.m"; path = "/Volumes/Macintosh HD/Dropbox/Repositories/GeekBrains.iOS.dev.2017/FlightWatcher/FlightWatcher/CoreData/CityObject+CoreDataProperties.m"; sourceTree = "<absolute>"; };
-		2A281C81203768270018C50E /* MapPriceObject+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "MapPriceObject+CoreDataProperties.m"; path = "/Volumes/Macintosh HD/Dropbox/Repositories/GeekBrains.iOS.dev.2017/FlightWatcher/FlightWatcher/CoreData/MapPriceObject+CoreDataProperties.m"; sourceTree = "<absolute>"; };
 		2A2F6015202E61A9007962F7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		2A5E39E7203388F900FAB50B /* TicketsCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketsCollectionViewController.h; sourceTree = "<group>"; };
 		2A5E39E8203388F900FAB50B /* TicketsCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketsCollectionViewController.m; sourceTree = "<group>"; };
@@ -191,15 +175,6 @@
 			path = PlacesSelectionView;
 			sourceTree = "<group>";
 		};
-		2A09C688203768A7004863BD /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				2A281C81203768270018C50E /* MapPriceObject+CoreDataProperties.m */,
-				2A281C7F203768270018C50E /* CityObject+CoreDataProperties.m */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 		2AEEBAD12020ECC9005D5C60 = {
 			isa = PBXGroup;
 			children = (
@@ -207,7 +182,6 @@
 				2AEEBADB2020ECC9005D5C60 /* Products */,
 				5EBA36861D1B40E5D5BF9677 /* Pods */,
 				33A19D4812002F90F5A4E657 /* Frameworks */,
-				2A09C688203768A7004863BD /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -254,19 +228,11 @@
 		2AEEBAF62020ECEF005D5C60 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				2A09C691203768BE004863BD /* CityObject+CoreDataClass.h */,
-				2A09C697203768BE004863BD /* CityObject+CoreDataClass.m */,
-				2A09C68F203768BE004863BD /* CityObject+CoreDataProperties.h */,
-				2A09C68C203768BD004863BD /* CityObject+CoreDataProperties.m */,
 				2A09C68D203768BD004863BD /* FavoriteTicket+CoreDataClass.h */,
 				2A09C68A203768BD004863BD /* FavoriteTicket+CoreDataClass.m */,
 				2A09C698203768BE004863BD /* FavoriteTicket+CoreDataProperties.h */,
 				2A09C694203768BE004863BD /* FavoriteTicket+CoreDataProperties.m */,
 				2A09C695203768BE004863BD /* FlightWatcher.xcdatamodeld */,
-				2A09C68E203768BE004863BD /* MapPriceObject+CoreDataClass.h */,
-				2A09C68B203768BD004863BD /* MapPriceObject+CoreDataClass.m */,
-				2A09C690203768BE004863BD /* MapPriceObject+CoreDataProperties.h */,
-				2A09C689203768BD004863BD /* MapPriceObject+CoreDataProperties.m */,
 				3765F6BCD82EB34603416956 /* CoreDataHelper.m */,
 				3765F89AEDEE5304D3B4F1C1 /* CoreDataHelper.h */,
 			);
@@ -519,13 +485,10 @@
 				3765F91D94D71DF3196572BE /* UIColor+ColorPalette.m in Sources */,
 				3765F4E689BF8A5812087D28 /* UILabel+Style.m in Sources */,
 				3765F446DEB215BDEF74B01E /* UIButton+Style.m in Sources */,
-				2A281C86203768270018C50E /* MapPriceObject+CoreDataProperties.m in Sources */,
 				2A5E39E9203388F900FAB50B /* TicketsCollectionViewController.m in Sources */,
 				3765F3E8031042099D980C2C /* UIView+GetController.m in Sources */,
 				2AEE4A342027F1340008F968 /* PlaceTableViewCell.m in Sources */,
 				3765FBA4EA6471B1F397E8E4 /* Country.m in Sources */,
-				2A09C69B203768BE004863BD /* MapPriceObject+CoreDataClass.m in Sources */,
-				2A281C85203768270018C50E /* CityObject+CoreDataProperties.m in Sources */,
 				3765F0F2FB15B1F66D12007E /* City.m in Sources */,
 				2A09C69A203768BE004863BD /* FavoriteTicket+CoreDataClass.m in Sources */,
 				3765FC8DA732C14069998FCC /* Airport.m in Sources */,
@@ -534,14 +497,11 @@
 				3765F8D5D82135DFC8107553 /* APIManager.m in Sources */,
 				3765F9995BEB8D82E2995F8F /* DataManager.m in Sources */,
 				3765F14F3950028573B60396 /* LocationService.m in Sources */,
-				2A09C699203768BE004863BD /* MapPriceObject+CoreDataProperties.m in Sources */,
 				2A5E39EC20338B8F00FAB50B /* TicketCollectionViewCell.m in Sources */,
-				2A09C69C203768BE004863BD /* CityObject+CoreDataProperties.m in Sources */,
 				2A09C69E203768BE004863BD /* FavoriteTicket+CoreDataProperties.m in Sources */,
 				3765FADE4946A5907C260AE5 /* MapPrice.m in Sources */,
 				3765F4CBF3F5C2C53BF2ACD7 /* MapViewController.m in Sources */,
 				2A09C69F203768BE004863BD /* FlightWatcher.xcdatamodeld in Sources */,
-				2A09C6A0203768BE004863BD /* CityObject+CoreDataClass.m in Sources */,
 				3765FA20EF3FAE7653C8BA18 /* TabBarController.m in Sources */,
 				3765F231BF9B28D43349B080 /* CoreDataHelper.m in Sources */,
 			);

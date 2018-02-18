@@ -126,7 +126,23 @@
             completion(array);
         });
     }];
+}
 
+-(void)requestTicketWithMapPrice:(MapPrice *)mapPrice completion:(void (^)(Ticket *ticket))completion {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    SearchRequest request;
+    request.origin = mapPrice.origin.code;
+    request.destination = mapPrice.destination.code;
+    request.departDate = mapPrice.departure;
+    request.returnDate = mapPrice.returnDate;
+    [self ticketsWithRequest:request withCompletion:^(NSArray *tickets) {
+        for (Ticket* ticket in tickets) {
+            if (ticket.price.integerValue == mapPrice.value) {
+                completion(ticket);
+            }
+        }
+        completion(nil);
+    }];
 }
 
 - (NSURL *)urlForSearchRequest:(SearchRequest)request {

@@ -2,7 +2,7 @@
 //  FavoriteTicket+CoreDataProperties.m
 //  
 //
-//  Created by Xan Kraegor on 16.02.2018.
+//  Created by Xan Kraegor on 17.02.2018.
 //
 //
 
@@ -14,14 +14,14 @@
 	return [[NSFetchRequest alloc] initWithEntityName:@"FavoriteTicket"];
 }
 
+@dynamic airline;
 @dynamic created;
 @dynamic departure;
 @dynamic expires;
-@dynamic returnDate;
-@dynamic airline;
-@dynamic from;
-@dynamic to;
-@dynamic price;
 @dynamic flightNumber;
+@dynamic from;
+@dynamic price;
+@dynamic returnDate;
+@dynamic to;
 
 @end
