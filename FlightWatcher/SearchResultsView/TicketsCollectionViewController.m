@@ -36,8 +36,18 @@ NSDateFormatter *dateFormatter;
 
 - (instancetype)initWithTickets:(NSArray *)tickets diplayingFavorites:(BOOL)favorites {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+
+    flowLayout.minimumLineSpacing = 0;
+
+    if (@available(iOS 11, *)) {
+        flowLayout.sectionInset = UIEdgeInsetsMake(8, self.view.safeAreaInsets.left, 8, self.view.safeAreaInsets.right);
+    } else {
+        flowLayout.sectionInset = UIEdgeInsetsMake(8, 8, 8, 8);
+    }
+
     self = [super initWithCollectionViewLayout:flowLayout];
     self.title = favorites ? @"Избранные" : @"Билеты";
     displayingFavorites = favorites;
@@ -105,7 +115,7 @@ NSDateFormatter *dateFormatter;
                                                   style:UIAlertActionStyleDestructive
                                                 handler:^(UIAlertAction *_Nonnull action) {
                                                     [CoreDataHelper.sharedInstance
-                                                            removeFromFavorite:_tickets[(NSUInteger) indexPath.row]];
+                                                            removeFromFavorites:_tickets[(NSUInteger) indexPath.row]];
                                                     __weak typeof(self) welf = self;
                                                     if (displayingFavorites) {
                                                         _tickets = CoreDataHelper.sharedInstance.favorites;
@@ -118,7 +128,7 @@ NSDateFormatter *dateFormatter;
                                                 handler:
                                                         ^(UIAlertAction *_Nonnull action) {
                                                             [CoreDataHelper.sharedInstance
-                                                                    addToFavorite:_tickets[(NSUInteger) indexPath.row]];
+                                                                    addToFavorites:_tickets[(NSUInteger) indexPath.row]];
                                                         }];
     }
 
@@ -132,23 +142,12 @@ NSDateFormatter *dateFormatter;
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat width = self.collectionView.bounds.size.width;
     if (width > 350) width = 350;
     return CGSizeMake(width, 150);
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 0;
-}
-
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    if (@available(iOS 11, *)) {
-        return UIEdgeInsetsMake(8, self.view.safeAreaInsets.left, 8, self.view.safeAreaInsets.right);
-    } else {
-        return UIEdgeInsetsMake(8, 8, 8, 8);
-    }
-}
 
 // MARK: - Memory management
 

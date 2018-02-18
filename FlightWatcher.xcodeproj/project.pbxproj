@@ -66,6 +66,7 @@
 		2A5E39E8203388F900FAB50B /* TicketsCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketsCollectionViewController.m; sourceTree = "<group>"; };
 		2A5E39EA20338B8F00FAB50B /* TicketCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketCollectionViewCell.h; sourceTree = "<group>"; };
 		2A5E39EB20338B8F00FAB50B /* TicketCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketCollectionViewCell.m; sourceTree = "<group>"; };
+		2ABF3C2A2039064A002E184B /* TicketSortOrder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketSortOrder.h; sourceTree = "<group>"; };
 		2AEE4A322027F1340008F968 /* PlaceTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaceTableViewCell.h; sourceTree = "<group>"; };
 		2AEE4A332027F1340008F968 /* PlaceTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaceTableViewCell.m; sourceTree = "<group>"; };
 		2AEEBADA2020ECC9005D5C60 /* FlightWatcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlightWatcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -207,6 +208,7 @@
 				2A0284AE2023D127004EFC23 /* PlacesClasses */,
 				3765F1478A3AE1C0FD8CDA13 /* SearchRequest.h */,
 				3765F3B33450BAB89454EFC6 /* DataSourceTypeEnum.h */,
+				2ABF3C2A2039064A002E184B /* TicketSortOrder.h */,
 				3765FDC2483F02382766E13C /* Ticket.m */,
 				3765F3CBB99AAA49A2419571 /* Ticket.h */,
 				3765FEEDE7D7EFE2E4338FCF /* Managers */,

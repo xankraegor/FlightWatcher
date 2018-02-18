@@ -121,7 +121,7 @@
                                                               style:UIAlertActionStyleDestructive
                                                             handler:^(UIAlertAction *_Nonnull action) {
                                                                 [CoreDataHelper.sharedInstance
-                                                                        removeFromFavorite:ticket];
+                                                                        removeFromFavorites:ticket];
                                                             }];
                 } else {
                     favoriteAction = [UIAlertAction actionWithTitle:@ "Добавить в избранное"
@@ -129,7 +129,7 @@
                                                             handler:
                                                                     ^(UIAlertAction *_Nonnull action) {
                                                                         [CoreDataHelper.sharedInstance
-                                                                                addToFavorite:ticket];
+                                                                                addToFavorites:ticket];
                                                                     }];
                 }
 

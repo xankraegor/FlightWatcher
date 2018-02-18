@@ -8,6 +8,7 @@
 #import "FavoriteTicket+CoreDataClass.h"
 #import "Ticket.h"
 
+
 @interface CoreDataHelper : NSObject
 + (instancetype)sharedInstance;
 
@@ -15,7 +16,7 @@
 
 - (NSArray *)favorites;
 
-- (void)addToFavorite:(Ticket *)ticket;
+- (void)addToFavorites:(Ticket *)ticket;
 
-- (void)removeFromFavorite:(Ticket *)ticket;
+- (void)removeFromFavorites:(Ticket *)ticket;
 @end

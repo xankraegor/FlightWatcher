@@ -4,6 +4,7 @@
 //
 
 #import "CoreDataHelper.h"
+#import "TicketSortOrder.h"
 
 @interface CoreDataHelper ()
 @property(nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
@@ -71,7 +72,7 @@
     return [self favoriteFromTicket:ticket] != nil;
 }
 
-- (void)addToFavorite:(Ticket *)ticket {
+- (void)addToFavorites:(Ticket *)ticket {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     FavoriteTicket *favorite = [NSEntityDescription insertNewObjectForEntityForName:@"FavoriteTicket"
                                                              inManagedObjectContext:_managedObjectContext];
@@ -87,7 +88,7 @@
     [self save];
 }
 
-- (void)removeFromFavorite:(Ticket *)ticket {
+- (void)removeFromFavorites:(Ticket *)ticket {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     FavoriteTicket *favorite = [self favoriteFromTicket:ticket];
     if (favorite) {
@@ -100,6 +101,45 @@
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"FavoriteTicket"];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"created" ascending:NO]];
+    return [_managedObjectContext executeFetchRequest:request error:nil];
+}
+
+
+- (NSArray *)favoritesSortedBy:(TicketSortOrder)order ascending:(BOOL)ascending {
+    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"FavoriteTicket"];
+
+    NSSortDescriptor* descriptor;
+    switch (order) {
+        case TicketSortOrderTo:
+            descriptor = [NSSortDescriptor sortDescriptorWithKey:@"to" ascending:ascending];
+            break;
+        case TicketSortOrderFrom:
+            descriptor = [NSSortDescriptor sortDescriptorWithKey:@"from" ascending:ascending];
+            break;
+        case TicketSortOrderPrice:
+            descriptor = [NSSortDescriptor sortDescriptorWithKey:@"price" ascending:ascending];
+            break;
+        case TicketSortOrderAirline:
+            descriptor = [NSSortDescriptor sortDescriptorWithKey:@"airline" ascending:ascending];
+            break;
+        case TicketSortOrderCreated:
+            descriptor = [NSSortDescriptor sortDescriptorWithKey:@"created" ascending:ascending];
+            break;
+        case TicketSortOrderExpires:
+            descriptor = [NSSortDescriptor sortDescriptorWithKey:@"expires" ascending:ascending];
+            break;
+        case TicketSortOrderDeparture:
+            descriptor = [NSSortDescriptor sortDescriptorWithKey:@"departure" ascending:ascending];
+            break;
+        case TicketSortOrderReturnDate:
+            descriptor = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:ascending];
+            break;
+        case TicketSortOrderFlightNumber:
+            descriptor = [NSSortDescriptor sortDescriptorWithKey:@"flightNumber" ascending:ascending];
+    }
+
+    request.sortDescriptors = @[descriptor];
     return [_managedObjectContext executeFetchRequest:request error:nil];
 }
 
