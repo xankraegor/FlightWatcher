@@ -2,7 +2,7 @@
 //  FavoriteTicket+CoreDataProperties.m
 //  
 //
-//  Created by Xan Kraegor on 17.02.2018.
+//  Created by Xan Kraegor on 18.02.2018.
 //
 //
 
@@ -23,5 +23,6 @@
 @dynamic price;
 @dynamic returnDate;
 @dynamic to;
+@dynamic addedFromMap;
 
 @end

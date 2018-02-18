@@ -42,6 +42,7 @@
 		3765FBA4EA6471B1F397E8E4 /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F986C01F4FD9E12BA979 /* Country.m */; };
 		3765FC1CA2232772C7B12438 /* favorite_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3765F729B279B34F9655C52E /* favorite_selected.png */; };
 		3765FC2B3EF77302215487ED /* Ticket.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765FDC2483F02382766E13C /* Ticket.m */; };
+		3765FC41DF4D3F8301CFCAC7 /* UIAlertAction+FavoriteTicketsSortingFabric.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F8370406A83D5AE79E1F /* UIAlertAction+FavoriteTicketsSortingFabric.m */; };
 		3765FC8DA732C14069998FCC /* Airport.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F0B9D09269E9326735BD /* Airport.m */; };
 		3765FD24FBB0EAE33292AF32 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3765F240F40762F845BB7921 /* map.png */; };
 		3765FE8520AE9D709C7BB344 /* NSDate+FromISOString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765FD8E8026A82F531421FC /* NSDate+FromISOString.m */; };
@@ -104,12 +105,14 @@
 		3765F6C954D8C1197F4AD8DB /* map_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_selected.png; sourceTree = "<group>"; };
 		3765F70F96D8F3B55185B062 /* UILabel+Style.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Style.h"; sourceTree = "<group>"; };
 		3765F729B279B34F9655C52E /* favorite_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favorite_selected.png; sourceTree = "<group>"; };
+		3765F8370406A83D5AE79E1F /* UIAlertAction+FavoriteTicketsSortingFabric.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertAction+FavoriteTicketsSortingFabric.m"; sourceTree = "<group>"; };
 		3765F858D8281C7BC8973856 /* favorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favorite.png; sourceTree = "<group>"; };
 		3765F89AEDEE5304D3B4F1C1 /* CoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataHelper.h; sourceTree = "<group>"; };
 		3765F8DBCFB2F53CB3C4683C /* MapPrice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapPrice.m; sourceTree = "<group>"; };
 		3765F95C6A4DB7C1D79E1598 /* UIView+GetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+GetController.h"; sourceTree = "<group>"; };
 		3765F98214AC26FC3D542C82 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		3765F986C01F4FD9E12BA979 /* Country.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Country.m; sourceTree = "<group>"; };
+		3765F9B017A8FBC019D5743D /* UIAlertAction+FavoriteTicketsSortingFabric.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertAction+FavoriteTicketsSortingFabric.h"; sourceTree = "<group>"; };
 		3765FA84A551792C993791F9 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		3765FAF4EBC7F5FB45C9BD90 /* UIButton+Style.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Style.h"; sourceTree = "<group>"; };
 		3765FC12282EB63718469C73 /* City.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = City.h; sourceTree = "<group>"; };
@@ -285,6 +288,8 @@
 				3765F95C6A4DB7C1D79E1598 /* UIView+GetController.h */,
 				3765FD8E8026A82F531421FC /* NSDate+FromISOString.m */,
 				3765FCE2EA8120BB2C3C85A6 /* NSDate+FromISOString.h */,
+				3765F8370406A83D5AE79E1F /* UIAlertAction+FavoriteTicketsSortingFabric.m */,
+				3765F9B017A8FBC019D5743D /* UIAlertAction+FavoriteTicketsSortingFabric.h */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -506,6 +511,7 @@
 				2A09C69F203768BE004863BD /* FlightWatcher.xcdatamodeld in Sources */,
 				3765FA20EF3FAE7653C8BA18 /* TabBarController.m in Sources */,
 				3765F231BF9B28D43349B080 /* CoreDataHelper.m in Sources */,
+				3765FC41DF4D3F8301CFCAC7 /* UIAlertAction+FavoriteTicketsSortingFabric.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

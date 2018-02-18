@@ -72,7 +72,7 @@
     return [self favoriteFromTicket:ticket] != nil;
 }
 
-- (void)addToFavorites:(Ticket *)ticket {
+- (void)addToFavorites:(Ticket *)ticket fromMap:(BOOL)fromMap {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     FavoriteTicket *favorite = [NSEntityDescription insertNewObjectForEntityForName:@"FavoriteTicket"
                                                              inManagedObjectContext:_managedObjectContext];
@@ -85,6 +85,7 @@
     favorite.from = ticket.from;
     favorite.to = ticket.to;
     favorite.created = [NSDate date];
+    favorite.addedFromMap = fromMap;
     [self save];
 }
 
@@ -105,9 +106,23 @@
 }
 
 
-- (NSArray *)favoritesSortedBy:(TicketSortOrder)order ascending:(BOOL)ascending {
+- (NSArray *)favoritesSortedBy:(TicketSortOrder)order ascending:(BOOL)ascending fiteredBy:(TicketFilter)filter {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"FavoriteTicket"];
+
+
+    NSPredicate *predicate;
+    switch (filter) {
+        case TicketFilterAll:
+            predicate = nil;
+            break;
+        case TicketFilterFromMap:
+            predicate = [NSPredicate predicateWithFormat: @"addedFromMap == TRUE"];
+            break;
+        case TicketFilterManual:
+            predicate = [NSPredicate predicateWithFormat: @"addedFromMap == FALSE"];
+            break;
+    }
 
     NSSortDescriptor* descriptor;
     switch (order) {
@@ -140,6 +155,7 @@
     }
 
     request.sortDescriptors = @[descriptor];
+    request.predicate = predicate;
     return [_managedObjectContext executeFetchRequest:request error:nil];
 }
 

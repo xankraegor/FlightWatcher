@@ -129,7 +129,7 @@
                                                             handler:
                                                                     ^(UIAlertAction *_Nonnull action) {
                                                                         [CoreDataHelper.sharedInstance
-                                                                                addToFavorites:ticket];
+                                                                                addToFavorites:ticket fromMap:YES];
                                                                     }];
                 }
 

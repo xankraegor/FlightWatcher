@@ -2,7 +2,7 @@
 //  FavoriteTicket+CoreDataProperties.h
 //  
 //
-//  Created by Xan Kraegor on 17.02.2018.
+//  Created by Xan Kraegor on 18.02.2018.
 //
 //
 
@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) int64_t price;
 @property (nullable, nonatomic, copy) NSDate *returnDate;
 @property (nullable, nonatomic, copy) NSString *to;
+@property (nonatomic) BOOL addedFromMap;
 
 @end
 

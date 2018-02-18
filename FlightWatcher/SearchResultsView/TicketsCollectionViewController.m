@@ -16,6 +16,12 @@
 
 @interface TicketsCollectionViewController () <UICollectionViewDelegateFlowLayout>
 @property(nonatomic, strong) NSArray *tickets;
+@property(nonatomic, strong) UISegmentedControl *segmentedControl;
+@property(nonatomic, strong) UIBarButtonItem *sortButton;
+
+@property TicketSortOrder sortOrder;
+@property BOOL sortAscending;
+@property TicketFilter ticketFilter;
 @end
 
 @implementation TicketsCollectionViewController {
@@ -39,14 +45,8 @@ NSDateFormatter *dateFormatter;
 
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-
     flowLayout.minimumLineSpacing = 0;
 
-    if (@available(iOS 11, *)) {
-        flowLayout.sectionInset = UIEdgeInsetsMake(8, self.view.safeAreaInsets.left, 8, self.view.safeAreaInsets.right);
-    } else {
-        flowLayout.sectionInset = UIEdgeInsetsMake(8, 8, 8, 8);
-    }
 
     self = [super initWithCollectionViewLayout:flowLayout];
     self.title = favorites ? @"Избранные" : @"Билеты";
@@ -54,6 +54,11 @@ NSDateFormatter *dateFormatter;
     _tickets = displayingFavorites ? CoreDataHelper.sharedInstance.favorites : tickets;
     dateFormatter = [NSDateFormatter new];
     dateFormatter.dateFormat = @"dd MMMM yyyy hh:mm";
+
+    _sortOrder = TicketSortOrderCreated;
+    _sortAscending = YES;
+    _ticketFilter = TicketFilterAll;
+
     return self;
 }
 
@@ -61,18 +66,42 @@ NSDateFormatter *dateFormatter;
 
 - (void)viewDidLoad {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
-
+    if (displayingFavorites) [self setupAdditionalFavoritesViews];
     [self.collectionView registerClass:TicketCollectionViewCell.class forCellWithReuseIdentifier:@"TicketCellIdentifier"];
     self.collectionView.backgroundColor = UIColor.whiteColor;
     self.collectionView.delegate = self;
     self.navigationItem.backBarButtonItem.title = @"Назад";
 }
 
--(void)viewWillAppear:(BOOL)animated {
-    if(displayingFavorites) {
-        _tickets = CoreDataHelper.sharedInstance.favorites;
+- (void)viewWillAppear:(BOOL)animated {
+    [self loadFavoritesIfNeededSortedAndFiltered];
+}
+
+- (void)loadFavoritesIfNeededSortedAndFiltered {
+    if (displayingFavorites) {
+        _tickets = [CoreDataHelper.sharedInstance
+                favoritesSortedBy:_sortOrder
+                        ascending:_sortAscending
+                        fiteredBy:_ticketFilter];
         [self.collectionView reloadData];
     }
+}
+
+- (void)setupAdditionalFavoritesViews {
+    _segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Все", @"С карты", @"Из поиска"]];
+    [_segmentedControl addTarget:self action:@selector(segmentedControlValueChanged) forControlEvents:UIControlEventValueChanged];
+    _segmentedControl.tintColor = [UIColor blackColor];
+    self.navigationItem.titleView = _segmentedControl;
+    _segmentedControl.selectedSegmentIndex = 0;
+    self.navigationItem.titleView = _segmentedControl;
+
+    _sortButton = [[UIBarButtonItem alloc]
+            initWithTitle:@"Сортировка"
+                    style:UIBarButtonItemStylePlain
+                   target:self
+                   action:@selector(filterButtonPressed)];
+
+    self.navigationItem.rightBarButtonItem = _sortButton;
 }
 
 // MARK: - UICollectionViewDataSource
@@ -118,8 +147,7 @@ NSDateFormatter *dateFormatter;
                                                             removeFromFavorites:_tickets[(NSUInteger) indexPath.row]];
                                                     __weak typeof(self) welf = self;
                                                     if (displayingFavorites) {
-                                                        _tickets = CoreDataHelper.sharedInstance.favorites;
-                                                        [welf.collectionView reloadData];
+                                                        [welf loadFavoritesIfNeededSortedAndFiltered];
                                                     }
                                                 }];
     } else if (!displayingFavorites) {
@@ -128,7 +156,7 @@ NSDateFormatter *dateFormatter;
                                                 handler:
                                                         ^(UIAlertAction *_Nonnull action) {
                                                             [CoreDataHelper.sharedInstance
-                                                                    addToFavorites:_tickets[(NSUInteger) indexPath.row]];
+                                                                    addToFavorites:_tickets[(NSUInteger) indexPath.row] fromMap:NO];
                                                         }];
     }
 
@@ -142,10 +170,93 @@ NSDateFormatter *dateFormatter;
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
--(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat width = self.collectionView.bounds.size.width;
     if (width > 350) width = 350;
     return CGSizeMake(width, 150);
+}
+
+
+
+-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    if (@available(iOS 11, *)) {
+        return UIEdgeInsetsMake(8, super.view.safeAreaInsets.left, 8, super.view.safeAreaInsets.right);
+    } else {
+        return UIEdgeInsetsMake(8, 8, 8, 8);
+    }
+}
+
+
+// MARK: - Filter and sorting
+
+-(void)segmentedControlValueChanged {
+    switch (_segmentedControl.selectedSegmentIndex) {
+        case 0:
+            _ticketFilter = TicketFilterAll;
+            break;
+        case 1:
+            _ticketFilter = TicketFilterFromMap;
+            break;
+        case 2:
+            _ticketFilter = TicketFilterManual;
+            break;
+        default:
+            break;
+    }
+    [self loadFavoritesIfNeededSortedAndFiltered];
+}
+
+-(void)filterButtonPressed{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Сортировка билетов"
+                                                                             message:@"Выберите предпочитаемую сортировку"
+                                                                      preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *sortByPriceAsc = [UIAlertAction actionWithTitle:@ "По цене (по возр.)"
+                                                  style:UIAlertActionStyleDefault
+                                                handler:^(UIAlertAction *_Nonnull action) {
+                                                    __weak typeof(self) welf = self;
+                                                    welf.sortOrder = TicketSortOrderPrice;
+                                                    welf.sortAscending = YES;
+                                                    [welf loadFavoritesIfNeededSortedAndFiltered];
+                                                }];
+    [alertController addAction:sortByPriceAsc];
+
+    UIAlertAction *sortByPriceDes = [UIAlertAction actionWithTitle:@ "По цене (по убыв.)"
+                                                             style:UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction *_Nonnull action) {
+                                                               __weak typeof(self) welf = self;
+                                                               welf.sortOrder = TicketSortOrderPrice;
+                                                               welf.sortAscending = NO;
+                                                               [welf loadFavoritesIfNeededSortedAndFiltered];
+                                                           }];
+    [alertController addAction:sortByPriceDes];
+
+    UIAlertAction *sortByAddedAsc = [UIAlertAction actionWithTitle:@ "По дате добавления (по возр.)"
+                                                             style:UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction *_Nonnull action) {
+                                                               __weak typeof(self) welf = self;
+                                                               welf.sortOrder = TicketSortOrderCreated;
+                                                               welf.sortAscending = YES;
+                                                               [welf loadFavoritesIfNeededSortedAndFiltered];
+                                                           }];
+    [alertController addAction:sortByAddedAsc];
+
+    UIAlertAction *sortByAddedDes = [UIAlertAction actionWithTitle:@ "По дате добавления (по убыв.)"
+                                                             style:UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction *_Nonnull action) {
+                                                               __weak typeof(self) welf = self;
+                                                               welf.sortOrder = TicketSortOrderCreated;
+                                                               welf.sortAscending = NO;
+                                                               [welf loadFavoritesIfNeededSortedAndFiltered];
+                                                           }];
+
+    [alertController addAction:sortByAddedDes];
+
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Закрыть"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:nil];
+    [alertController addAction:cancelAction];
+
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 
@@ -154,5 +265,7 @@ NSDateFormatter *dateFormatter;
 - (void)didReceiveMemoryWarning {
     NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
 }
+
+
 
 @end

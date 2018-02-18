@@ -7,6 +7,7 @@
 #import "DataManager.h"
 #import "FavoriteTicket+CoreDataClass.h"
 #import "Ticket.h"
+#import "TicketSortOrder.h"
 
 
 @interface CoreDataHelper : NSObject
@@ -16,7 +17,9 @@
 
 - (NSArray *)favorites;
 
-- (void)addToFavorites:(Ticket *)ticket;
+- (NSArray *)favoritesSortedBy:(TicketSortOrder)order ascending:(BOOL)ascending fiteredBy:(TicketFilter)filter;
+
+- (void)addToFavorites:(Ticket *)ticket fromMap:(BOOL)fromMap;
 
 - (void)removeFromFavorites:(Ticket *)ticket;
 @end
