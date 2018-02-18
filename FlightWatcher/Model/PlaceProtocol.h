@@ -3,7 +3,7 @@
 // Copyright (c) 2018 Xan Kraegor. All rights reserved.
 //
 
-@protocol Place <NSObject>
+@protocol PlaceProtocol <NSObject>
 @property(nonatomic, strong) NSString *name;
 @property(nonatomic, strong) NSString *code;
 @end

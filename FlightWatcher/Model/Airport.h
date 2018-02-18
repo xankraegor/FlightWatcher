@@ -4,9 +4,9 @@
 //
 
 #import <MapKit/MapKit.h>
-#import "Place.h"
+#import "PlaceProtocol.h"
 
-@interface Airport : NSObject <Place>
+@interface Airport : NSObject <PlaceProtocol>
 @property(nonatomic, strong) NSString *name;
 @property(nonatomic, strong) NSString *timezone;
 @property(nonatomic, strong) NSDictionary *translations;

@@ -105,7 +105,7 @@ static NSString *cellId = @"PlaceCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
-    NSObject <Place> *place = [self isSearching] ?
+    NSObject <PlaceProtocol> *place = [self isSearching] ?
             _searchArray[(NSUInteger) indexPath.row] : _currentArray[(NSUInteger) indexPath.row];
     cell.textLabel.text = place.name;
     cell.detailTextLabel.text = place.code;
