@@ -6,7 +6,6 @@
 //  Copyright © 2018 Xan Kraegor. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 
 @interface TicketsCollectionViewController : UICollectionViewController
 - (instancetype)initWithTickets:(NSArray *)tickets;

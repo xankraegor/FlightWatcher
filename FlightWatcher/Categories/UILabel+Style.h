@@ -3,8 +3,6 @@
 // Copyright (c) 2018 Xan Kraegor. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 @interface UILabel (Style)
 
 + (instancetype _Nonnull)newWithFrame:(CGRect)frame usingTitle:(NSString *__nullable)title alignment:(NSTextAlignment)alignment;

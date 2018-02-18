@@ -3,9 +3,7 @@
 // Copyright (c) 2018 Xan Kraegor. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "City.h"
-
 
 @interface MapPrice : NSObject
 @property(strong, nonatomic) City *destination;

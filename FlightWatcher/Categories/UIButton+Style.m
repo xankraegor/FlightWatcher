@@ -9,6 +9,7 @@
 @implementation UIButton (Style)
 
 - (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title background:(UIColor *)bgcolor tint:(UIColor *)tintClr {
+    logCurrentMethod();
     self = [[UIButton alloc] initWithFrame:frame];
 
     if (title) {
@@ -30,6 +31,7 @@
 }
 
 - (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title {
+    logCurrentMethod();
     self = [[UIButton alloc] initWithFrame:frame
                                      title:title
                                 background:UIColor.buttonBackgorundFW

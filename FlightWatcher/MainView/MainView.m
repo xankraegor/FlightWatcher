@@ -22,7 +22,7 @@
 }
 
 - (id)initWithFrame:(CGRect)frame {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     self = [super initWithFrame:frame];
     self.backgroundColor = UIColor.whiteColor;
 

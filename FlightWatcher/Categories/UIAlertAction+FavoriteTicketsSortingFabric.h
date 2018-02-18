@@ -3,7 +3,6 @@
 // Copyright (c) 2018 Xan Kraegor. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "YYImage-prefix.pch"
 
 @interface UIAlertAction (FavoriteTicketsSortingFabric)

@@ -28,7 +28,7 @@
 // MARK: - Life cycle
 
 - (void)viewDidLoad {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     [super viewDidLoad];
     [DataManager.sharedInstance loadData];
     [self performViewInitialization];
@@ -37,7 +37,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     [super viewWillAppear:animated];
 
     self.navigationController.navigationBarHidden = NO;
@@ -55,7 +55,7 @@
 // MARK: - View Initialization
 
 - (void)performViewInitialization {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     self.view = [[MainView alloc] initWithFrame:self.view.frame];
     [self.navigationItem setTitle:@"Поиск билетов"];
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc]
@@ -69,7 +69,7 @@
 // MARK: - Loading data
 
 - (void)dataLoadingCompletion {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     [self.view performSelector:@selector(activateButtons)];
     [APIManager.sharedInstance cityForCurrentIP:^(City *city) {
         [self setPlace:city ofType:DataSourceTypeCity isOrigin:YES];
@@ -80,7 +80,7 @@
 // MARK: - Navigation
 
 - (void)searchButtonPressed {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     [APIManager.sharedInstance ticketsWithRequest:_searchRequest withCompletion:^(NSArray *tickets) {
         if (tickets.count > 0) {
             _searchResultsCollectionViewController =
@@ -103,7 +103,7 @@
 }
 
 - (void)presentOriginSelectionView {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     PlacesTableViewController *controller = [[PlacesTableViewController alloc]
             initWithStyle:UITableViewStylePlain
            toReturnOrigin:true];
@@ -113,7 +113,7 @@
 
 
 - (void)presentDestinationSelectionView {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     PlacesTableViewController *controller = [[PlacesTableViewController alloc]
             initWithStyle:UITableViewStylePlain
            toReturnOrigin:false];
@@ -124,12 +124,12 @@
 // MARK: - PlaceViewControllerDelegate
 
 - (void)selectPlace:(id)place withType:(BOOL)isOrigin andDataType:(DataSourceType)dataType {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     [self setPlace:place ofType:dataType isOrigin:isOrigin];
 }
 
 - (void)setPlace:(id)place ofType:(DataSourceType)dataType isOrigin:(BOOL)isOrigin {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     NSString *title;
     NSString *data;
     if (dataType == DataSourceTypeCity) {
@@ -153,7 +153,7 @@
 // MARK: - Memory management
 
 -(void)didReceiveMemoryWarning {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
 }
 
 @end

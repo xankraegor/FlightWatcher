@@ -17,7 +17,7 @@
 }
 
 + (instancetype)sharedInstance {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     static CoreDataHelper *instance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -28,7 +28,7 @@
 }
 
 - (void)setup {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"FlightWatcher"
                                               withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
@@ -51,7 +51,7 @@
 }
 
 - (void)save {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     NSError *error;
     [_managedObjectContext save:&error];
     if (error) {
@@ -60,7 +60,7 @@
 }
 
 - (FavoriteTicket *)favoriteFromTicket:(Ticket *)ticket {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"FavoriteTicket"];
     // N.B. "valueForKey" used by voluntairy to work around strange EXC_BAD_ACCESS fault:
     request.predicate = [NSPredicate predicateWithFormat:@"price == %@ AND airline == %@ AND from == %@ AND to == %@ AND departure == %@ AND expires == %@ AND flightNumber == %@", [ticket valueForKey:@"price"], ticket.airline, ticket.from, ticket.to, ticket.departure, ticket.expires, [ticket valueForKey:@"flightNumber"]];
@@ -68,12 +68,12 @@
 }
 
 - (BOOL)isFavorite:(Ticket *)ticket {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     return [self favoriteFromTicket:ticket] != nil;
 }
 
 - (void)addToFavorites:(Ticket *)ticket fromMap:(BOOL)fromMap {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     FavoriteTicket *favorite = [NSEntityDescription insertNewObjectForEntityForName:@"FavoriteTicket"
                                                              inManagedObjectContext:_managedObjectContext];
     favorite.price = ticket.price.intValue;
@@ -90,7 +90,7 @@
 }
 
 - (void)removeFromFavorites:(Ticket *)ticket {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     FavoriteTicket *favorite = [self favoriteFromTicket:ticket];
     if (favorite) {
         [_managedObjectContext deleteObject:favorite];
@@ -99,7 +99,7 @@
 }
 
 - (NSArray *)favorites {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"FavoriteTicket"];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"created" ascending:NO]];
     return [_managedObjectContext executeFetchRequest:request error:nil];
@@ -107,7 +107,7 @@
 
 
 - (NSArray *)favoritesSortedBy:(TicketSortOrder)order ascending:(BOOL)ascending fiteredBy:(TicketFilter)filter {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"FavoriteTicket"];
 
 

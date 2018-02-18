@@ -31,7 +31,7 @@ static NSString *cellId = @"PlaceCell";
 // MARK: - Initialization
 
 - (instancetype)initWithStyle:(UITableViewStyle)style toReturnOrigin:(BOOL)isOrigin {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     self = [super initWithStyle:style];
     _isOrigin = isOrigin;
     _dataSourceType = DataSourceTypeCity;
@@ -40,7 +40,7 @@ static NSString *cellId = @"PlaceCell";
 }
 
 - (void)performViewInitialization {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     [self.tableView registerClass:PlaceTableViewCell.class forCellReuseIdentifier:cellId];
 
     self.title = _isOrigin ? @"Откуда" : @"Куда";
@@ -66,7 +66,7 @@ static NSString *cellId = @"PlaceCell";
 }
 
 - (void)setSource {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     switch (_segmentedControl.selectedSegmentIndex) {
         case 0:
             _currentArray = DataManager.sharedInstance.cities;
@@ -83,7 +83,7 @@ static NSString *cellId = @"PlaceCell";
 // MARK: - UISearchResultsUpdating
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     if (searchController.searchBar.text) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.name CONTAINS[cd] %@",
                                                                   searchController.searchBar.text];
@@ -115,7 +115,7 @@ static NSString *cellId = @"PlaceCell";
 // MARK: - Table View Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     id place = (_searchController.isActive &&_searchArray.count > 0) ? _searchArray[(NSUInteger) indexPath.row] : _currentArray[(NSUInteger) indexPath.row];
     [self.delegate selectPlace:place withType:self.isOrigin andDataType:self.dataSourceType];
     [self.navigationController popViewControllerAnimated:YES];
@@ -124,7 +124,7 @@ static NSString *cellId = @"PlaceCell";
 // MARK: - Memory management
 
 -(void)didReceiveMemoryWarning {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
 }
 
 @end

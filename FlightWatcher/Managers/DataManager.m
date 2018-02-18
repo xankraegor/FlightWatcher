@@ -20,7 +20,7 @@
 @implementation DataManager
 
 + (instancetype)sharedInstance {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     static DataManager *instance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -30,7 +30,7 @@
 }
 
 - (void)loadData {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0), ^{
 
         NSSortDescriptor *byName = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:true];
@@ -58,7 +58,7 @@
 
 - (NSMutableArray *)createObjectsFromArray:(NSArray *)array withType:(DataSourceType)type {
 
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     NSMutableArray *results = [NSMutableArray new];
     for (NSDictionary *jsonObject in array) {
         if (type == DataSourceTypeCountry) {
@@ -76,7 +76,7 @@
 }
 
 - (NSArray *)arrayFromFileName:(NSString *)fileName ofType:(NSString *)type {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:type];
     NSData *data = [NSData dataWithContentsOfFile:path];
     return [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers
@@ -97,7 +97,7 @@
 
 
 - (City *)cityForCityCode:(NSString *)code {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     if (!code) return nil;
     for (City *city in _citiesArray) {
         if (city.code == code) {
@@ -109,7 +109,7 @@
 }
 
 - (City *)cityForLocation:(CLLocation *)location {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     for (City *city in _citiesArray) {
         if (ceilf((float) city.coordinate.latitude) == ceilf((float) location.coordinate.latitude) &&
                 ceilf((float) city.coordinate.longitude) == ceilf((float) location.coordinate.longitude)) {

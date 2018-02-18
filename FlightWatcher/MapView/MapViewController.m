@@ -21,7 +21,7 @@
 @implementation MapViewController
 
 - (void)viewDidLoad {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     [super viewDidLoad];
     self.title = @"Карта цен";
     _mapView = [[MKMapView alloc] initWithFrame:self.view.bounds];
@@ -50,17 +50,17 @@
 
 
 - (void)dealloc {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)dataLoadedSuccessfully {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     _locationService = [[LocationService alloc] init];
 }
 
 - (void)updateCurrentLocation:(NSNotification *)notification {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     CLLocation *currentLocation = notification.object;
 
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(currentLocation.coordinate,
@@ -81,7 +81,7 @@
 }
 
 - (void)setPrices:(NSArray *)prices {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     _prices = prices;
     [_mapView removeAnnotations:_mapView.annotations];
     for (MapPrice *price in prices) {
@@ -98,7 +98,7 @@
 // MARK: - Map view delegate
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     if (annotation == mapView.userLocation) {
         return nil;
     }
@@ -108,7 +108,7 @@
 }
 
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     for (MapPrice *price in _prices) {
         if (price.destination.name == view.annotation.title) {
             [APIManager.sharedInstance requestTicketWithMapPrice:price completion:^(Ticket *ticket) {
@@ -147,6 +147,6 @@
 // MARK: - Memory management
 
 -(void)didReceiveMemoryWarning {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
 }
 @end

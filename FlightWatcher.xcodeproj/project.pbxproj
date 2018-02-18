@@ -68,6 +68,7 @@
 		2A5E39EA20338B8F00FAB50B /* TicketCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketCollectionViewCell.h; sourceTree = "<group>"; };
 		2A5E39EB20338B8F00FAB50B /* TicketCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicketCollectionViewCell.m; sourceTree = "<group>"; };
 		2ABF3C2A2039064A002E184B /* TicketSortOrder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicketSortOrder.h; sourceTree = "<group>"; };
+		2ABF3C2E203A1BAF002E184B /* FlightWatcher-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FlightWatcher-Prefix.pch"; sourceTree = "<group>"; };
 		2AEE4A322027F1340008F968 /* PlaceTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaceTableViewCell.h; sourceTree = "<group>"; };
 		2AEE4A332027F1340008F968 /* PlaceTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaceTableViewCell.m; sourceTree = "<group>"; };
 		2AEEBADA2020ECC9005D5C60 /* FlightWatcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlightWatcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -200,6 +201,7 @@
 		2AEEBADC2020ECC9005D5C60 /* FlightWatcher */ = {
 			isa = PBXGroup;
 			children = (
+				2ABF3C2E203A1BAF002E184B /* FlightWatcher-Prefix.pch */,
 				2AEEBADD2020ECC9005D5C60 /* AppDelegate.h */,
 				2AEEBADE2020ECC9005D5C60 /* AppDelegate.m */,
 				2AEEBB07202148BD005D5C60 /* NavigationControllers */,
@@ -640,6 +642,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L74ER2RZ64;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FlightWatcher/FlightWatcher-Prefix.pch";
 				INFOPLIST_FILE = FlightWatcher/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xankraegor.FlightWatcher;
@@ -656,6 +660,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L74ER2RZ64;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FlightWatcher/FlightWatcher-Prefix.pch";
 				INFOPLIST_FILE = FlightWatcher/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xankraegor.FlightWatcher;

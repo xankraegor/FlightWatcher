@@ -41,7 +41,7 @@ NSDateFormatter *dateFormatter;
 }
 
 - (instancetype)initWithTickets:(NSArray *)tickets diplayingFavorites:(BOOL)favorites {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
 
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
@@ -65,7 +65,7 @@ NSDateFormatter *dateFormatter;
 // MARK: - Life cycle
 
 - (void)viewDidLoad {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     if (displayingFavorites) [self setupAdditionalFavoritesViews];
     [self.collectionView registerClass:TicketCollectionViewCell.class forCellWithReuseIdentifier:@"TicketCellIdentifier"];
     self.collectionView.backgroundColor = UIColor.whiteColor;
@@ -88,6 +88,7 @@ NSDateFormatter *dateFormatter;
 }
 
 - (void)setupAdditionalFavoritesViews {
+    logCurrentMethod();
     _segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Все", @"С карты", @"Из поиска"]];
     [_segmentedControl addTarget:self action:@selector(segmentedControlValueChanged) forControlEvents:UIControlEventValueChanged];
     _segmentedControl.tintColor = [UIColor blackColor];
@@ -132,7 +133,7 @@ NSDateFormatter *dateFormatter;
 // MARK: - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
 
 
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@ "Действия с билетом"
@@ -190,6 +191,7 @@ NSDateFormatter *dateFormatter;
 // MARK: - Filter and sorting
 
 -(void)segmentedControlValueChanged {
+    logCurrentMethod();
     switch (_segmentedControl.selectedSegmentIndex) {
         case 0:
             _ticketFilter = TicketFilterAll;
@@ -207,6 +209,7 @@ NSDateFormatter *dateFormatter;
 }
 
 -(void)filterButtonPressed{
+    logCurrentMethod();
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Сортировка билетов"
                                                                              message:@"Выберите предпочитаемую сортировку"
                                                                       preferredStyle:UIAlertControllerStyleActionSheet];
@@ -263,7 +266,7 @@ NSDateFormatter *dateFormatter;
 // MARK: - Memory management
 
 - (void)didReceiveMemoryWarning {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
 }
 
 

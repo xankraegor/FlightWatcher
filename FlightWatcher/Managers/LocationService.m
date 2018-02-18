@@ -14,7 +14,7 @@
 @implementation LocationService
 
 - (instancetype)init {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     self = [super init];
     if (self) {
         _locationManager = [CLLocationManager new];
@@ -25,7 +25,7 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     if (status == kCLAuthorizationStatusAuthorizedAlways || status == kCLAuthorizationStatusAuthorizedWhenInUse) {
         [_locationManager startUpdatingLocation];
     } else if (status != kCLAuthorizationStatusNotDetermined) {
@@ -44,7 +44,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray < CLLocation *>
 *)locations {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     if (!_currentLocation) {
         _currentLocation = [locations firstObject];
         [_locationManager stopUpdatingLocation];
@@ -54,7 +54,7 @@
 }
 
 - (void)cityNameForLocation:(CLLocation *)location completeWithName:(void(^)(NSString * name))completion {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> *placemarks, NSError *error) {
         if (error) {

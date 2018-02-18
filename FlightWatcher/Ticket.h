@@ -3,8 +3,6 @@
 // Copyright (c) 2018 Xan Kraegor. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface Ticket : NSObject
 
 @property(nonatomic, strong) NSNumber *price;

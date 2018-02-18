@@ -3,8 +3,6 @@
 // Copyright (c) 2018 Xan Kraegor. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 
 @interface TabBarController : UITabBarController
 @end

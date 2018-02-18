@@ -3,7 +3,6 @@
 // Copyright (c) 2018 Xan Kraegor. All rights reserved.
 //
 
-#import <MapKit/MapKit.h>
 
 @interface MapViewController : UIViewController
 

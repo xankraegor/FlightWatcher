@@ -67,18 +67,15 @@
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
     NSLog(@"View controller selected: %@ of class %@", viewController, NSStringFromClass(viewController.class));
     NSLog(@"Child view controllers: %@", viewController.childViewControllers);
-//    if ([viewController isKindOfClass:TicketsCollectionViewController.class]) {
-//        
-//    }
 }
 
 // MARK: - Memory management
 
 - (void)didReceiveMemoryWarning {
-    NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd));
+    logCurrentMethod();
 }
 
 @end

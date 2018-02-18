@@ -1,0 +1,22 @@
+//
+//  FlightWatcher-Prefix.pch
+//  FlightWatcher
+//
+//  Created by Xan Kraegor on 18.02.2018.
+//  Copyright © 2018 Xan Kraegor. All rights reserved.
+//
+
+#ifndef FlightWatcher_Prefix_pch
+#define FlightWatcher_Prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#ifdef __OBJC__
+
+#import <UIKit/UIkit.h>
+
+#define logCurrentMethod() NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd))
+
+#endif
+
+#endif /* FlightWatcher_Prefix_pch */

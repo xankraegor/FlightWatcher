@@ -3,8 +3,6 @@
 // Copyright (c) 2018 Xan Kraegor. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @protocol Place <NSObject>
 @property(nonatomic, strong) NSString *name;
 @property(nonatomic, strong) NSString *code;
