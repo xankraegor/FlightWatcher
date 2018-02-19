@@ -11,7 +11,6 @@
 		2A0284AB2023CACE004EFC23 /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A0284A82023CACE004EFC23 /* countries.json */; };
 		2A0284AC2023CACE004EFC23 /* airports.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A0284A92023CACE004EFC23 /* airports.json */; };
 		2A2F6016202E61A9007962F7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A2F6015202E61A9007962F7 /* MapKit.framework */; };
-		2AEEBADF2020ECC9005D5C60 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEBADE2020ECC9005D5C60 /* AppDelegate.m */; };
 		2AEEBAEA2020ECC9005D5C60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AEEBAE92020ECC9005D5C60 /* Assets.xcassets */; };
 		2AEEBAED2020ECC9005D5C60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AEEBAEB2020ECC9005D5C60 /* LaunchScreen.storyboard */; };
 		2AEEBAF02020ECC9005D5C60 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEBAEF2020ECC9005D5C60 /* main.m */; };
@@ -48,6 +47,7 @@
 		3765FC8DA732C14069998FCC /* Airport.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F0B9D09269E9326735BD /* Airport.m */; };
 		3765FDB227D5F81A32299AB8 /* PlacesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F39B5546E8A6BCDB61A1 /* PlacesTableViewController.m */; };
 		3765FE8520AE9D709C7BB344 /* NSDate+FromISOString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765FD8E8026A82F531421FC /* NSDate+FromISOString.m */; };
+		3765FF8C9625D84B241DDFB0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765FDFBA535D931FF1A0146 /* AppDelegate.m */; };
 		3765FFE1902379B86F3E013E /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3765F4304995F928DC4DE3EE /* map.png */; };
 		8AB65C77CA6D4424DDD1B10C /* libPods-FlightWatcher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 931DF525AB9F6B292ACADF2A /* libPods-FlightWatcher.a */; };
 /* End PBXBuildFile section */
@@ -59,8 +59,6 @@
 		2A2F6015202E61A9007962F7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		2ABF3C2E203A1BAF002E184B /* FlightWatcher-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FlightWatcher-Prefix.pch"; sourceTree = "<group>"; };
 		2AEEBADA2020ECC9005D5C60 /* FlightWatcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlightWatcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		2AEEBADD2020ECC9005D5C60 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		2AEEBADE2020ECC9005D5C60 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2AEEBAE92020ECC9005D5C60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2AEEBAEC2020ECC9005D5C60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2AEEBAEF2020ECC9005D5C60 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -119,13 +117,15 @@
 		3765FCD364B528ED8519143D /* UILabel+Style.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Style.m"; sourceTree = "<group>"; };
 		3765FCE2EA8120BB2C3C85A6 /* NSDate+FromISOString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+FromISOString.h"; sourceTree = "<group>"; };
 		3765FCFEC5AB205FFC47DF57 /* UIColor+ColorPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorPalette.h"; sourceTree = "<group>"; };
-		3765FD0BE73ED4E6FF26453A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		3765FD8E8026A82F531421FC /* NSDate+FromISOString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+FromISOString.m"; sourceTree = "<group>"; };
 		3765FDA45E7E8BBCB2C25942 /* favorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favorite.png; sourceTree = "<group>"; };
 		3765FDC66E7CE8FE4BEF4F02 /* FlightWatcher.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FlightWatcher.xcdatamodel; sourceTree = "<group>"; };
 		3765FDCFB05A542DF29F72E1 /* City.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = City.m; sourceTree = "<group>"; };
+		3765FDFBA535D931FF1A0146 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3765FE203E7B563719BD3CAF /* TicketCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketCollectionViewCell.h; sourceTree = "<group>"; };
 		3765FE79852B7AE147B34A97 /* FavoriteTicket+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FavoriteTicket+CoreDataClass.m"; sourceTree = "<group>"; };
+		3765FE7EF80086A3D042586B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		3765FE96097878CD64178B4E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		3765FEA4533C710C998F7D7C /* FavoriteTicket+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FavoriteTicket+CoreDataProperties.h"; sourceTree = "<group>"; };
 		3765FEA4E247501952FFD906 /* TicketsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketsCollectionViewController.m; sourceTree = "<group>"; };
 		3765FF3843243DAD79337EE8 /* PlaceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceTableViewCell.h; sourceTree = "<group>"; };
@@ -200,15 +200,13 @@
 			isa = PBXGroup;
 			children = (
 				2ABF3C2E203A1BAF002E184B /* FlightWatcher-Prefix.pch */,
-				2AEEBADD2020ECC9005D5C60 /* AppDelegate.h */,
-				2AEEBADE2020ECC9005D5C60 /* AppDelegate.m */,
 				2AEEBAF72020ECFF005D5C60 /* Other */,
 				2AEEBB0820214BC2005D5C60 /* Categories */,
 				2A0284AE2023D127004EFC23 /* Model */,
 				3765FEEDE7D7EFE2E4338FCF /* Managers */,
-				3765FD0BE73ED4E6FF26453A /* Info.plist */,
 				3765F0B9B154621945FDF1F1 /* Scenes */,
 				3765F5C7EEFCE484F09FEE5C /* Enums */,
+				3765FE96097878CD64178B4E /* Info.plist */,
 			);
 			path = FlightWatcher;
 			sourceTree = "<group>";
@@ -354,6 +352,8 @@
 				3765F6255D82BCAE76E57CDE /* LocationService.h */,
 				3765F29BE1622565819810FB /* CoreDataHelper.h */,
 				3765F98EBB3433EE1F282988 /* CoreDataHelper.m */,
+				3765FDFBA535D931FF1A0146 /* AppDelegate.m */,
+				3765FE7EF80086A3D042586B /* AppDelegate.h */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -516,7 +516,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2AEEBAF02020ECC9005D5C60 /* main.m in Sources */,
-				2AEEBADF2020ECC9005D5C60 /* AppDelegate.m in Sources */,
 				3765F91D94D71DF3196572BE /* UIColor+ColorPalette.m in Sources */,
 				3765F4E689BF8A5812087D28 /* UILabel+Style.m in Sources */,
 				3765F446DEB215BDEF74B01E /* UIButton+Style.m in Sources */,
@@ -544,6 +543,7 @@
 				3765F6540E6556DBFBF54971 /* MainView.m in Sources */,
 				3765F512B41F0A92806E4E4B /* Ticket.m in Sources */,
 				3765F7A45E7A43BAF3AB7ED7 /* ProgressView.m in Sources */,
+				3765FF8C9625D84B241DDFB0 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

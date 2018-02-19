@@ -15,6 +15,7 @@
 #import "SearchRequest.h"
 #import "APIManager.h"
 #import "Airport.h"
+#import "ProgressView.h"
 
 
 @interface MainViewController () <PlaceViewControllerDelegate>
@@ -81,25 +82,28 @@
 
 - (void)searchButtonPressed {
     logCurrentMethod();
-    [APIManager.sharedInstance ticketsWithRequest:_searchRequest withCompletion:^(NSArray *tickets) {
-        if (tickets.count > 0) {
-            _searchResultsCollectionViewController =
-                    [[TicketsCollectionViewController alloc] initWithTickets:tickets];
-            [self.navigationController pushViewController:_searchResultsCollectionViewController animated:YES];
-        } else {
-            UIAlertController *alertController =
-                    [UIAlertController alertControllerWithTitle:@""
-                                                        message:@"По данному направлению билетов не найдено"
-                                                 preferredStyle:UIAlertControllerStyleAlert];
+    if (!_searchRequest.origin || !_searchRequest.destination) return;
+    [ProgressView.sharedInstance show:^{
+        [APIManager.sharedInstance ticketsWithRequest:_searchRequest withCompletion:^(NSArray *tickets) {
+            [ProgressView.sharedInstance dismiss:^{
+                if (tickets.count > 0) {
+                    _searchResultsCollectionViewController =
+                            [[TicketsCollectionViewController alloc] initWithTickets:tickets];
+                    [self.navigationController pushViewController:_searchResultsCollectionViewController animated:YES];
+                } else {
+                    UIAlertController *alertController =
+                            [UIAlertController alertControllerWithTitle:@""
+                                                                message:@"По данному направлению билетов не найдено"
+                                                         preferredStyle:UIAlertControllerStyleAlert];
 
-            [alertController addAction:[UIAlertAction actionWithTitle:@"Закрыть"
-                                                                style:(UIAlertActionStyleDefault) handler:nil]];
+                    [alertController addAction:[UIAlertAction actionWithTitle:@"Закрыть"
+                                                                        style:(UIAlertActionStyleDefault) handler:nil]];
 
-            [self presentViewController:alertController animated:YES completion:nil];
-        }
+                    [self presentViewController:alertController animated:YES completion:nil];
+                }
+            }];
+        }];
     }];
-
-
 }
 
 - (void)presentOriginSelectionView {
