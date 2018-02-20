@@ -41,12 +41,14 @@
 		3765F8D5D82135DFC8107553 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F308CAB0C90184815846 /* APIManager.m */; };
 		3765F91D94D71DF3196572BE /* UIColor+ColorPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F08C7DDB7E97E69177A4 /* UIColor+ColorPalette.m */; };
 		3765F9995BEB8D82E2995F8F /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765FA84A551792C993791F9 /* DataManager.m */; };
+		3765FA6B8C6CEE3B6FAFB4D9 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765FD723BE72FE9A53C6323 /* FirstViewController.m */; };
 		3765FBA4EA6471B1F397E8E4 /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F986C01F4FD9E12BA979 /* Country.m */; };
 		3765FC41DF4D3F8301CFCAC7 /* UIAlertAction+FavoriteTicketsSortingFabric.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F8370406A83D5AE79E1F /* UIAlertAction+FavoriteTicketsSortingFabric.m */; };
 		3765FC8A957EF6A6073E7FDB /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F47E282C2D434551F603 /* TabBarController.m */; };
 		3765FC8DA732C14069998FCC /* Airport.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F0B9D09269E9326735BD /* Airport.m */; };
 		3765FDB227D5F81A32299AB8 /* PlacesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F39B5546E8A6BCDB61A1 /* PlacesTableViewController.m */; };
 		3765FE8520AE9D709C7BB344 /* NSDate+FromISOString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765FD8E8026A82F531421FC /* NSDate+FromISOString.m */; };
+		3765FF2EE1C4D122677C4469 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765FB48E369E31770B95CF4 /* ContentViewController.m */; };
 		3765FF8C9625D84B241DDFB0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765FDFBA535D931FF1A0146 /* AppDelegate.m */; };
 		3765FFE1902379B86F3E013E /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3765F4304995F928DC4DE3EE /* map.png */; };
 		8AB65C77CA6D4424DDD1B10C /* libPods-FlightWatcher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 931DF525AB9F6B292ACADF2A /* libPods-FlightWatcher.a */; };
@@ -67,6 +69,7 @@
 		3765F0B9D09269E9326735BD /* Airport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Airport.m; sourceTree = "<group>"; };
 		3765F143F89408CD35786DA9 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		3765F18A77F6E30F74D0D29B /* UIView+GetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GetController.m"; sourceTree = "<group>"; };
+		3765F1CCD2A31818F4ED4695 /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		3765F1DC43E9661AC87BCA28 /* LocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationService.m; sourceTree = "<group>"; };
 		3765F2003C6EFE0FBB521123 /* Ticket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ticket.m; sourceTree = "<group>"; };
 		3765F2080A0DFF4396D12CFA /* PlacesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlacesTableViewController.h; sourceTree = "<group>"; };
@@ -105,10 +108,12 @@
 		3765F999F2C494067FDAC105 /* FavoriteTicket+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FavoriteTicket+CoreDataClass.h"; sourceTree = "<group>"; };
 		3765F9B017A8FBC019D5743D /* UIAlertAction+FavoriteTicketsSortingFabric.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertAction+FavoriteTicketsSortingFabric.h"; sourceTree = "<group>"; };
 		3765F9BC4D217F1041544BFD /* map_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_selected.png; sourceTree = "<group>"; };
+		3765FA6D74F0FF8E80664CC2 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
 		3765FA84A551792C993791F9 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		3765FAC703331F3EEAF9D493 /* MapPrice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapPrice.h; sourceTree = "<group>"; };
 		3765FAF4EBC7F5FB45C9BD90 /* UIButton+Style.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Style.h"; sourceTree = "<group>"; };
 		3765FB07B044E056714FA105 /* TicketsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketsCollectionViewController.h; sourceTree = "<group>"; };
+		3765FB48E369E31770B95CF4 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
 		3765FB56612660BBE310BA46 /* MapPrice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapPrice.m; sourceTree = "<group>"; };
 		3765FBFCCBCDF3F35DC21645 /* TicketCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketCollectionViewCell.m; sourceTree = "<group>"; };
 		3765FC12282EB63718469C73 /* City.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = City.h; sourceTree = "<group>"; };
@@ -117,6 +122,7 @@
 		3765FCD364B528ED8519143D /* UILabel+Style.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Style.m"; sourceTree = "<group>"; };
 		3765FCE2EA8120BB2C3C85A6 /* NSDate+FromISOString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+FromISOString.h"; sourceTree = "<group>"; };
 		3765FCFEC5AB205FFC47DF57 /* UIColor+ColorPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorPalette.h"; sourceTree = "<group>"; };
+		3765FD723BE72FE9A53C6323 /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		3765FD8E8026A82F531421FC /* NSDate+FromISOString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+FromISOString.m"; sourceTree = "<group>"; };
 		3765FDA45E7E8BBCB2C25942 /* favorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favorite.png; sourceTree = "<group>"; };
 		3765FDC66E7CE8FE4BEF4F02 /* FlightWatcher.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FlightWatcher.xcdatamodel; sourceTree = "<group>"; };
@@ -265,6 +271,7 @@
 				3765FFA46955368459896074 /* MapView */,
 				3765FA7095C3D8A8FEBF3970 /* MainView */,
 				3765F75B9BF28A0F84D491FD /* ProgressScene */,
+				3765F66B4C7625E1638D3A8A /* WelcomeScene */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -297,6 +304,17 @@
 				3765F88E7820270D0F63C8B6 /* TicketSortOrder.h */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		3765F66B4C7625E1638D3A8A /* WelcomeScene */ = {
+			isa = PBXGroup;
+			children = (
+				3765FB48E369E31770B95CF4 /* ContentViewController.m */,
+				3765FA6D74F0FF8E80664CC2 /* ContentViewController.h */,
+				3765FD723BE72FE9A53C6323 /* FirstViewController.m */,
+				3765F1CCD2A31818F4ED4695 /* FirstViewController.h */,
+			);
+			path = WelcomeScene;
 			sourceTree = "<group>";
 		};
 		3765F75B9BF28A0F84D491FD /* ProgressScene */ = {
@@ -544,6 +562,8 @@
 				3765F512B41F0A92806E4E4B /* Ticket.m in Sources */,
 				3765F7A45E7A43BAF3AB7ED7 /* ProgressView.m in Sources */,
 				3765FF8C9625D84B241DDFB0 /* AppDelegate.m in Sources */,
+				3765FF2EE1C4D122677C4469 /* ContentViewController.m in Sources */,
+				3765FA6B8C6CEE3B6FAFB4D9 /* FirstViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

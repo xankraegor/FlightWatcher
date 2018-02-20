@@ -14,8 +14,7 @@
     static ProgressView *instance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        instance = [[ProgressView alloc] initWithFrame:[UIApplication
-                sharedApplication].keyWindow.bounds];
+        instance = [[ProgressView alloc] initWithFrame:UIApplication.sharedApplication.keyWindow.bounds];
         [instance setup];
     });
     return instance;
@@ -31,10 +30,9 @@
 }
 
 - (void)createPlanes {
-
     for (int i = 1; i < 6; i++) {
         UIImageView *plane = [[UIImageView alloc] initWithFrame:CGRectMake(-100.0, ((float) i * 100.0) +
-                50.0, 100.0, 100.0)];
+                                                                           50.0, 100.0, 100.0)];
         plane.tag = i;
         plane.contentMode = UIViewContentModeScaleAspectFit;
         plane.image = [UIImage imageNamed:@"plane"];
@@ -53,34 +51,36 @@
             plane.frame = CGRectMake(-100.0, plane.frame.origin.y, 100.0, 100.0);
         }];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t) (0.3 * NSEC_PER_SEC)),
-                dispatch_get_main_queue(), ^{
-                    [self startAnimating:planeId + 1];
-                });
+                       dispatch_get_main_queue(), ^{
+                           [self startAnimating:planeId + 1];
+                       });
     }
 }
 
 - (void)show:(void (^)(void))completion {
-    self.alpha = 0.0;
-    isActive = YES;
-    [self startAnimating:1];
-    [[[UIApplication sharedApplication] keyWindow] addSubview:self];
-    [UIView animateWithDuration:0.5 animations:^{
-        self.alpha = 1.0;
-    }                completion:^(BOOL finished) {
-        completion();
-    }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.alpha = 0.0;
+        isActive = YES;
+        [self startAnimating:1];
+        [UIApplication.sharedApplication.keyWindow addSubview:self];
+        [UIView animateWithDuration:0.3 animations:^{
+            self.alpha = 1.0;
+        } completion:^(BOOL finished) {
+            completion();
+        }];
+    });
 }
 
 - (void)dismiss:(void (^)(void))completion {
-    [UIView animateWithDuration:0.5 animations:^{
-        self.alpha = 0.0;
-    }                completion:^(BOOL finished) {
-        [self removeFromSuperview];
-        isActive = NO;
-        if (completion) {
-            completion();
-        }
-    }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:0.3 animations:^{
+            self.alpha = 0.0;
+        } completion:^(BOOL finished) {
+            [self removeFromSuperview];
+            isActive = NO;
+            if (completion) completion();
+        }];
+    });
 }
 
 @end

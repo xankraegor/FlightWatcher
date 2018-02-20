@@ -151,16 +151,11 @@
     components.scheme = @"https";
     components.host = API_MAIN_HOST;
 
-    NSMutableArray *queryItems = [NSMutableArray new];
-
     NSURLQueryItem *token = [[NSURLQueryItem alloc] initWithName:@"token" value:_apikey];
-    [queryItems addObject:token];
-
     NSURLQueryItem *origin = [[NSURLQueryItem alloc] initWithName:@"origin" value:request.origin];
-    [queryItems addObject:origin];
-
     NSURLQueryItem *destination = [[NSURLQueryItem alloc] initWithName:@"destination" value:request.destination];
-    [queryItems addObject:destination];
+
+    NSMutableArray *queryItems = [NSMutableArray arrayWithArray:@[token, origin, destination]];
 
     if (request.departDate && request.returnDate) {
         NSDateFormatter *dateFormatter = [NSDateFormatter new];
@@ -176,7 +171,6 @@
     }
 
     components.queryItems = queryItems;
-
     return [components URL];
 }
 

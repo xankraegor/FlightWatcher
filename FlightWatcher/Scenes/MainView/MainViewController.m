@@ -16,11 +16,12 @@
 #import "APIManager.h"
 #import "Airport.h"
 #import "ProgressView.h"
+#import "FirstViewController.h"
 
 
 @interface MainViewController () <PlaceViewControllerDelegate>
-@property (nonatomic) SearchRequest searchRequest;
-@property (strong) TicketsCollectionViewController *searchResultsCollectionViewController;
+@property(nonatomic) SearchRequest searchRequest;
+@property(strong) TicketsCollectionViewController *searchResultsCollectionViewController;
 @end
 
 
@@ -33,6 +34,7 @@
     [super viewDidLoad];
     [DataManager.sharedInstance loadData];
     [self performViewInitialization];
+    [self presentFirstViewControllerIfNeeded];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataLoadingCompletion)
                                                  name:kDataManagerLoadDataDidComplete object:nil];
 }
@@ -154,9 +156,21 @@
     [(MainView *) self.view setTitle:title forOriginButton:isOrigin];
 }
 
+// MARK: - Initial start presentation
+
+- (void)presentFirstViewControllerIfNeeded {
+    BOOL isFirstStart = [[NSUserDefaults standardUserDefaults] boolForKey:@"first_start"];
+    if (!isFirstStart) {
+        FirstViewController *firstViewController = [[FirstViewController alloc]
+                initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
+                  navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
+        [self presentViewController:firstViewController animated:YES completion:nil];
+    }
+}
+
 // MARK: - Memory management
 
--(void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning {
     logCurrentMethod();
 }
 
