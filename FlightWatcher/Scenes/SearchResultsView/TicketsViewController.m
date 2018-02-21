@@ -40,10 +40,6 @@ NSDateFormatter *ticktsDateFormatter;
     ticktsDateFormatter = [NSDateFormatter new];
     ticktsDateFormatter.dateFormat = @"dd MMMM yyyy hh:mm";
 
-
-
-
-
     _datePicker = [[UIDatePicker alloc] init];
     _datePicker.datePickerMode = UIDatePickerModeDateAndTime;
     _datePicker.minimumDate = [NSDate date];
@@ -130,17 +126,26 @@ NSDateFormatter *ticktsDateFormatter;
                                                                     addToFavorites:_tickets[(NSUInteger) indexPath.row] fromMap:NO];
                                                         }];
     }
-
-
-
-
-
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Закрыть"
                                                            style:UIAlertActionStyleCancel
                                                          handler:nil];
     [alertController addAction:favoriteAction];
     [alertController addAction:cancelAction];
     [self presentViewController:alertController animated:YES completion:nil];
+}
+
+-(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    CATransform3D rotationAnimation = CATransform3DMakeRotation(1.178097 * M_PI / 2, 0.0, 1.0, 0.0);
+    rotationAnimation.m34 = -1/500;
+    CATransform3D transitionAnimation = CATransform3DMakeTranslation(-cell.frame.size.width, 0, -cell.frame.size.width);
+    CATransform3D animation = CATransform3DConcat(rotationAnimation, transitionAnimation);
+    cell.layer.transform = animation;
+    cell.alpha = 0;
+
+    [UIView animateWithDuration:0.3 animations:^{
+        cell.layer.transform = CATransform3DIdentity;
+        cell.alpha = 1;
+    }];
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout

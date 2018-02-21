@@ -174,6 +174,20 @@ NSDateFormatter *favoritesDateFormatter;
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
+-(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    CATransform3D rotationAnimation = CATransform3DMakeRotation(1.178097 * M_PI / 2, 0.0, 1.0, 0.0);
+    rotationAnimation.m34 = -1/500;
+    CATransform3D transitionAnimation = CATransform3DMakeTranslation(-cell.frame.size.width, 0, -cell.frame.size.width);
+    CATransform3D animation = CATransform3DConcat(rotationAnimation, transitionAnimation);
+    cell.layer.transform = animation;
+    cell.alpha = 0;
+
+    [UIView animateWithDuration:0.3 animations:^{
+        cell.layer.transform = CATransform3DIdentity;
+        cell.alpha = 1;
+    }];
+}
+
 // MARK: - UICollectionViewDelegateFlowLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
