@@ -50,6 +50,7 @@
 		3765FE8520AE9D709C7BB344 /* NSDate+FromISOString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765FD8E8026A82F531421FC /* NSDate+FromISOString.m */; };
 		3765FF2EE1C4D122677C4469 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765FB48E369E31770B95CF4 /* ContentViewController.m */; };
 		3765FF8C9625D84B241DDFB0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765FDFBA535D931FF1A0146 /* AppDelegate.m */; };
+		3765FFACEEAF667A926A050F /* NotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F640D385615B7841D76F /* NotificationCenter.m */; };
 		3765FFE1902379B86F3E013E /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3765F4304995F928DC4DE3EE /* map.png */; };
 		8AB65C77CA6D4424DDD1B10C /* libPods-FlightWatcher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 931DF525AB9F6B292ACADF2A /* libPods-FlightWatcher.a */; };
 /* End PBXBuildFile section */
@@ -78,6 +79,7 @@
 		3765F250ECC5BCD173FB273D /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		3765F29BE1622565819810FB /* CoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataHelper.h; sourceTree = "<group>"; };
 		3765F2AD659B1FA651C05440 /* DataSourceTypeEnum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSourceTypeEnum.h; sourceTree = "<group>"; };
+		3765F2BC6B10D66B858CC0C7 /* NotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationCenter.h; sourceTree = "<group>"; };
 		3765F2D9F84C0CA5BFBA35EC /* APIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
 		3765F2E72F85975A168732B8 /* Country.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Country.h; sourceTree = "<group>"; };
 		3765F308CAB0C90184815846 /* APIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 		3765F4B17A946993AB07BC43 /* Airport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Airport.h; sourceTree = "<group>"; };
 		3765F5F5E02EBC04E54BBA8F /* ProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressView.m; sourceTree = "<group>"; };
 		3765F6255D82BCAE76E57CDE /* LocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationService.h; sourceTree = "<group>"; };
+		3765F640D385615B7841D76F /* NotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationCenter.m; sourceTree = "<group>"; };
 		3765F693404695A282F2E892 /* ProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressView.h; sourceTree = "<group>"; };
 		3765F6EFD2F5CCAA9D23F814 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		3765F70F96D8F3B55185B062 /* UILabel+Style.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Style.h"; sourceTree = "<group>"; };
@@ -372,6 +375,8 @@
 				3765F98EBB3433EE1F282988 /* CoreDataHelper.m */,
 				3765FDFBA535D931FF1A0146 /* AppDelegate.m */,
 				3765FE7EF80086A3D042586B /* AppDelegate.h */,
+				3765F640D385615B7841D76F /* NotificationCenter.m */,
+				3765F2BC6B10D66B858CC0C7 /* NotificationCenter.h */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -564,6 +569,7 @@
 				3765FF8C9625D84B241DDFB0 /* AppDelegate.m in Sources */,
 				3765FF2EE1C4D122677C4469 /* ContentViewController.m in Sources */,
 				3765FA6B8C6CEE3B6FAFB4D9 /* FirstViewController.m in Sources */,
+				3765FFACEEAF667A926A050F /* NotificationCenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -624,6 +630,7 @@
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
@@ -673,6 +680,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;

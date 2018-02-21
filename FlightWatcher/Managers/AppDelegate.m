@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "TabBarController.h"
+#import "NotificationCenter.h"
+
 
 
 @implementation AppDelegate
@@ -16,7 +18,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     logCurrentMethod();
     [self performViewInitialization];
-
+    [NotificationCenter.sharedInstance registerService];
     return YES;
 }
 

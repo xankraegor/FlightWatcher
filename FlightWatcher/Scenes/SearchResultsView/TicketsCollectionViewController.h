@@ -9,5 +9,9 @@
 
 @interface TicketsCollectionViewController : UICollectionViewController
 - (instancetype)initWithTickets:(NSArray *)tickets;
+
 - (instancetype)initWithFavoriteTickets;
+
+@property(nonatomic, strong) UIDatePicker *datePicker;
+@property(nonatomic, strong) UITextField *dateTextField;
 @end

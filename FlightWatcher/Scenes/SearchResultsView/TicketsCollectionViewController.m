@@ -13,9 +13,10 @@
 #import "YYWebImage.h"
 #import "Ticket.h"
 #import "CoreDataHelper.h"
+#import "NotificationCenter.h"
 
 @interface TicketsCollectionViewController () <UICollectionViewDelegateFlowLayout>
-@property(nonatomic, strong) NSArray *tickets;
+@property(nonatomic, strong) NSArray <Ticket *> *tickets;
 @property(nonatomic, strong) UISegmentedControl *segmentedControl;
 @property(nonatomic, strong) UIBarButtonItem *sortButton;
 
@@ -26,6 +27,7 @@
 
 @implementation TicketsCollectionViewController {
     BOOL displayingFavorites;
+    TicketCollectionViewCell *notificationCell;
 }
 
 NSDateFormatter *dateFormatter;
@@ -47,7 +49,6 @@ NSDateFormatter *dateFormatter;
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     flowLayout.minimumLineSpacing = 0;
 
-
     self = [super initWithCollectionViewLayout:flowLayout];
     self.title = favorites ? @"Избранные" : @"Билеты";
     displayingFavorites = favorites;
@@ -58,6 +59,23 @@ NSDateFormatter *dateFormatter;
     _sortOrder = TicketSortOrderCreated;
     _sortAscending = YES;
     _ticketFilter = TicketFilterAll;
+
+    _datePicker = [[UIDatePicker alloc] init];
+    _datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+    _datePicker.minimumDate = [NSDate date];
+    _dateTextField = [[UITextField alloc] initWithFrame:self.view.bounds];
+    _dateTextField.hidden = YES;
+    _dateTextField.inputView = _datePicker;
+    UIToolbar *keyboardToolbar = [[UIToolbar alloc] init];
+    [keyboardToolbar sizeToFit];
+    UIBarButtonItem *flexBarButton = [[UIBarButtonItem alloc]
+            initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc]
+            initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self
+                                 action:@selector(doneButtonDidTap:)];
+    keyboardToolbar.items = @[flexBarButton, doneBarButton];
+    _dateTextField.inputAccessoryView = keyboardToolbar;
+    [self.view addSubview:_dateTextField];
 
     return self;
 }
@@ -136,7 +154,7 @@ NSDateFormatter *dateFormatter;
     logCurrentMethod();
 
 
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@ "Действия с билетом"
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Действия с билетом"
                                                                              message:@"Что необходимо сделать с выбранным билетом?"
                                                                       preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *favoriteAction;
@@ -151,6 +169,7 @@ NSDateFormatter *dateFormatter;
                                                         [welf loadFavoritesIfNeededSortedAndFiltered];
                                                     }
                                                 }];
+
     } else if (!displayingFavorites) {
         favoriteAction = [UIAlertAction actionWithTitle:@ "Добавить в избранное"
                                                   style:UIAlertActionStyleDefault
@@ -159,7 +178,18 @@ NSDateFormatter *dateFormatter;
                                                             [CoreDataHelper.sharedInstance
                                                                     addToFavorites:_tickets[(NSUInteger) indexPath.row] fromMap:NO];
                                                         }];
+
     }
+
+    if (displayingFavorites) {
+        UIAlertAction *notificationAction = [UIAlertAction actionWithTitle:@"Напомнить"
+                                                                     style:(UIAlertActionStyleDefault) handler:^(UIAlertAction *_Nonnull action) {
+                    notificationCell = (TicketCollectionViewCell *) [collectionView cellForItemAtIndexPath:indexPath];
+                    [_dateTextField becomeFirstResponder];
+                }];
+        [alertController addAction:notificationAction];
+    }
+
 
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Закрыть"
                                                            style:UIAlertActionStyleCancel
@@ -178,8 +208,7 @@ NSDateFormatter *dateFormatter;
 }
 
 
-
--(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     if (@available(iOS 11, *)) {
         return UIEdgeInsetsMake(8, super.view.safeAreaInsets.left, 8, super.view.safeAreaInsets.right);
     } else {
@@ -190,7 +219,7 @@ NSDateFormatter *dateFormatter;
 
 // MARK: - Filter and sorting
 
--(void)segmentedControlValueChanged {
+- (void)segmentedControlValueChanged {
     logCurrentMethod();
     switch (_segmentedControl.selectedSegmentIndex) {
         case 0:
@@ -208,19 +237,19 @@ NSDateFormatter *dateFormatter;
     [self loadFavoritesIfNeededSortedAndFiltered];
 }
 
--(void)filterButtonPressed{
+- (void)filterButtonPressed {
     logCurrentMethod();
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Сортировка билетов"
                                                                              message:@"Выберите предпочитаемую сортировку"
                                                                       preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *sortByPriceAsc = [UIAlertAction actionWithTitle:@ "По цене (по возр.)"
-                                                  style:UIAlertActionStyleDefault
-                                                handler:^(UIAlertAction *_Nonnull action) {
-                                                    __weak typeof(self) welf = self;
-                                                    welf.sortOrder = TicketSortOrderPrice;
-                                                    welf.sortAscending = YES;
-                                                    [welf loadFavoritesIfNeededSortedAndFiltered];
-                                                }];
+                                                             style:UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction *_Nonnull action) {
+                                                               __weak typeof(self) welf = self;
+                                                               welf.sortOrder = TicketSortOrderPrice;
+                                                               welf.sortAscending = YES;
+                                                               [welf loadFavoritesIfNeededSortedAndFiltered];
+                                                           }];
     [alertController addAction:sortByPriceAsc];
 
     UIAlertAction *sortByPriceDes = [UIAlertAction actionWithTitle:@ "По цене (по убыв.)"
@@ -269,6 +298,43 @@ NSDateFormatter *dateFormatter;
     logCurrentMethod();
 }
 
+// MARK: - Buttons
+
+- (void)doneButtonDidTap:(UIBarButtonItem *)sender {
+    if (_datePicker.date && notificationCell) {
+        NSIndexPath *indexPath = [self.collectionView indexPathForCell:notificationCell];
+        if (!indexPath) return;
+        // N.B. "valueForKey" used by voluntairy to work around strange EXC_BAD_ACCESS fault:
+        NSNumber *price = [_tickets[indexPath.row] valueForKey:@"price"];
+        NSString *message = [NSString stringWithFormat:@"%@ - %@ за %@ руб.",
+                        _tickets[(NSUInteger) indexPath.row].from,
+                        _tickets[(NSUInteger) indexPath.row].to,
+                        price];
+        NSURL *imageURL;
+        if (notificationCell.airlineLogoView.image) {
+
+            NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]
+                    stringByAppendingString:[NSString stringWithFormat:@"/%@.png", _tickets[(NSUInteger) indexPath.row].airline]];
+
+            if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+                UIImage *logo = notificationCell.airlineLogoView.image;
+                NSData *pngData = UIImagePNGRepresentation(logo);
+                [pngData writeToFile:path atomically:YES];
+            }
+            imageURL = [NSURL fileURLWithPath:path];
+        }
+        Notification notification = NotificationMake(@"Напоминание о билете", message, _datePicker.date, imageURL);
+        [[NotificationCenter sharedInstance] sendNotification:notification];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Успешно" message:[NSString stringWithFormat:@"Уведомление будет отправлено - %@", _datePicker.date] preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Закрыть"
+                                                               style:UIAlertActionStyleCancel handler:nil];
+        [alertController addAction:cancelAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    _datePicker.date = [NSDate date];
+    notificationCell = nil;
+    [self.view endEditing:YES];
+}
 
 
 @end
