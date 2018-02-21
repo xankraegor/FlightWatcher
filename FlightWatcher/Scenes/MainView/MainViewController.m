@@ -8,7 +8,7 @@
 
 #import "MainViewController.h"
 #import "DataSourceTypeEnum.h"
-#import "TicketsCollectionViewController.h"
+#import "TicketsViewController.h"
 #import "MainView.h"
 #import "DataManager.h"
 #import "PlacesTableViewController.h"
@@ -21,7 +21,7 @@
 
 @interface MainViewController () <PlaceViewControllerDelegate>
 @property(nonatomic) SearchRequest searchRequest;
-@property(strong) TicketsCollectionViewController *searchResultsCollectionViewController;
+@property(strong) TicketsViewController *searchResultsCollectionViewController;
 @end
 
 
@@ -90,7 +90,7 @@
             [ProgressView.sharedInstance dismiss:^{
                 if (tickets.count > 0) {
                     _searchResultsCollectionViewController =
-                            [[TicketsCollectionViewController alloc] initWithTickets:tickets];
+                            [[TicketsViewController alloc] initWithTickets:tickets];
                     [self.navigationController pushViewController:_searchResultsCollectionViewController animated:YES];
                 } else {
                     UIAlertController *alertController =

@@ -19,6 +19,7 @@
 		3765F0F54C4988F1F3917995 /* apikey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3765F230C67C08BAF6B25DCD /* apikey.plist */; };
 		3765F10EC3B82FE68BB1CC42 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F98EBB3433EE1F282988 /* CoreDataHelper.m */; };
 		3765F14F3950028573B60396 /* LocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F1DC43E9661AC87BCA28 /* LocationService.m */; };
+		3765F1F6F1C6598E91A2CE18 /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F36343E88690E0FCCD02 /* FavoritesViewController.m */; };
 		3765F1FBA927047B641DE61F /* favorite.png in Resources */ = {isa = PBXBuildFile; fileRef = 3765FDA45E7E8BBCB2C25942 /* favorite.png */; };
 		3765F2C8BD95614A2E007DE2 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 3765F3907AB77C1A692B8A1A /* search.png */; };
 		3765F37F0987ED922BC2AA98 /* favorite_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3765F92D2FBF51EC3658931E /* favorite_selected.png */; };
@@ -37,7 +38,7 @@
 		3765F767F37C06C6D2D2171E /* TicketCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765FBFCCBCDF3F35DC21645 /* TicketCollectionViewCell.m */; };
 		3765F7A45E7A43BAF3AB7ED7 /* ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F5F5E02EBC04E54BBA8F /* ProgressView.m */; };
 		3765F897B52FBF7869F3946F /* PlaceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F32191304D4A4DED5A8B /* PlaceTableViewCell.m */; };
-		3765F8A895A743631E9025CC /* TicketsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765FEA4E247501952FFD906 /* TicketsCollectionViewController.m */; };
+		3765F8A895A743631E9025CC /* TicketsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765FEA4E247501952FFD906 /* TicketsViewController.m */; };
 		3765F8D5D82135DFC8107553 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F308CAB0C90184815846 /* APIManager.m */; };
 		3765F91D94D71DF3196572BE /* UIColor+ColorPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765F08C7DDB7E97E69177A4 /* UIColor+ColorPalette.m */; };
 		3765F9995BEB8D82E2995F8F /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765FA84A551792C993791F9 /* DataManager.m */; };
@@ -85,6 +86,7 @@
 		3765F308CAB0C90184815846 /* APIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		3765F32191304D4A4DED5A8B /* PlaceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceTableViewCell.m; sourceTree = "<group>"; };
 		3765F33CF70D99C9100875E2 /* MainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainView.h; sourceTree = "<group>"; };
+		3765F36343E88690E0FCCD02 /* FavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesViewController.m; sourceTree = "<group>"; };
 		3765F3907AB77C1A692B8A1A /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		3765F39B5546E8A6BCDB61A1 /* PlacesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlacesTableViewController.m; sourceTree = "<group>"; };
 		3765F40619431C7FB16E2ED7 /* FavoriteTicket+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FavoriteTicket+CoreDataProperties.m"; sourceTree = "<group>"; };
@@ -115,7 +117,7 @@
 		3765FA84A551792C993791F9 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		3765FAC703331F3EEAF9D493 /* MapPrice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapPrice.h; sourceTree = "<group>"; };
 		3765FAF4EBC7F5FB45C9BD90 /* UIButton+Style.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Style.h"; sourceTree = "<group>"; };
-		3765FB07B044E056714FA105 /* TicketsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketsCollectionViewController.h; sourceTree = "<group>"; };
+		3765FB07B044E056714FA105 /* TicketsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketsViewController.h; sourceTree = "<group>"; };
 		3765FB48E369E31770B95CF4 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
 		3765FB56612660BBE310BA46 /* MapPrice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapPrice.m; sourceTree = "<group>"; };
 		3765FBFCCBCDF3F35DC21645 /* TicketCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketCollectionViewCell.m; sourceTree = "<group>"; };
@@ -136,8 +138,9 @@
 		3765FE7EF80086A3D042586B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3765FE96097878CD64178B4E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		3765FEA4533C710C998F7D7C /* FavoriteTicket+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FavoriteTicket+CoreDataProperties.h"; sourceTree = "<group>"; };
-		3765FEA4E247501952FFD906 /* TicketsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketsCollectionViewController.m; sourceTree = "<group>"; };
+		3765FEA4E247501952FFD906 /* TicketsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketsViewController.m; sourceTree = "<group>"; };
 		3765FF3843243DAD79337EE8 /* PlaceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceTableViewCell.h; sourceTree = "<group>"; };
+		3765FF64E51B91EDE71119B7 /* FavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesViewController.h; sourceTree = "<group>"; };
 		7718B9BAD2D69D1731AC2313 /* Pods-FlightWatcher.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlightWatcher.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlightWatcher/Pods-FlightWatcher.debug.xcconfig"; sourceTree = "<group>"; };
 		931DF525AB9F6B292ACADF2A /* libPods-FlightWatcher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FlightWatcher.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D58CE391EA3DFBECDC8AEA96 /* Pods-FlightWatcher.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlightWatcher.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlightWatcher/Pods-FlightWatcher.release.xcconfig"; sourceTree = "<group>"; };
@@ -332,10 +335,12 @@
 		3765F9671D4E4F8B6D08417A /* SearchResultsView */ = {
 			isa = PBXGroup;
 			children = (
-				3765FB07B044E056714FA105 /* TicketsCollectionViewController.h */,
-				3765FEA4E247501952FFD906 /* TicketsCollectionViewController.m */,
+				3765FB07B044E056714FA105 /* TicketsViewController.h */,
+				3765FEA4E247501952FFD906 /* TicketsViewController.m */,
 				3765FE203E7B563719BD3CAF /* TicketCollectionViewCell.h */,
 				3765FBFCCBCDF3F35DC21645 /* TicketCollectionViewCell.m */,
+				3765F36343E88690E0FCCD02 /* FavoritesViewController.m */,
+				3765FF64E51B91EDE71119B7 /* FavoritesViewController.h */,
 			);
 			path = SearchResultsView;
 			sourceTree = "<group>";
@@ -559,7 +564,7 @@
 				3765FDB227D5F81A32299AB8 /* PlacesTableViewController.m in Sources */,
 				3765F897B52FBF7869F3946F /* PlaceTableViewCell.m in Sources */,
 				3765FC8A957EF6A6073E7FDB /* TabBarController.m in Sources */,
-				3765F8A895A743631E9025CC /* TicketsCollectionViewController.m in Sources */,
+				3765F8A895A743631E9025CC /* TicketsViewController.m in Sources */,
 				3765F767F37C06C6D2D2171E /* TicketCollectionViewCell.m in Sources */,
 				3765F7539A330B54B5721EE5 /* MapViewController.m in Sources */,
 				3765F3EE306354368E7BD9A7 /* MainViewController.m in Sources */,
@@ -570,6 +575,7 @@
 				3765FF2EE1C4D122677C4469 /* ContentViewController.m in Sources */,
 				3765FA6B8C6CEE3B6FAFB4D9 /* FirstViewController.m in Sources */,
 				3765FFACEEAF667A926A050F /* NotificationCenter.m in Sources */,
+				3765F1F6F1C6598E91A2CE18 /* FavoritesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

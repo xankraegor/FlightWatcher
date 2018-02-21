@@ -7,7 +7,7 @@
 #import "MainViewController.h"
 #import "MapViewController.h"
 #import "UIColor+ColorPalette.h"
-#import "TicketsCollectionViewController.h"
+#import "FavoritesViewController.h"
 
 
 @interface TabBarController () <UITabBarControllerDelegate>
@@ -16,7 +16,7 @@
 @property(strong) UINavigationController *mapNavigationController;
 @property(strong) MapViewController *mapViewController;
 @property(strong) UINavigationController *favoritesNavigationController;
-@property(strong) TicketsCollectionViewController* favoriteViewController;
+@property(strong) FavoritesViewController* favoriteViewController;
 @end
 
 @implementation TabBarController
@@ -51,7 +51,7 @@
             initWithRootViewController:_mapViewController];
     [self configuteNavigationController:_mapNavigationController];
 
-    _favoriteViewController = [[TicketsCollectionViewController alloc] initWithFavoriteTickets];
+    _favoriteViewController = [[FavoritesViewController alloc] initWithFavoriteTickets];
     _favoriteViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Избранное"
                                                                       image:[UIImage imageNamed:@"favorite"]
                                                               selectedImage:[UIImage imageNamed:@"favorite_selected"]];

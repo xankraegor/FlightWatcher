@@ -62,7 +62,7 @@
 - (FavoriteTicket *)favoriteFromTicket:(Ticket *)ticket {
     logCurrentMethod();
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"FavoriteTicket"];
-    // N.B. "valueForKey" used by voluntairy to work around strange EXC_BAD_ACCESS fault:
+    // N.B. "valueForKey" used by voluntary to work around strange EXC_BAD_ACCESS fault:
     request.predicate = [NSPredicate predicateWithFormat:@"price == %@ AND airline == %@ AND from == %@ AND to == %@ AND departure == %@ AND expires == %@ AND flightNumber == %@", [ticket valueForKey:@"price"], ticket.airline, ticket.from, ticket.to, ticket.departure, ticket.expires, [ticket valueForKey:@"flightNumber"]];
     return [[_managedObjectContext executeFetchRequest:request error:nil] firstObject];
 }

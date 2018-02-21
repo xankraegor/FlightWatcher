@@ -1,12 +1,9 @@
 //
-//  CollectionViewController.m
-//  FlightWatcher
-//
-//  Created by Xan Kraegor on 13.02.2018.
-//  Copyright © 2018 Xan Kraegor. All rights reserved.
+// Created by Xan Kraegor on 21.02.2018.
+// Copyright (c) 2018 Xan Kraegor. All rights reserved.
 //
 
-#import "TicketsCollectionViewController.h"
+#import "FavoritesViewController.h"
 #import "TicketCollectionViewCell.h"
 #import "APIManager.h"
 #import "YYWebImageManager.h"
@@ -15,7 +12,7 @@
 #import "CoreDataHelper.h"
 #import "NotificationCenter.h"
 
-@interface TicketsCollectionViewController () <UICollectionViewDelegateFlowLayout>
+@interface FavoritesViewController () <UICollectionViewDelegateFlowLayout>
 @property(nonatomic, strong) NSArray <Ticket *> *tickets;
 @property(nonatomic, strong) UISegmentedControl *segmentedControl;
 @property(nonatomic, strong) UIBarButtonItem *sortButton;
@@ -25,24 +22,17 @@
 @property TicketFilter ticketFilter;
 @end
 
-@implementation TicketsCollectionViewController {
-    BOOL displayingFavorites;
+@implementation FavoritesViewController {
+
     TicketCollectionViewCell *notificationCell;
 }
 
-NSDateFormatter *dateFormatter;
+NSDateFormatter *favoritesDateFormatter;
 
 // MARK: - Intitalization
 
-- (instancetype)initWithTickets:(NSArray *)tickets {
-    return [self initWithTickets:tickets diplayingFavorites:NO];
-}
 
 - (instancetype)initWithFavoriteTickets {
-    return [self initWithTickets:nil diplayingFavorites:YES];
-}
-
-- (instancetype)initWithTickets:(NSArray *)tickets diplayingFavorites:(BOOL)favorites {
     logCurrentMethod();
 
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -50,11 +40,10 @@ NSDateFormatter *dateFormatter;
     flowLayout.minimumLineSpacing = 0;
 
     self = [super initWithCollectionViewLayout:flowLayout];
-    self.title = favorites ? @"Избранные" : @"Билеты";
-    displayingFavorites = favorites;
-    _tickets = displayingFavorites ? CoreDataHelper.sharedInstance.favorites : tickets;
-    dateFormatter = [NSDateFormatter new];
-    dateFormatter.dateFormat = @"dd MMMM yyyy hh:mm";
+    self.title = @"Избранные";
+    _tickets = CoreDataHelper.sharedInstance.favorites;
+    favoritesDateFormatter = [NSDateFormatter new];
+    favoritesDateFormatter.dateFormat = @"dd MMMM yyyy hh:mm";
 
     _sortOrder = TicketSortOrderCreated;
     _sortAscending = YES;
@@ -84,7 +73,7 @@ NSDateFormatter *dateFormatter;
 
 - (void)viewDidLoad {
     logCurrentMethod();
-    if (displayingFavorites) [self setupAdditionalFavoritesViews];
+    [self setupAdditionalFavoritesViews];
     [self.collectionView registerClass:TicketCollectionViewCell.class forCellWithReuseIdentifier:@"TicketCellIdentifier"];
     self.collectionView.backgroundColor = UIColor.whiteColor;
     self.collectionView.delegate = self;
@@ -96,13 +85,11 @@ NSDateFormatter *dateFormatter;
 }
 
 - (void)loadFavoritesIfNeededSortedAndFiltered {
-    if (displayingFavorites) {
-        _tickets = [CoreDataHelper.sharedInstance
-                favoritesSortedBy:_sortOrder
-                        ascending:_sortAscending
-                        fiteredBy:_ticketFilter];
-        [self.collectionView reloadData];
-    }
+    _tickets = [CoreDataHelper.sharedInstance
+            favoritesSortedBy:_sortOrder
+                    ascending:_sortAscending
+                    fiteredBy:_ticketFilter];
+    [self.collectionView reloadData];
 }
 
 - (void)setupAdditionalFavoritesViews {
@@ -137,10 +124,10 @@ NSDateFormatter *dateFormatter;
     TicketCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TicketCellIdentifier" forIndexPath:indexPath];
 
     Ticket *ticket = _tickets[(NSUInteger) indexPath.row];
-    // N.B. "valueForKey" used by voluntairy to work around strange EXC_BAD_ACCESS fault:
+    // N.B. "valueForKey" used by voluntary to work around strange EXC_BAD_ACCESS fault:
     cell.priceLabel.text = [NSString stringWithFormat:@"%@ руб.", [ticket valueForKey:@"price"]];
     cell.placesLabel.text = [NSString stringWithFormat:@"%@ - %@", ticket.from, ticket.to];
-    cell.dateLabel.text = [dateFormatter stringFromDate:ticket.departure];
+    cell.dateLabel.text = [favoritesDateFormatter stringFromDate:ticket.departure];
 
     NSURL *urlLogo = [APIManager.sharedInstance urlWithAirlineLogoForIATACode:ticket.airline];
     [cell.airlineLogoView yy_setImageWithURL:urlLogo
@@ -165,30 +152,18 @@ NSDateFormatter *dateFormatter;
                                                     [CoreDataHelper.sharedInstance
                                                             removeFromFavorites:_tickets[(NSUInteger) indexPath.row]];
                                                     __weak typeof(self) welf = self;
-                                                    if (displayingFavorites) {
-                                                        [welf loadFavoritesIfNeededSortedAndFiltered];
-                                                    }
+                                                    [welf loadFavoritesIfNeededSortedAndFiltered];
                                                 }];
 
-    } else if (!displayingFavorites) {
-        favoriteAction = [UIAlertAction actionWithTitle:@ "Добавить в избранное"
-                                                  style:UIAlertActionStyleDefault
-                                                handler:
-                                                        ^(UIAlertAction *_Nonnull action) {
-                                                            [CoreDataHelper.sharedInstance
-                                                                    addToFavorites:_tickets[(NSUInteger) indexPath.row] fromMap:NO];
-                                                        }];
-
     }
 
-    if (displayingFavorites) {
-        UIAlertAction *notificationAction = [UIAlertAction actionWithTitle:@"Напомнить"
-                                                                     style:(UIAlertActionStyleDefault) handler:^(UIAlertAction *_Nonnull action) {
-                    notificationCell = (TicketCollectionViewCell *) [collectionView cellForItemAtIndexPath:indexPath];
-                    [_dateTextField becomeFirstResponder];
-                }];
-        [alertController addAction:notificationAction];
-    }
+
+    UIAlertAction *notificationAction = [UIAlertAction actionWithTitle:@"Напомнить"
+                                                                 style:(UIAlertActionStyleDefault) handler:^(UIAlertAction *_Nonnull action) {
+                notificationCell = (TicketCollectionViewCell *) [collectionView cellForItemAtIndexPath:indexPath];
+                [_dateTextField becomeFirstResponder];
+            }];
+    [alertController addAction:notificationAction];
 
 
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Закрыть"
@@ -304,12 +279,12 @@ NSDateFormatter *dateFormatter;
     if (_datePicker.date && notificationCell) {
         NSIndexPath *indexPath = [self.collectionView indexPathForCell:notificationCell];
         if (!indexPath) return;
-        // N.B. "valueForKey" used by voluntairy to work around strange EXC_BAD_ACCESS fault:
-        NSNumber *price = [_tickets[indexPath.row] valueForKey:@"price"];
+        // N.B. "valueForKey" used by voluntary to work around strange EXC_BAD_ACCESS fault:
+        NSNumber *price = [_tickets[(NSUInteger) indexPath.row] valueForKey:@"price"];
         NSString *message = [NSString stringWithFormat:@"%@ - %@ за %@ руб.",
-                        _tickets[(NSUInteger) indexPath.row].from,
-                        _tickets[(NSUInteger) indexPath.row].to,
-                        price];
+                                                       _tickets[(NSUInteger) indexPath.row].from,
+                                                       _tickets[(NSUInteger) indexPath.row].to,
+                                                       price];
         NSURL *imageURL;
         if (notificationCell.airlineLogoView.image) {
 
