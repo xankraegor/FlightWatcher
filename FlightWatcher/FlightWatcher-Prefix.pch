@@ -16,6 +16,9 @@
 #import <UIKit/UIkit.h>
 
 #define logCurrentMethod() NSLog(@"%@ %@", NSStringFromClass(self.class), NSStringFromSelector(_cmd))
+#define kDataManagerLoadDataDidComplete     @"DataManagerLoadDataDidComplete"
+#define kDidReceiveNotificationResponse     @"DidReceiveNotificationResponse"
+#define kFavoritesControllerIndex           2
 
 #endif
 

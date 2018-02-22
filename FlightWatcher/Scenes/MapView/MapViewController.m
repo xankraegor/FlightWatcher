@@ -29,10 +29,15 @@
     _mapView.delegate = self;
     [self.view addSubview:_mapView];
     [DataManager.sharedInstance loadData];
+
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(dataLoadedSuccessfully)
                                                name:kDataManagerLoadDataDidComplete object:nil];
+
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(updateCurrentLocation:)
                                                name:kLocationServiceDidUpdateCurrentLocation object:nil];
+
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(handleLocalNotification)
+                                               name:kDidReceiveNotificationResponse object:nil];
 
     CGRect currentLocationFrame = CGRectMake(16, 16, _mapView.bounds.size.width - 32, 24.0);
     _currentLocationLabel = [[UILabel alloc] initWithFrame:currentLocationFrame];
@@ -149,4 +154,12 @@
 -(void)didReceiveMemoryWarning {
     logCurrentMethod();
 }
+
+// MARK: - Local notification handling
+
+- (void)handleLocalNotification {
+    logCurrentMethod();
+    [self.tabBarController setSelectedIndex:(NSUInteger) kFavoritesControllerIndex];
+}
+
 @end

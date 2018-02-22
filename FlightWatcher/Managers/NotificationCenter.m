@@ -6,6 +6,8 @@
 #import "NotificationCenter.h"
 #import <UserNotifications/UserNotifications.h>
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
 @interface NotificationCenter () <UNUserNotificationCenterDelegate>
 @end
@@ -85,8 +87,8 @@
     }
 }
 
-Notification NotificationMake(NSString *_Nullable title, NSString *_Nonnull body, NSDate *_Nonnull date,
-        NSURL *_Nullable imageURL) {
+Notification NotificationMake(NSString *_Nullable title, NSString *_Nonnull body, NSDate *_Nonnull date, NSURL *_Nullable imageURL) {
+
     Notification notification;
     notification.title = title;
     notification.body = body;
@@ -95,5 +97,17 @@ Notification NotificationMake(NSString *_Nullable title, NSString *_Nonnull body
     return notification;
 }
 
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)(void))completionHandler {
+    logCurrentMethod();
+    if (![response.actionIdentifier containsString:@"UNNotificationDefaultActionIdentifier"]) { return; }
+
+    [NSNotificationCenter.defaultCenter postNotificationName:kDidReceiveNotificationResponse
+                                                      object:nil];
+    completionHandler();
+    // response.notification.request.content.userInfo
+}
+
 
 @end
+
+#pragma clang diagnostic pop

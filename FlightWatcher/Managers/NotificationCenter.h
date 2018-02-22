@@ -19,4 +19,5 @@ typedef struct Notification {
 - (void)sendNotification:(Notification)notification;
 
 Notification NotificationMake(NSString *_Nullable title, NSString *_Nonnull body, NSDate *_Nonnull date, NSURL *_Nullable imageURL);
+
 @end

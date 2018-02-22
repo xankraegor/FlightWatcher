@@ -25,6 +25,7 @@
 @implementation FavoritesViewController {
 
     TicketCollectionViewCell *notificationCell;
+    UIToolbar *keyboardToolbar;
 }
 
 NSDateFormatter *favoritesDateFormatter;
@@ -55,7 +56,7 @@ NSDateFormatter *favoritesDateFormatter;
     _dateTextField = [[UITextField alloc] initWithFrame:self.view.bounds];
     _dateTextField.hidden = YES;
     _dateTextField.inputView = _datePicker;
-    UIToolbar *keyboardToolbar = [[UIToolbar alloc] init];
+    keyboardToolbar = [[UIToolbar alloc] init];
     [keyboardToolbar sizeToFit];
     UIBarButtonItem *flexBarButton = [[UIBarButtonItem alloc]
             initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
@@ -140,29 +141,31 @@ NSDateFormatter *favoritesDateFormatter;
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     logCurrentMethod();
 
-
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Действия с билетом"
-                                                                             message:@"Что необходимо сделать с выбранным билетом?"
-                                                                      preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alertController = [UIAlertController
+            alertControllerWithTitle:@"Действия с билетом"
+                             message:@"Что необходимо сделать с выбранным билетом?"
+                      preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *favoriteAction;
     if ([CoreDataHelper.sharedInstance isFavorite:_tickets[(NSUInteger) indexPath.row]]) {
-        favoriteAction = [UIAlertAction actionWithTitle:@ "Удалить из избранного"
-                                                  style:UIAlertActionStyleDestructive
-                                                handler:^(UIAlertAction *_Nonnull action) {
-                                                    [CoreDataHelper.sharedInstance
-                                                            removeFromFavorites:_tickets[(NSUInteger) indexPath.row]];
-                                                    __weak typeof(self) welf = self;
-                                                    [welf loadFavoritesIfNeededSortedAndFiltered];
-                                                }];
+        favoriteAction = [UIAlertAction
+                actionWithTitle:@ "Удалить из избранного"
+                          style:UIAlertActionStyleDestructive
+                        handler:^(UIAlertAction *_Nonnull action) {
+                            [CoreDataHelper.sharedInstance removeFromFavorites:_tickets[(NSUInteger) indexPath.row]];
+                            __weak typeof(self) welf = self;
+                            [welf loadFavoritesIfNeededSortedAndFiltered];
+                        }];
 
     }
 
 
-    UIAlertAction *notificationAction = [UIAlertAction actionWithTitle:@"Напомнить"
-                                                                 style:(UIAlertActionStyleDefault) handler:^(UIAlertAction *_Nonnull action) {
-                notificationCell = (TicketCollectionViewCell *) [collectionView cellForItemAtIndexPath:indexPath];
-                [_dateTextField becomeFirstResponder];
-            }];
+    UIAlertAction *notificationAction = [UIAlertAction
+            actionWithTitle:@"Напомнить"
+                      style:(UIAlertActionStyleDefault)
+                    handler:^(UIAlertAction *_Nonnull action) {
+                        notificationCell = (TicketCollectionViewCell *) [collectionView cellForItemAtIndexPath:indexPath];
+                        [_dateTextField becomeFirstResponder];
+                    }];
     [alertController addAction:notificationAction];
 
 
@@ -290,6 +293,7 @@ NSDateFormatter *favoritesDateFormatter;
 // MARK: - Buttons
 
 - (void)doneButtonDidTap:(UIBarButtonItem *)sender {
+    logCurrentMethod();
     if (_datePicker.date && notificationCell) {
         NSIndexPath *indexPath = [self.collectionView indexPathForCell:notificationCell];
         if (!indexPath) return;
@@ -318,12 +322,12 @@ NSDateFormatter *favoritesDateFormatter;
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Закрыть"
                                                                style:UIAlertActionStyleCancel handler:nil];
         [alertController addAction:cancelAction];
+        [self.view endEditing:YES];
         [self presentViewController:alertController animated:YES completion:nil];
     }
     _datePicker.date = [NSDate date];
     notificationCell = nil;
     [self.view endEditing:YES];
 }
-
 
 @end

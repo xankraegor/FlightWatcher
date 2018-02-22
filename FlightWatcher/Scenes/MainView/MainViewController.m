@@ -35,8 +35,15 @@
     [DataManager.sharedInstance loadData];
     [self performViewInitialization];
     [self presentFirstViewControllerIfNeeded];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataLoadingCompletion)
-                                                 name:kDataManagerLoadDataDidComplete object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(dataLoadingCompletion)
+                                                 name:kDataManagerLoadDataDidComplete
+                                               object:nil];
+
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(handleLocalNotification)
+                                               name:kDidReceiveNotificationResponse
+                                             object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -51,8 +58,12 @@
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kDataManagerLoadDataDidComplete
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:kDataManagerLoadDataDidComplete
                                                   object:nil];
+    [NSNotificationCenter.defaultCenter removeObserver:self
+                                                  name:kDidReceiveNotificationResponse
+                                                object:nil];
 }
 
 // MARK: - View Initialization
@@ -172,6 +183,13 @@
 
 - (void)didReceiveMemoryWarning {
     logCurrentMethod();
+}
+
+// MARK: - Local notification handling
+
+- (void)handleLocalNotification {
+    logCurrentMethod();
+    [self.tabBarController setSelectedIndex:(NSUInteger) kFavoritesControllerIndex];
 }
 
 @end

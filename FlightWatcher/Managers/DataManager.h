@@ -8,8 +8,6 @@
 
 #import "City.h"
 
-#define kDataManagerLoadDataDidComplete  @"DataManagerLoadDataDidComplete"
-
 
 @interface DataManager : NSObject
 @property(nonatomic, strong, readonly) NSArray *countries;
