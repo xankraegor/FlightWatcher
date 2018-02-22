@@ -157,17 +157,21 @@
 
     NSMutableArray *queryItems = [NSMutableArray arrayWithArray:@[token, origin, destination]];
 
-    if (request.departDate && request.returnDate) {
+    if (request.departDate || request.returnDate) {
         NSDateFormatter *dateFormatter = [NSDateFormatter new];
-        dateFormatter.dateFormat = @"yyyy-MM";
+        dateFormatter.dateFormat = @"yyyy-MM-dd";
 
-        NSString *departDateString = [dateFormatter stringFromDate:request.departDate];
-        NSURLQueryItem *departDate = [[NSURLQueryItem alloc] initWithName:@"depart_date" value:departDateString];
-        [queryItems addObject:departDate];
+        if (request.departDate) {
+            NSString *departDateString = [dateFormatter stringFromDate:request.departDate];
+            NSURLQueryItem *departDate = [[NSURLQueryItem alloc] initWithName:@"depart_date" value:departDateString];
+            [queryItems addObject:departDate];
+        }
 
-        NSString *returnDateString = [dateFormatter stringFromDate:request.returnDate];
-        NSURLQueryItem *returnDate = [[NSURLQueryItem alloc] initWithName:@"return_date" value:returnDateString];
-        [queryItems addObject:returnDate];
+        if (request.returnDate) {
+            NSString *returnDateString = [dateFormatter stringFromDate:request.returnDate];
+            NSURLQueryItem *returnDate = [[NSURLQueryItem alloc] initWithName:@"return_date" value:returnDateString];
+            [queryItems addObject:returnDate];
+        }
     }
 
     components.queryItems = queryItems;

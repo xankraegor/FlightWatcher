@@ -10,5 +10,7 @@
 @interface MainView : UIView
 - (id)initWithFrame:(CGRect)frame;
 - (void)activateButtons;
-- (void)setTitle:(NSString *)title forOriginButton:(BOOL)isOrigin;
+- (void)setPlaceButtonTitle:(NSString *)title forOriginButton:(BOOL)isOrigin;
+
+- (void)setDateButtonTitle:(NSString *)title forDepartureDateButton:(BOOL)isDeparture;
 @end

@@ -17,8 +17,8 @@
 @implementation MainView {
     UIButton *originButton;
     UIButton *destinationButton;
-    UILabel *tansfersCountLabel;
-    UIStepper *tansfersCountStepper;
+    UIButton *departureDateButton;
+    UIButton *returnDateButton;
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -30,24 +30,26 @@
 
 
 // MARK: originButton
-    originButton = [[UIButton alloc] initWithFrame:self.bounds title:@"Откуда"];
+    originButton = [[UIButton alloc] initWithFrame:self.bounds title:@"Откуда: нужно указать"];
     [originButton addTarget:superViewController action:@selector(presentOriginSelectionView) forControlEvents:UIControlEventTouchUpInside];
     [originButton setEnabled:false];
     [self addSubview:originButton];
 
 // MARK: destinationButton
-    destinationButton = [[UIButton alloc] initWithFrame:self.bounds title:@"Куда"];
+    destinationButton = [[UIButton alloc] initWithFrame:self.bounds title:@"Куда: нужно указать"];
     [destinationButton addTarget:superViewController action:@selector(presentDestinationSelectionView) forControlEvents:UIControlEventTouchUpInside];
     [destinationButton setEnabled:false];
     [self addSubview:destinationButton];
 
-// MARK: transfersCountLabel
-    tansfersCountLabel = [UILabel newWithFrame:self.bounds usingTitle:@"Количество пересадок: 0"];
-    [self addSubview:tansfersCountLabel];
+// MARK: departure_date
+    departureDateButton = [[UIButton alloc] initWithFrame:self.bounds title:@"Дата вылета: любая"];
+    [departureDateButton addTarget:superViewController action:@selector(presentDepartureDateBox) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:departureDateButton];
 
-// MARK: transfersCountStepper
-    tansfersCountStepper = [[UIStepper alloc] initWithFrame:self.bounds];
-    [self addSubview:tansfersCountStepper];
+    // MARK: return_date
+    returnDateButton = [[UIButton alloc] initWithFrame:self.bounds title:@"Дата возвращения: любая"];
+    [returnDateButton addTarget:superViewController action:@selector(presentReturnDateBox) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:returnDateButton];
 
     return self;
 }
@@ -57,7 +59,7 @@
     [destinationButton setEnabled:true];
 }
 
-- (void)setTitle:(NSString *)title forOriginButton:(BOOL)isOrigin {
+- (void)setPlaceButtonTitle:(NSString *)title forOriginButton:(BOOL)isOrigin {
     if (isOrigin) {
         [originButton setTitle:[[NSString alloc] initWithFormat:@"Откуда: %@", title] forState:UIControlStateNormal];
     } else {
@@ -65,34 +67,42 @@
     }
 }
 
+- (void)setDateButtonTitle:(NSString *)title forDepartureDateButton:(BOOL)isDeparture {
+    if (isDeparture) {
+        [departureDateButton setTitle:[[NSString alloc] initWithFormat:@"Дата вылета: %@", title] forState:UIControlStateNormal];
+    } else {
+        [returnDateButton setTitle:[[NSString alloc] initWithFormat:@"Дата возвращения: %@", title] forState:UIControlStateNormal];
+    }
+}
+
 -(void)layoutSubviews {
     CGFloat topInset = 24;
     CGFloat leftInset = 24;
     CGFloat rightInset = 24;
-    CGFloat internalMarginSize = 16;
+    CGFloat internalMarginSize = 24;
     CGFloat elementWidth = self.bounds.size.width - leftInset - rightInset;
     CGFloat buttonHeight = 54;
-    CGFloat elementHeight = 32;
 
     CGRect originButtonFrame = CGRectMake(leftInset, topInset, elementWidth, buttonHeight);
     originButton.frame = originButtonFrame;
 
     CGRect destinationButtonFrame = CGRectMake(leftInset,
-            originButtonFrame.origin.y + originButtonFrame.size.height + internalMarginSize,
-            elementWidth, buttonHeight);
+            CGRectGetMaxY(originButtonFrame) + internalMarginSize,
+            elementWidth,
+            buttonHeight);
     destinationButton.frame = destinationButtonFrame;
 
-    CGRect tansfersCountLabelFrame = CGRectMake(leftInset,
-            destinationButtonFrame.origin.y + destinationButtonFrame.size.height + 3 * internalMarginSize,
-            elementWidth * 2 / 3,
-            elementHeight);
-    tansfersCountLabel.frame = tansfersCountLabelFrame;
+    CGRect departureDateButtonFrame = CGRectMake(leftInset,
+            CGRectGetMaxY(destinationButtonFrame) + internalMarginSize,
+            elementWidth,
+            buttonHeight);
+    departureDateButton.frame = departureDateButtonFrame;
 
-    CGRect tansfersCountStepperFrame = CGRectMake(leftInset + elementWidth * 2 / 3,
-            destinationButtonFrame.origin.y + destinationButtonFrame.size.height + 3 * internalMarginSize,
-            elementWidth * 1 / 3,
-            elementHeight);
-    tansfersCountStepper.frame = tansfersCountStepperFrame;
+    CGRect returnDateButtonFrame = CGRectMake(leftInset,
+            CGRectGetMaxY(departureDateButtonFrame) + internalMarginSize,
+            elementWidth,
+            buttonHeight);
+    returnDateButton.frame = returnDateButtonFrame;
 }
 
 

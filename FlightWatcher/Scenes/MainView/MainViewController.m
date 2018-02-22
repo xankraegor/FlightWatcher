@@ -25,7 +25,11 @@
 @end
 
 
-@implementation MainViewController
+@implementation MainViewController {
+    UIToolbar *keyboardToolbar;
+    BOOL selectingDepartureDate;
+    NSDateFormatter *dateFormatter;
+}
 
 // MARK: - Life cycle
 
@@ -44,7 +48,32 @@
                                            selector:@selector(handleLocalNotification)
                                                name:kDidReceiveNotificationResponse
                                              object:nil];
+
+    selectingDepartureDate = true;
+    _datePicker = [[UIDatePicker alloc] init];
+    _datePicker.datePickerMode = UIDatePickerModeDate;
+    _datePicker.minimumDate = [NSDate date];
+    _dateTextField = [[UITextField alloc] initWithFrame:self.view.bounds];
+    _dateTextField.hidden = YES;
+    _dateTextField.inputView = _datePicker;
+    keyboardToolbar = [[UIToolbar alloc] init];
+    [keyboardToolbar sizeToFit];
+    UIBarButtonItem *resetBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Не указывать" style:UIBarButtonItemStyleDone target:self action:@selector(resetButtonDidTap)];
+    UIBarButtonItem *flexBarButton = [[UIBarButtonItem alloc]
+            initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc]
+            initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self
+                                 action:@selector(doneButtonDidTap:)];
+    keyboardToolbar.items = @[resetBarButton, flexBarButton, doneBarButton];
+    _dateTextField.inputAccessoryView = keyboardToolbar;
+    [self.view addSubview:_dateTextField];
+
+    dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateStyle = NSDateFormatterShortStyle;
+    dateFormatter.timeStyle = NSDateFormatterNoStyle;
+
 }
+
 
 - (void)viewWillAppear:(BOOL)animated {
     logCurrentMethod();
@@ -138,6 +167,53 @@
     [self.navigationController pushViewController:controller animated:YES];
 }
 
+// MARK: - Buttons' actions
+
+-(void)presentDepartureDateBox {
+    logCurrentMethod();
+    selectingDepartureDate = true;
+    _datePicker.minimumDate = [NSDate date];
+    _datePicker.date = (_searchRequest.departDate) ?: [NSDate date];
+    [_dateTextField becomeFirstResponder];
+}
+
+-(void)presentReturnDateBox {
+    logCurrentMethod();
+    selectingDepartureDate = false;
+    _datePicker.minimumDate = (_searchRequest.departDate) ?: [NSDate date];
+    _datePicker.date = (_searchRequest.returnDate) ?: [NSDate date];
+    [_dateTextField becomeFirstResponder];
+}
+
+- (void)doneButtonDidTap:(UIBarButtonItem *)sender {
+    logCurrentMethod();
+
+    if (selectingDepartureDate) {
+        _searchRequest.departDate = _datePicker.date;
+        [(MainView *) self.view setDateButtonTitle:[dateFormatter stringFromDate:_datePicker.date] forDepartureDateButton:YES];
+    } else {
+        _searchRequest.returnDate = _datePicker.date;
+        [(MainView *) self.view setDateButtonTitle:[dateFormatter stringFromDate:_datePicker.date] forDepartureDateButton:NO];
+    }
+
+    [self.view endEditing:YES];
+}
+
+
+- (void)resetButtonDidTap {
+    logCurrentMethod();
+
+    if (selectingDepartureDate) {
+        _searchRequest.departDate = nil;
+        [(MainView *) self.view setDateButtonTitle:@"любая" forDepartureDateButton:YES];
+    } else {
+        _searchRequest.returnDate = nil;
+        [(MainView *) self.view setDateButtonTitle:@"любая" forDepartureDateButton:NO];
+    }
+
+    [self.view endEditing:YES];
+}
+
 // MARK: - PlaceViewControllerDelegate
 
 - (void)selectPlace:(id)place withType:(BOOL)isOrigin andDataType:(DataSourceType)dataType {
@@ -164,7 +240,7 @@
         _searchRequest.destination = data;
     }
 
-    [(MainView *) self.view setTitle:title forOriginButton:isOrigin];
+    [(MainView *) self.view setPlaceButtonTitle:title forOriginButton:isOrigin];
 }
 
 // MARK: - Initial start presentation

@@ -49,7 +49,6 @@ NSDateFormatter *favoritesDateFormatter;
     _sortOrder = TicketSortOrderCreated;
     _sortAscending = YES;
     _ticketFilter = TicketFilterAll;
-
     _datePicker = [[UIDatePicker alloc] init];
     _datePicker.datePickerMode = UIDatePickerModeDateAndTime;
     _datePicker.minimumDate = [NSDate date];
@@ -155,7 +154,6 @@ NSDateFormatter *favoritesDateFormatter;
                             __weak typeof(self) welf = self;
                             [welf loadFavoritesIfNeededSortedAndFiltered];
                         }];
-
     }
 
 

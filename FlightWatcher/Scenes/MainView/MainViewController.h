@@ -7,4 +7,6 @@
 //
 
 @interface MainViewController : UIViewController
+@property(nonatomic, strong) UIDatePicker *datePicker;
+@property(nonatomic, strong) UITextField *dateTextField;
 @end
