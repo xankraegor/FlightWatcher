@@ -15,7 +15,6 @@
 @property(nonatomic, strong) LocationService *locationService;
 @property(nonatomic, strong) City *origin;
 @property(nonatomic, strong) NSArray *prices;
-@property(strong) UILabel *currentLocationLabel;
 @end
 
 @implementation MapViewController
@@ -38,19 +37,21 @@
 
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(handleLocalNotification)
                                                name:kDidReceiveNotificationResponse object:nil];
-
-    CGRect currentLocationFrame = CGRectMake(16, 16, _mapView.bounds.size.width - 32, 24.0);
-    _currentLocationLabel = [[UILabel alloc] initWithFrame:currentLocationFrame];
-    _currentLocationLabel.backgroundColor = [UIColor.whiteColor colorWithAlphaComponent:0.5];
-    _currentLocationLabel.layer.cornerRadius = 10.0;
-    _currentLocationLabel.textAlignment = NSTextAlignmentCenter;
-    [self.view addSubview:_currentLocationLabel];
 }
 
--(void)viewDidLayoutSubviews {
+- (void)viewWillAppear:(BOOL)animated {
+    logCurrentMethod();
+    self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeNever;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    logCurrentMethod();
+    self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeAutomatic;
+}
+
+- (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     _mapView.frame = self.view.bounds;
-    _currentLocationLabel.frame = CGRectMake(16, 16, _mapView.bounds.size.width - 32, 24.0);
 }
 
 
@@ -81,7 +82,7 @@
     }
 
     [_locationService cityNameForLocation:currentLocation completeWithName:^(NSString *name) {
-        _currentLocationLabel.text = name;
+        self.navigationItem.title = [NSString stringWithFormat:@"Карта цен из %@", (name) ?: @"неизвестного места"];
     }];
 }
 
@@ -102,7 +103,7 @@
 
 // MARK: - Map view delegate
 
--(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
     logCurrentMethod();
     if (annotation == mapView.userLocation) {
         return nil;
@@ -112,7 +113,7 @@
     return annotationView;
 }
 
--(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     logCurrentMethod();
     for (MapPrice *price in _prices) {
         if (price.destination.name == view.annotation.title) {
@@ -151,7 +152,7 @@
 
 // MARK: - Memory management
 
--(void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning {
     logCurrentMethod();
 }
 
