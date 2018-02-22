@@ -91,6 +91,7 @@
     logCurrentMethod();
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(location.coordinate,
             1000000, 1000000);
+    [_mapView removeAnnotations:_mapView.annotations];
     [_mapView setRegion:region animated:YES];
     if (location) {
         _origin = [DataManager.sharedInstance cityForLocation:location];
@@ -149,7 +150,7 @@
     for (MapPrice *price in _prices) {
         if (price.destination.name == view.annotation.title) {
             [APIManager.sharedInstance requestTicketWithMapPrice:price completion:^(Ticket *ticket) {
-                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@ "Действия с билетом"
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@ "Билет в %@ за %@", view.annotation.title, view.annotation.subtitle]
                                                                                          message:@"Что необходимо сделать с выбранным билетом?"
                                                                                   preferredStyle:UIAlertControllerStyleActionSheet];
                 UIAlertAction *favoriteAction;
@@ -170,10 +171,20 @@
                                                                     }];
                 }
 
+                UIAlertAction *changeOriginAction = [UIAlertAction actionWithTitle:@ "Сделать это местом вылета"
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction *_Nonnull action) {
+                                                            __weak typeof(self) welf = self;
+                                                            [welf.mapView deselectAnnotation:view.annotation animated:YES];
+                                                            [welf updateCurrentLocationWithCoordinates:view.annotation.coordinate];
+
+                                                        }];
+
                 UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Закрыть"
                                                                        style:UIAlertActionStyleCancel
                                                                      handler:nil];
                 [alertController addAction:favoriteAction];
+                [alertController addAction:changeOriginAction];
                 [alertController addAction:cancelAction];
                 [self presentViewController:alertController animated:YES completion:nil];
             }];
