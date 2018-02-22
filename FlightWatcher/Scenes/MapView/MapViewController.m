@@ -9,12 +9,16 @@
 #import "MapViewController.h"
 #import "MapPrice.h"
 #import "CoreDataHelper.h"
+#import "UIButton+Style.h"
+#import "PlacesTableViewController.h"
+#import "Airport.h"
 
-@interface MapViewController () <MKMapViewDelegate>
+@interface MapViewController () <MKMapViewDelegate, PlaceViewControllerDelegate>
 @property(nonatomic, strong) MKMapView *mapView;
 @property(nonatomic, strong) LocationService *locationService;
 @property(nonatomic, strong) City *origin;
 @property(nonatomic, strong) NSArray *prices;
+@property(nonatomic, strong) UIButton *selectPlaceButton;
 @end
 
 @implementation MapViewController
@@ -32,11 +36,15 @@
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(dataLoadedSuccessfully)
                                                name:kDataManagerLoadDataDidComplete object:nil];
 
-    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(updateCurrentLocation:)
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(updateCurrentLocationWithNotification:)
                                                name:kLocationServiceDidUpdateCurrentLocation object:nil];
 
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(handleLocalNotification)
                                                name:kDidReceiveNotificationResponse object:nil];
+
+    _selectPlaceButton = [[UIButton alloc] initWithFrame:self.view.bounds title:@"Выбрать место вылета"];
+    [_selectPlaceButton addTarget:self action:@selector(selectPlaceButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_selectPlaceButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -52,6 +60,7 @@
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     _mapView.frame = self.view.bounds;
+    _selectPlaceButton.frame = CGRectMake(_mapView.bounds.size.width / 2 - 250.0 / 2, CGRectGetMaxY(_mapView.bounds) - 64, 250.0, 48);
 }
 
 
@@ -65,15 +74,26 @@
     _locationService = [[LocationService alloc] init];
 }
 
-- (void)updateCurrentLocation:(NSNotification *)notification {
+- (void)updateCurrentLocationWithNotification:(NSNotification *)notification {
     logCurrentMethod();
     CLLocation *currentLocation = notification.object;
+    [self updateCurrentLocation:currentLocation];
 
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(currentLocation.coordinate,
+}
+
+-(void)updateCurrentLocationWithCoordinates:(CLLocationCoordinate2D)coordinates {
+    logCurrentMethod();
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:coordinates.latitude longitude:coordinates.longitude];
+    [self updateCurrentLocation:location];
+}
+
+-(void)updateCurrentLocation:(CLLocation *)location {
+    logCurrentMethod();
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(location.coordinate,
             1000000, 1000000);
     [_mapView setRegion:region animated:YES];
-    if (currentLocation) {
-        _origin = [DataManager.sharedInstance cityForLocation:currentLocation];
+    if (location) {
+        _origin = [DataManager.sharedInstance cityForLocation:location];
         if (_origin) {
             [APIManager.sharedInstance mapPricesFor:_origin withCompletion:^(NSArray *prices) {
                 self.prices = prices;
@@ -81,10 +101,11 @@
         }
     }
 
-    [_locationService cityNameForLocation:currentLocation completeWithName:^(NSString *name) {
+    [_locationService cityNameForLocation:location completeWithName:^(NSString *name) {
         self.navigationItem.title = [NSString stringWithFormat:@"Карта цен из %@", (name) ?: @"неизвестного места"];
     }];
 }
+
 
 - (void)setPrices:(NSArray *)prices {
     logCurrentMethod();
@@ -101,6 +122,15 @@
     }
 }
 
+// MARK: - Button's actions
+
+-(void)selectPlaceButtonPressed {
+    logCurrentMethod();
+    PlacesTableViewController *controller = [[PlacesTableViewController alloc] initWithStyle:UITableViewStylePlain toReturnOrigin:PlaceSelectionReturnTypeMapOrigin];
+    controller.delegate = self;
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
 // MARK: - Map view delegate
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
@@ -108,6 +138,7 @@
     if (annotation == mapView.userLocation) {
         return nil;
     }
+
     MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"AnnotationReuseIdentifier"];
 
     return annotationView;
@@ -161,6 +192,28 @@
 - (void)handleLocalNotification {
     logCurrentMethod();
     [self.tabBarController setSelectedIndex:(NSUInteger) kFavoritesControllerIndex];
+}
+
+// MARK: - PlaceViewControllerDelegate
+
+- (void)selectPlace:(id)place withType:(PlaceSelectionReturnType)returnType andDataType:(DataSourceType)dataType {
+    logCurrentMethod();
+
+    if (returnType == PlaceSelectionReturnTypeMapOrigin) {
+        if (dataType == DataSourceTypeCity) {
+            City *city = (City *) place;
+            [self setNewOrigin:city.coordinate];
+
+        } else if (dataType == DataSourceTypeAirport) {
+            Airport *airport = (Airport *) place;
+            [self setNewOrigin:airport.coordinate];
+        }
+    }
+}
+
+-(void) setNewOrigin:(CLLocationCoordinate2D)coordinate {
+    logCurrentMethod();
+    [self updateCurrentLocationWithCoordinates:coordinate];
 }
 
 @end

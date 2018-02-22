@@ -7,14 +7,16 @@
 //
 
 #import "DataSourceTypeEnum.h"
+#import "PlaceSelectionReturnType.h"
+#import "PlaceSelectionReturnType.h"
 
 
 @protocol PlaceViewControllerDelegate <NSObject>
-- (void)selectPlace:(id)place withType:(bool)isOrigin andDataType:(DataSourceType)dataType;
+- (void)selectPlace:(id)place withType:(PlaceSelectionReturnType)returnType andDataType:(DataSourceType)dataType;
 @end
 
 @interface PlacesTableViewController : UITableViewController
 @property(nonatomic, strong) id <PlaceViewControllerDelegate> delegate;
 
-- (instancetype)initWithStyle:(UITableViewStyle)style toReturnOrigin:(bool)isOrigin;
+- (instancetype)initWithStyle:(UITableViewStyle)style toReturnOrigin:(PlaceSelectionReturnType)returnType;
 @end

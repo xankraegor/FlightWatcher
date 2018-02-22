@@ -14,7 +14,7 @@
 @interface PlacesTableViewController () <UISearchResultsUpdating>
 
 @property(strong, nonatomic) UISegmentedControl *segmentedControl;
-@property(readonly, nonatomic) BOOL isOrigin;
+@property(readonly, nonatomic) PlaceSelectionReturnType returnType;
 @property(nonatomic) DataSourceType dataSourceType;
 @property(nonatomic, strong) NSArray *currentArray;
 @property(nonatomic, strong) NSArray *searchArray;
@@ -30,10 +30,10 @@ static NSString *cellId = @"PlaceCell";
 
 // MARK: - Initialization
 
-- (instancetype)initWithStyle:(UITableViewStyle)style toReturnOrigin:(BOOL)isOrigin {
+- (instancetype)initWithStyle:(UITableViewStyle)style toReturnOrigin:(PlaceSelectionReturnType)returnType {
     logCurrentMethod();
     self = [super initWithStyle:style];
-    _isOrigin = isOrigin;
+    _returnType = returnType;
     _dataSourceType = DataSourceTypeCity;
     [self performViewInitialization];
     return self;
@@ -43,7 +43,7 @@ static NSString *cellId = @"PlaceCell";
     logCurrentMethod();
     [self.tableView registerClass:PlaceTableViewCell.class forCellReuseIdentifier:cellId];
 
-    self.title = _isOrigin ? @"Откуда" : @"Куда";
+    self.title = _returnType == PlaceSelectionReturnTypeDestination ? @"Куда" : @"Откуда";
 
     _searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     _searchController.dimsBackgroundDuringPresentation = NO;
@@ -117,7 +117,7 @@ static NSString *cellId = @"PlaceCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     logCurrentMethod();
     id place = (_searchController.isActive &&_searchArray.count > 0) ? _searchArray[(NSUInteger) indexPath.row] : _currentArray[(NSUInteger) indexPath.row];
-    [self.delegate selectPlace:place withType:self.isOrigin andDataType:self.dataSourceType];
+    [self.delegate selectPlace:place withType:_returnType andDataType:self.dataSourceType];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

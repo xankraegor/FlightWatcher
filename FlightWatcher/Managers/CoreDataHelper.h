@@ -8,6 +8,7 @@
 #import "FavoriteTicket+CoreDataClass.h"
 #import "Ticket.h"
 #import "TicketSortOrder.h"
+#import "TicketFilter.h"
 
 
 @interface CoreDataHelper : NSObject

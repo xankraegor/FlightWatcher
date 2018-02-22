@@ -150,9 +150,7 @@
 
 - (void)presentOriginSelectionView {
     logCurrentMethod();
-    PlacesTableViewController *controller = [[PlacesTableViewController alloc]
-            initWithStyle:UITableViewStylePlain
-           toReturnOrigin:true];
+    PlacesTableViewController *controller = [[PlacesTableViewController alloc] initWithStyle:UITableViewStylePlain toReturnOrigin:PlaceSelectionReturnTypeOrigin];
     controller.delegate = self;
     [self.navigationController pushViewController:controller animated:YES];
 }
@@ -160,9 +158,7 @@
 
 - (void)presentDestinationSelectionView {
     logCurrentMethod();
-    PlacesTableViewController *controller = [[PlacesTableViewController alloc]
-            initWithStyle:UITableViewStylePlain
-           toReturnOrigin:false];
+    PlacesTableViewController *controller = [[PlacesTableViewController alloc] initWithStyle:UITableViewStylePlain toReturnOrigin:PlaceSelectionReturnTypeDestination];
     controller.delegate = self;
     [self.navigationController pushViewController:controller animated:YES];
 }
@@ -216,9 +212,17 @@
 
 // MARK: - PlaceViewControllerDelegate
 
-- (void)selectPlace:(id)place withType:(BOOL)isOrigin andDataType:(DataSourceType)dataType {
+- (void)selectPlace:(id)place withType:(PlaceSelectionReturnType)returnType andDataType:(DataSourceType)dataType {
     logCurrentMethod();
-    [self setPlace:place ofType:dataType isOrigin:isOrigin];
+
+    if (returnType == PlaceSelectionReturnTypeOrigin) {
+        [self setPlace:place ofType:dataType isOrigin:YES];
+    }
+
+    if (returnType == PlaceSelectionReturnTypeDestination) {
+        [self setPlace:place ofType:dataType isOrigin:NO];
+    }
+
 }
 
 - (void)setPlace:(id)place ofType:(DataSourceType)dataType isOrigin:(BOOL)isOrigin {

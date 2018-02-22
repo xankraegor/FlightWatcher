@@ -14,9 +14,3 @@ typedef enum TicketSortOrder {
     TicketSortOrderReturnDate,
     TicketSortOrderTo
 } TicketSortOrder;
-
-typedef enum TicketFilter {
-    TicketFilterAll,
-    TicketFilterFromMap,
-    TicketFilterManual
-} TicketFilter;

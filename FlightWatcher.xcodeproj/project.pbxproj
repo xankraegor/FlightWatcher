@@ -99,6 +99,7 @@
 		3765F6255D82BCAE76E57CDE /* LocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationService.h; sourceTree = "<group>"; };
 		3765F640D385615B7841D76F /* NotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationCenter.m; sourceTree = "<group>"; };
 		3765F693404695A282F2E892 /* ProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressView.h; sourceTree = "<group>"; };
+		3765F6ED4A707BEF888D6929 /* PlaceSelectionReturnType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceSelectionReturnType.h; sourceTree = "<group>"; };
 		3765F6EFD2F5CCAA9D23F814 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		3765F70F96D8F3B55185B062 /* UILabel+Style.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Style.h"; sourceTree = "<group>"; };
 		3765F8370406A83D5AE79E1F /* UIAlertAction+FavoriteTicketsSortingFabric.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertAction+FavoriteTicketsSortingFabric.m"; sourceTree = "<group>"; };
@@ -127,6 +128,7 @@
 		3765FCD364B528ED8519143D /* UILabel+Style.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Style.m"; sourceTree = "<group>"; };
 		3765FCE2EA8120BB2C3C85A6 /* NSDate+FromISOString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+FromISOString.h"; sourceTree = "<group>"; };
 		3765FCFEC5AB205FFC47DF57 /* UIColor+ColorPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorPalette.h"; sourceTree = "<group>"; };
+		3765FD689CF4A5A3C91F8FB3 /* TicketFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketFilter.h; sourceTree = "<group>"; };
 		3765FD723BE72FE9A53C6323 /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		3765FD8E8026A82F531421FC /* NSDate+FromISOString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+FromISOString.m"; sourceTree = "<group>"; };
 		3765FDA45E7E8BBCB2C25942 /* favorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favorite.png; sourceTree = "<group>"; };
@@ -308,6 +310,8 @@
 			children = (
 				3765F2AD659B1FA651C05440 /* DataSourceTypeEnum.h */,
 				3765F88E7820270D0F63C8B6 /* TicketSortOrder.h */,
+				3765FD689CF4A5A3C91F8FB3 /* TicketFilter.h */,
+				3765F6ED4A707BEF888D6929 /* PlaceSelectionReturnType.h */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
