@@ -121,10 +121,6 @@ static NSString *cellId = @"PlaceCell";
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-// MARK: - Memory management
 
--(void)didReceiveMemoryWarning {
-    logCurrentMethod();
-}
 
 @end

@@ -259,12 +259,6 @@
     }
 }
 
-// MARK: - Memory management
-
-- (void)didReceiveMemoryWarning {
-    logCurrentMethod();
-}
-
 // MARK: - Local notification handling
 
 - (void)handleLocalNotification {

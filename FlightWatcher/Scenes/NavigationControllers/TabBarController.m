@@ -72,10 +72,4 @@
     NSLog(@"Child view controllers: %@", viewController.childViewControllers);
 }
 
-// MARK: - Memory management
-
-- (void)didReceiveMemoryWarning {
-    logCurrentMethod();
-}
-
 @end

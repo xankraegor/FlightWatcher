@@ -9,7 +9,6 @@
 #import <YYWebImage/YYWebImage.h>
 #import "TicketCollectionViewCell.h"
 #import "UIColor+ColorPalette.h"
-#import "FavoriteTicket+CoreDataClass.h"
 #import "APIManager.h"
 
 

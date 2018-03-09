@@ -49,11 +49,13 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     logCurrentMethod();
+    [super viewWillAppear:animated];
     self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeNever;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     logCurrentMethod();
+    [super viewWillDisappear:animated];
     self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeAutomatic;
 }
 
@@ -190,12 +192,6 @@
             }];
         }
     }
-}
-
-// MARK: - Memory management
-
-- (void)didReceiveMemoryWarning {
-    logCurrentMethod();
 }
 
 // MARK: - Local notification handling

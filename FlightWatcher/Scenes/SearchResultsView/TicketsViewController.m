@@ -64,14 +64,11 @@ NSDateFormatter *ticktsDateFormatter;
 
 - (void)viewDidLoad {
     logCurrentMethod();
+    [super viewDidLoad];
     [self.collectionView registerClass:TicketCollectionViewCell.class forCellWithReuseIdentifier:@"TicketCellIdentifier"];
     self.collectionView.backgroundColor = UIColor.whiteColor;
     self.collectionView.delegate = self;
     self.navigationItem.backBarButtonItem.title = @"Назад";
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-
 }
 
 // MARK: - UICollectionViewDataSource
@@ -162,13 +159,6 @@ NSDateFormatter *ticktsDateFormatter;
     } else {
         return UIEdgeInsetsMake(8, 8, 8, 8);
     }
-}
-
-
-// MARK: - Memory management
-
-- (void)didReceiveMemoryWarning {
-    logCurrentMethod();
 }
 
 // MARK: - Buttons
