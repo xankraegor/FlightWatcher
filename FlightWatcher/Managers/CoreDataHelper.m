@@ -4,7 +4,6 @@
 //
 
 #import "CoreDataHelper.h"
-#import "TicketSortOrder.h"
 
 @interface CoreDataHelper ()
 @property(nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;

@@ -7,7 +7,6 @@
 //
 
 #import "MainView.h"
-#import "UILabel+Style.h"
 #import "UIButton+Style.h"
 #import "UIView+GetController.h"
 
@@ -25,9 +24,7 @@
     logCurrentMethod();
     self = [super initWithFrame:frame];
     self.backgroundColor = UIColor.whiteColor;
-
     UIViewController *superViewController = [[self superview] getViewController];
-
 
 // MARK: originButton
     originButton = [[UIButton alloc] initWithFrame:self.bounds title:@"Откуда: нужно указать"];

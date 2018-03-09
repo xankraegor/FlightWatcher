@@ -4,7 +4,6 @@
 //
 
 #import "LocationService.h"
-#import <UIKit/UIKit.h>
 
 @interface LocationService () <CLLocationManagerDelegate>
 @property(nonatomic, strong) CLLocationManager *locationManager;
