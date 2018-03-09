@@ -35,7 +35,7 @@ NSDateFormatter *ticktsDateFormatter;
     flowLayout.minimumLineSpacing = 0;
 
     self = [super initWithCollectionViewLayout:flowLayout];
-    self.title = NSLocalizedString(@"Tickets", @"Билеты");
+    self.title = NSLocalizedString(@"Tickets", @"Tickets");
     _tickets = tickets;
     ticktsDateFormatter = [NSDateFormatter new];
     ticktsDateFormatter.dateFormat = @"dd MMMM yyyy hh:mm";
@@ -68,7 +68,7 @@ NSDateFormatter *ticktsDateFormatter;
     [self.collectionView registerClass:TicketCollectionViewCell.class forCellWithReuseIdentifier:@"TicketCellIdentifier"];
     self.collectionView.backgroundColor = UIColor.whiteColor;
     self.collectionView.delegate = self;
-    self.navigationItem.backBarButtonItem.title = NSLocalizedString(@"Back", @"Назад");
+    self.navigationItem.backBarButtonItem.title = NSLocalizedString(@"Back", @"Back");
 }
 
 // MARK: - UICollectionViewDataSource
@@ -86,7 +86,7 @@ NSDateFormatter *ticktsDateFormatter;
 
     Ticket *ticket = _tickets[(NSUInteger) indexPath.row];
     // N.B. "valueForKey" used by voluntary to work around strange EXC_BAD_ACCESS fault:
-    cell.priceLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ RUR", @"%@ руб."), ticket.price];
+    cell.priceLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ RUR", @"%@ RUR"), ticket.price];
     cell.placesLabel.text = [NSString stringWithFormat:@"%@ - %@", ticket.from, ticket.to];
     cell.dateLabel.text = [ticktsDateFormatter stringFromDate:ticket.departure];
 

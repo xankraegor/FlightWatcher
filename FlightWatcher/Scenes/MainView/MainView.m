@@ -27,24 +27,24 @@
     UIViewController *superViewController = [[self superview] getViewController];
 
 // MARK: originButton
-    originButton = [[UIButton alloc] initWithFrame:self.bounds title:NSLocalizedString(@"From: required", @"To: нужно указать")];
+    originButton = [[UIButton alloc] initWithFrame:self.bounds title:NSLocalizedString(@"From: required", @"From: required")];
     [originButton addTarget:superViewController action:@selector(presentOriginSelectionView) forControlEvents:UIControlEventTouchUpInside];
     [originButton setEnabled:false];
     [self addSubview:originButton];
 
 // MARK: destinationButton
-    destinationButton = [[UIButton alloc] initWithFrame:self.bounds title:NSLocalizedString(@"To: required", @"Куда: нужно указать")];
+    destinationButton = [[UIButton alloc] initWithFrame:self.bounds title:NSLocalizedString(@"To: required", @"To: required")];
     [destinationButton addTarget:superViewController action:@selector(presentDestinationSelectionView) forControlEvents:UIControlEventTouchUpInside];
     [destinationButton setEnabled:false];
     [self addSubview:destinationButton];
 
 // MARK: departure_date
-    departureDateButton = [[UIButton alloc] initWithFrame:self.bounds title:NSLocalizedString(@"Departure date: any", @"Дата вылета: любая")];
+    departureDateButton = [[UIButton alloc] initWithFrame:self.bounds title:NSLocalizedString(@"Departure date: any", @"Departure date: any")];
     [departureDateButton addTarget:superViewController action:@selector(presentDepartureDateBox) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:departureDateButton];
 
     // MARK: return_date
-    returnDateButton = [[UIButton alloc] initWithFrame:self.bounds title:NSLocalizedString(@"Return date: any", @"Дата возвращения: any")];
+    returnDateButton = [[UIButton alloc] initWithFrame:self.bounds title:NSLocalizedString(@"Return date: any", @"Return date: any")];
     [returnDateButton addTarget:superViewController action:@selector(presentReturnDateBox) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:returnDateButton];
 
@@ -60,15 +60,15 @@
     if (isOrigin) {
         [originButton setTitle:[[NSString alloc] initWithFormat:NSLocalizedString(@"From: %@", @"From: %@"), title] forState:UIControlStateNormal];
     } else {
-        [destinationButton setTitle:[[NSString alloc] initWithFormat:NSLocalizedString(@"To: %@", @"Куда: %@"), title] forState:UIControlStateNormal];
+        [destinationButton setTitle:[[NSString alloc] initWithFormat:NSLocalizedString(@"To: %@", @"To: %@"), title] forState:UIControlStateNormal];
     }
 }
 
 - (void)setDateButtonTitle:(NSString *)title forDepartureDateButton:(BOOL)isDeparture {
     if (isDeparture) {
-        [departureDateButton setTitle:[[NSString alloc] initWithFormat:NSLocalizedString(@"Departure date: %@", @"Дата вылета: %@"), title] forState:UIControlStateNormal];
+        [departureDateButton setTitle:[[NSString alloc] initWithFormat:NSLocalizedString(@"Departure date: %@", @"Departure date: %@"), title] forState:UIControlStateNormal];
     } else {
-        [returnDateButton setTitle:[[NSString alloc] initWithFormat:NSLocalizedString(@"Return date: %@", @"Дата возвращения: %@"), title] forState:UIControlStateNormal];
+        [returnDateButton setTitle:[[NSString alloc] initWithFormat:NSLocalizedString(@"Return date: %@", @"Return date: %@"), title] forState:UIControlStateNormal];
     }
 }
 

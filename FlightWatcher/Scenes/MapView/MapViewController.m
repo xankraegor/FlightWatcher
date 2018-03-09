@@ -42,7 +42,7 @@
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(handleLocalNotification)
                                                name:kDidReceiveNotificationResponse object:nil];
 
-    _selectPlaceButton = [[UIButton alloc] initWithFrame:self.view.bounds title:NSLocalizedString(@"Choose departure location", @"Выбрать место вылета")];
+    _selectPlaceButton = [[UIButton alloc] initWithFrame:self.view.bounds title:NSLocalizedString(@"Choose departure location", @"Choose departure location")];
     [_selectPlaceButton addTarget:self action:@selector(selectPlaceButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_selectPlaceButton];
 }
@@ -105,7 +105,7 @@
     }
 
     [_locationService cityNameForLocation:location completeWithName:^(NSString *name) {
-        self.navigationItem.title = [NSString stringWithFormat:NSLocalizedString(@"Prices map from %@", @"Prices map from %@"), (name) ?: NSLocalizedString(@"unknown place", @"неизвестного места")];
+        self.navigationItem.title = [NSString stringWithFormat:NSLocalizedString(@"Prices map from %@", @"Prices map from %@"), (name) ?: NSLocalizedString(@"unknown place", @"unknown place")];
     }];
 }
 
@@ -152,7 +152,7 @@
     for (MapPrice *price in _prices) {
         if (price.destination.name == view.annotation.title) {
             [APIManager.sharedInstance requestTicketWithMapPrice:price completion:^(Ticket *ticket) {
-                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Ticket to %@ for %@", @"Билет в %@ за %@"), view.annotation.title, view.annotation.subtitle]
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Ticket to %@ for %@", @"Ticket to %@ for %@"), view.annotation.title, view.annotation.subtitle]
                                                                                          message:NSLocalizedString(@"What to do with the ticket?", @"What to do with the ticket?")
                                                                                   preferredStyle:UIAlertControllerStyleActionSheet];
                 UIAlertAction *favoriteAction;
@@ -164,7 +164,7 @@
                                                                         removeFromFavorites:ticket];
                                                             }];
                 } else {
-                    favoriteAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Add to favorites", @"Добавить в избранное")
+                    favoriteAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Add to favorites", @"Add to favorites")
                                                               style:UIAlertActionStyleDefault
                                                             handler:
                                                                     ^(UIAlertAction *_Nonnull action) {
@@ -173,7 +173,7 @@
                                                                     }];
                 }
 
-                UIAlertAction *changeOriginAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Set this as departure location", @"Сделать это местом вылета")
+                UIAlertAction *changeOriginAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Make it my departure location", @"Set this as departure location")
                                                           style:UIAlertActionStyleDefault
                                                         handler:^(UIAlertAction *_Nonnull action) {
                                                             __weak typeof(self) welf = self;

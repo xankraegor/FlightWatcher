@@ -53,7 +53,7 @@
 "unknown place" = "неизвестного места";
 "Ticket to %@ for %@" = "Билет в %@ за %@";
 "Add to favorites" = "Добавить в избранное";
-"Set this as departure location" = "Сделать это местом вылета";
+"Make it my departure location" = "Сделать это местом вылета";
 "About" = "О ПРИЛОЖЕНИИ";
 "Flight tickets" = "АВИАБИЛЕТЫ";
 "Price map" = "Карта цен";

@@ -58,7 +58,7 @@
     _dateTextField.inputView = _datePicker;
     keyboardToolbar = [[UIToolbar alloc] init];
     [keyboardToolbar sizeToFit];
-    UIBarButtonItem *resetBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Remove", @"Не указывать") style:UIBarButtonItemStyleDone target:self action:@selector(resetButtonDidTap)];
+    UIBarButtonItem *resetBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Remove", @"Remove") style:UIBarButtonItemStyleDone target:self action:@selector(resetButtonDidTap)];
     UIBarButtonItem *flexBarButton = [[UIBarButtonItem alloc]
             initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc]
@@ -100,7 +100,7 @@
 - (void)performViewInitialization {
     logCurrentMethod();
     self.view = [[MainView alloc] initWithFrame:self.view.frame];
-    self.navigationItem.title = NSLocalizedString(@"Ticket search", @"Search билетов");
+    self.navigationItem.title = NSLocalizedString(@"Ticket search", @"Ticket search");
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc]
             initWithTitle:NSLocalizedString(@"Search", @"Найти")
                     style:UIBarButtonItemStylePlain
@@ -201,7 +201,7 @@
 
     if (selectingDepartureDate) {
         _searchRequest.departDate = nil;
-        [(MainView *) self.view setDateButtonTitle:NSLocalizedString(@"any", @"любая") forDepartureDateButton:YES];
+        [(MainView *) self.view setDateButtonTitle:NSLocalizedString(@"any", @"any") forDepartureDateButton:YES];
     } else {
         _searchRequest.returnDate = nil;
         [(MainView *) self.view setDateButtonTitle:NSLocalizedString(@"any", @"any") forDepartureDateButton:NO];

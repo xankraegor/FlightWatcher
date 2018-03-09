@@ -49,15 +49,15 @@
 
 - (void)createContentDataArray {
     NSArray *titles = @[
-            NSLocalizedString(@"About", @"О ПРИЛОЖЕНИИ"),
-            NSLocalizedString(@"Flight tickets", @"АВИАБИЛЕТЫ"),
-            NSLocalizedString(@"Price map", @"КАРТА ЦЕН"),
-            NSLocalizedString(@"Favorites", @"ИЗБРАННОЕ")];
+            NSLocalizedString(@"About", @"About"),
+            NSLocalizedString(@"Flight tickets", @"Flight tickets"),
+            NSLocalizedString(@"Price map", @"Price map"),
+            NSLocalizedString(@"Favorites", @"Favorites")];
     NSArray *contents = @[
-            NSLocalizedString(@"Flight tickets search done easily", @"Приложение для поиска авиабилетов"),
-            NSLocalizedString(@"Find the cheapest tickets", @"Находите самые дешевые авиабилеты"),
-            NSLocalizedString(@"Observe prices on the map", @"Просматривайте карту цен"),
-            NSLocalizedString(@"Make ticket favorite to save", @"Сохраняйте выбранные билеты в избранное")];
+            NSLocalizedString(@"Flight tickets search done easily", @"Flight tickets search done easily"),
+            NSLocalizedString(@"Find the cheapest tickets", @"Find the cheapest tickets"),
+            NSLocalizedString(@"Observe prices on the map", @"Observe prices on the map"),
+            NSLocalizedString(@"Make ticket favorite to save", @"Make ticket favorite to save")];
     for (int i = 0; i < 4; ++i) {
         contentData[i].title = titles[(NSUInteger) i];
         contentData[i].contentText = contents[(NSUInteger) i];
@@ -87,11 +87,11 @@
 - (void)updateButtonWithIndex:(int)index {
     switch (index) {
         case 0 ... 2:
-            [_nextButton setTitle:NSLocalizedString(@"Next", @"ДАЛЕЕ") forState:UIControlStateNormal];
+            [_nextButton setTitle:NSLocalizedString(@"Next", @"Next") forState:UIControlStateNormal];
             _nextButton.tag = 0;
             break;
         case 3:
-            [_nextButton setTitle:NSLocalizedString(@"Done", @"ГОТОВО") forState:UIControlStateNormal];
+            [_nextButton setTitle:NSLocalizedString(@"Done", @"Done") forState:UIControlStateNormal];
             _nextButton.tag = 1;
             break;
         default:
