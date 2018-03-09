@@ -58,7 +58,7 @@
     _dateTextField.inputView = _datePicker;
     keyboardToolbar = [[UIToolbar alloc] init];
     [keyboardToolbar sizeToFit];
-    UIBarButtonItem *resetBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Не указывать" style:UIBarButtonItemStyleDone target:self action:@selector(resetButtonDidTap)];
+    UIBarButtonItem *resetBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Remove", @"Не указывать") style:UIBarButtonItemStyleDone target:self action:@selector(resetButtonDidTap)];
     UIBarButtonItem *flexBarButton = [[UIBarButtonItem alloc]
             initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc]
@@ -100,9 +100,9 @@
 - (void)performViewInitialization {
     logCurrentMethod();
     self.view = [[MainView alloc] initWithFrame:self.view.frame];
-    [self.navigationItem setTitle:@"Поиск билетов"];
+    self.navigationItem.title = NSLocalizedString(@"Ticket search", @"Search билетов");
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc]
-            initWithTitle:@"Найти"
+            initWithTitle:NSLocalizedString(@"Search", @"Найти")
                     style:UIBarButtonItemStylePlain
                    target:self
                    action:@selector(searchButtonPressed)];
@@ -135,10 +135,10 @@
                 } else {
                     UIAlertController *alertController =
                             [UIAlertController alertControllerWithTitle:@""
-                                                                message:@"По данному направлению билетов не найдено"
+                                                                message:NSLocalizedString(@"No tickets found with current settings", @"No tickets found with current settings")
                                                          preferredStyle:UIAlertControllerStyleAlert];
 
-                    [alertController addAction:[UIAlertAction actionWithTitle:@"Закрыть"
+                    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Close", @"Close")
                                                                         style:(UIAlertActionStyleDefault) handler:nil]];
 
                     [self presentViewController:alertController animated:YES completion:nil];
@@ -201,10 +201,10 @@
 
     if (selectingDepartureDate) {
         _searchRequest.departDate = nil;
-        [(MainView *) self.view setDateButtonTitle:@"любая" forDepartureDateButton:YES];
+        [(MainView *) self.view setDateButtonTitle:NSLocalizedString(@"any", @"любая") forDepartureDateButton:YES];
     } else {
         _searchRequest.returnDate = nil;
-        [(MainView *) self.view setDateButtonTitle:@"любая" forDepartureDateButton:NO];
+        [(MainView *) self.view setDateButtonTitle:NSLocalizedString(@"any", @"any") forDepartureDateButton:NO];
     }
 
     [self.view endEditing:YES];

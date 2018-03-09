@@ -43,7 +43,7 @@ static NSString *cellId = @"PlaceCell";
     logCurrentMethod();
     [self.tableView registerClass:PlaceTableViewCell.class forCellReuseIdentifier:cellId];
 
-    self.title = _returnType == PlaceSelectionReturnTypeDestination ? @"Куда" : @"Откуда";
+    self.title = _returnType == PlaceSelectionReturnTypeDestination ? NSLocalizedString(@"From", @"Куда") : NSLocalizedString(@"To", @"Откуда");
 
     _searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     _searchController.dimsBackgroundDuringPresentation = NO;
@@ -57,7 +57,7 @@ static NSString *cellId = @"PlaceCell";
         self.tableView.tableHeaderView = _searchController.searchBar;
     }
 
-    _segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Города", @"Аэропорты"]];
+    _segmentedControl = [[UISegmentedControl alloc] initWithItems:@[NSLocalizedString(@"Cities", @"Города"), NSLocalizedString(@"Airports", @"Аэропорты")]];
     [_segmentedControl addTarget:self action:@selector(setSource) forControlEvents:UIControlEventValueChanged];
     _segmentedControl.tintColor = [UIColor blackColor];
     self.navigationItem.titleView = _segmentedControl;

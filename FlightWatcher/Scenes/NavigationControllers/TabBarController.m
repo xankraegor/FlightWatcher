@@ -36,7 +36,7 @@
 - (NSArray <UIViewController *> *)createViewControllers {
     _mainViewController = [[MainViewController alloc] init];
     _mainViewController.tabBarItem =
-            [[UITabBarItem alloc] initWithTitle:@"Поиск"
+            [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Search", @"Поиск")
                                           image:[UIImage imageNamed:@"search"]
                                   selectedImage:[UIImage imageNamed:@"search_selected"]];
     _mainNavigationController = [[UINavigationController alloc]
@@ -44,7 +44,7 @@
     [self configuteNavigationController:_mainNavigationController];
 
     _mapViewController = [[MapViewController alloc] init];
-    _mapViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Карта цен"
+    _mapViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Prices map", @"Карта цен")
                                                                   image:[UIImage imageNamed:@"map"]
                                                           selectedImage:[UIImage imageNamed:@"map_selected"]];
     _mapNavigationController = [[UINavigationController alloc]
@@ -52,7 +52,7 @@
     [self configuteNavigationController:_mapNavigationController];
 
     _favoriteViewController = [[FavoritesViewController alloc] initWithFavoriteTickets];
-    _favoriteViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Избранное"
+    _favoriteViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Favorites", @"Избранное")
                                                                       image:[UIImage imageNamed:@"favorite"]
                                                               selectedImage:[UIImage imageNamed:@"favorite_selected"]];
     _favoritesNavigationController = [[UINavigationController alloc] initWithRootViewController:_favoriteViewController];
@@ -68,8 +68,6 @@
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
     logCurrentMethod();
-    NSLog(@"View controller selected: %@ of class %@", viewController, NSStringFromClass(viewController.class));
-    NSLog(@"Child view controllers: %@", viewController.childViewControllers);
 }
 
 @end

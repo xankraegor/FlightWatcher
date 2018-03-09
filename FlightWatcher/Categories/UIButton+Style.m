@@ -17,7 +17,7 @@
         [self setTitle:title forState:UIControlStateDisabled];
     } else {
         [self setTitle:title forState:UIControlStateNormal];
-        [self setTitle:@"Unnamed" forState:UIControlStateDisabled];
+        [self setTitle:NSLocalizedString(@"Unnamed", @"Unnamed") forState:UIControlStateDisabled];
     }
 
     UIColor *mainColor = (bgcolor ? bgcolor : UIColor.clearColor);

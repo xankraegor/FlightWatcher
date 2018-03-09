@@ -41,7 +41,7 @@ NSDateFormatter *favoritesDateFormatter;
     flowLayout.minimumLineSpacing = 0;
 
     self = [super initWithCollectionViewLayout:flowLayout];
-    self.title = @"Избранные";
+    self.title = NSLocalizedString(@"Favorites", @"Favorites");
     _tickets = CoreDataHelper.sharedInstance.favorites;
     favoritesDateFormatter = [NSDateFormatter new];
     favoritesDateFormatter.dateFormat = @"dd MMMM yyyy hh:mm";
@@ -78,7 +78,7 @@ NSDateFormatter *favoritesDateFormatter;
     [self.collectionView registerClass:TicketCollectionViewCell.class forCellWithReuseIdentifier:@"TicketCellIdentifier"];
     self.collectionView.backgroundColor = UIColor.whiteColor;
     self.collectionView.delegate = self;
-    self.navigationItem.backBarButtonItem.title = @"Назад";
+    self.navigationItem.backBarButtonItem.title = NSLocalizedString(@"Back", @"Back");
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -96,7 +96,7 @@ NSDateFormatter *favoritesDateFormatter;
 
 - (void)setupAdditionalFavoritesViews {
     logCurrentMethod();
-    _segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Все", @"С карты", @"Из поиска"]];
+    _segmentedControl = [[UISegmentedControl alloc] initWithItems:@[NSLocalizedString(@"All", @"All"), NSLocalizedString(@"From map", @"From map"), NSLocalizedString(@"From search", @"From search")]];
     [_segmentedControl addTarget:self action:@selector(segmentedControlValueChanged) forControlEvents:UIControlEventValueChanged];
     _segmentedControl.tintColor = [UIColor blackColor];
     self.navigationItem.titleView = _segmentedControl;
@@ -104,7 +104,7 @@ NSDateFormatter *favoritesDateFormatter;
     self.navigationItem.titleView = _segmentedControl;
 
     _sortButton = [[UIBarButtonItem alloc]
-            initWithTitle:@"Сортировка"
+            initWithTitle:NSLocalizedString(@"Sort", @"Sort")
                     style:UIBarButtonItemStylePlain
                    target:self
                    action:@selector(filterButtonPressed)];
@@ -127,7 +127,7 @@ NSDateFormatter *favoritesDateFormatter;
 
     Ticket *ticket = _tickets[(NSUInteger) indexPath.row];
     // N.B. "valueForKey" used by voluntary to work around strange EXC_BAD_ACCESS fault:
-    cell.priceLabel.text = [NSString stringWithFormat:@"%@ руб.", [ticket valueForKey:@"price"]];
+    cell.priceLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ RUR", @"%@ RUR"), [ticket valueForKey:@"price"]];
     cell.placesLabel.text = [NSString stringWithFormat:@"%@ - %@", ticket.from, ticket.to];
     cell.dateLabel.text = [favoritesDateFormatter stringFromDate:ticket.departure];
 
@@ -143,13 +143,13 @@ NSDateFormatter *favoritesDateFormatter;
     logCurrentMethod();
 
     UIAlertController *alertController = [UIAlertController
-            alertControllerWithTitle:@"Действия с билетом"
-                             message:@"Что необходимо сделать с выбранным билетом?"
+            alertControllerWithTitle:NSLocalizedString(@"Ticket actions", @"Ticket actions")
+                             message:NSLocalizedString(@"What to do with the ticket?", @"What to do with the ticket?")
                       preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *favoriteAction;
     if ([CoreDataHelper.sharedInstance isFavorite:_tickets[(NSUInteger) indexPath.row]]) {
         favoriteAction = [UIAlertAction
-                actionWithTitle:@ "Удалить из избранного"
+                actionWithTitle:NSLocalizedString(@"Remove from favorites", @"Remove from favorites")
                           style:UIAlertActionStyleDestructive
                         handler:^(UIAlertAction *_Nonnull action) {
                             [CoreDataHelper.sharedInstance removeFromFavorites:_tickets[(NSUInteger) indexPath.row]];
@@ -160,7 +160,7 @@ NSDateFormatter *favoritesDateFormatter;
 
 
     UIAlertAction *notificationAction = [UIAlertAction
-            actionWithTitle:@"Напомнить"
+            actionWithTitle:NSLocalizedString(@"Remind me", @"Remind me")
                       style:(UIAlertActionStyleDefault)
                     handler:^(UIAlertAction *_Nonnull action) {
                         notificationCell = (TicketCollectionViewCell *) [collectionView cellForItemAtIndexPath:indexPath];
@@ -169,7 +169,7 @@ NSDateFormatter *favoritesDateFormatter;
     [alertController addAction:notificationAction];
 
 
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Закрыть" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Close", @"Close") style:UIAlertActionStyleCancel handler:nil];
     [alertController addAction:favoriteAction];
     [alertController addAction:cancelAction];
     [self presentViewController:alertController animated:YES completion:nil];
@@ -228,10 +228,10 @@ NSDateFormatter *favoritesDateFormatter;
 
 - (void)filterButtonPressed {
     logCurrentMethod();
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Сортировка билетов"
-                                                                             message:@"Выберите предпочитаемую сортировку"
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Sort tickets", @"Sort tickets")
+                                                                             message:NSLocalizedString(@"Select the preferred sort order", @"Выберите предпочитаемую сортировку")
                                                                       preferredStyle:UIAlertControllerStyleActionSheet];
-    UIAlertAction *sortByPriceAsc = [UIAlertAction actionWithTitle:@ "По цене (по возр.)"
+    UIAlertAction *sortByPriceAsc = [UIAlertAction actionWithTitle:NSLocalizedString(@"By price (asc.)", @"По цене (по возр.)")
                                                              style:UIAlertActionStyleDefault
                                                            handler:^(UIAlertAction *_Nonnull action) {
                                                                __weak typeof(self) welf = self;
@@ -241,7 +241,7 @@ NSDateFormatter *favoritesDateFormatter;
                                                            }];
     [alertController addAction:sortByPriceAsc];
 
-    UIAlertAction *sortByPriceDes = [UIAlertAction actionWithTitle:@ "По цене (по убыв.)"
+    UIAlertAction *sortByPriceDes = [UIAlertAction actionWithTitle:NSLocalizedString(@"By price (desc.)", @"По цене (по убыв.)")
                                                              style:UIAlertActionStyleDefault
                                                            handler:^(UIAlertAction *_Nonnull action) {
                                                                __weak typeof(self) welf = self;
@@ -251,7 +251,7 @@ NSDateFormatter *favoritesDateFormatter;
                                                            }];
     [alertController addAction:sortByPriceDes];
 
-    UIAlertAction *sortByAddedAsc = [UIAlertAction actionWithTitle:@ "По дате добавления (по возр.)"
+    UIAlertAction *sortByAddedAsc = [UIAlertAction actionWithTitle:NSLocalizedString(@"Date added (asc.)", @"По дате добавления (по возр.)")
                                                              style:UIAlertActionStyleDefault
                                                            handler:^(UIAlertAction *_Nonnull action) {
                                                                __weak typeof(self) welf = self;
@@ -261,7 +261,7 @@ NSDateFormatter *favoritesDateFormatter;
                                                            }];
     [alertController addAction:sortByAddedAsc];
 
-    UIAlertAction *sortByAddedDes = [UIAlertAction actionWithTitle:@ "По дате добавления (по убыв.)"
+    UIAlertAction *sortByAddedDes = [UIAlertAction actionWithTitle:NSLocalizedString(@"Date added (desc.)", @"По дате добавления (по убыв.)")
                                                              style:UIAlertActionStyleDefault
                                                            handler:^(UIAlertAction *_Nonnull action) {
                                                                __weak typeof(self) welf = self;
@@ -272,7 +272,7 @@ NSDateFormatter *favoritesDateFormatter;
 
     [alertController addAction:sortByAddedDes];
 
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Закрыть"
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Close", @"Закрыть")
                                                            style:UIAlertActionStyleCancel
                                                          handler:nil];
     [alertController addAction:cancelAction];
@@ -289,7 +289,7 @@ NSDateFormatter *favoritesDateFormatter;
         if (!indexPath) return;
         // N.B. "valueForKey" used by voluntary to work around strange EXC_BAD_ACCESS fault:
         NSNumber *price = [_tickets[(NSUInteger) indexPath.row] valueForKey:@"price"];
-        NSString *message = [NSString stringWithFormat:@"%@ - %@ за %@ руб.",
+        NSString *message = [NSString stringWithFormat:NSLocalizedString(@"%@ - %@ for %@ RUR", @"%@ - %@ за %@ руб."),
                                                        _tickets[(NSUInteger) indexPath.row].from,
                                                        _tickets[(NSUInteger) indexPath.row].to,
                                                        price];
@@ -306,10 +306,10 @@ NSDateFormatter *favoritesDateFormatter;
             }
             imageURL = [NSURL fileURLWithPath:path];
         }
-        Notification notification = NotificationMake(@"Напоминание о билете", message, _datePicker.date, imageURL);
+        Notification notification = NotificationMake(NSLocalizedString(@"Ticket reminder", @"Напоминание о билете"), message, _datePicker.date, imageURL);
         [[NotificationCenter sharedInstance] sendNotification:notification];
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Успешно" message:[NSString stringWithFormat:@"Уведомление будет отправлено - %@", _datePicker.date] preferredStyle:(UIAlertControllerStyleAlert)];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Закрыть"
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Success", @"Успешно") message:[NSString stringWithFormat:NSLocalizedString(@"Remainder set at %@", @"Уведомление будет отправлено - %@"), _datePicker.date] preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Close", @"Close")
                                                                style:UIAlertActionStyleCancel handler:nil];
         [alertController addAction:cancelAction];
         [self.view endEditing:YES];

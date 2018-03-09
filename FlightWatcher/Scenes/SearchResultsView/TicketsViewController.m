@@ -35,7 +35,7 @@ NSDateFormatter *ticktsDateFormatter;
     flowLayout.minimumLineSpacing = 0;
 
     self = [super initWithCollectionViewLayout:flowLayout];
-    self.title = @"Билеты";
+    self.title = NSLocalizedString(@"Tickets", @"Билеты");
     _tickets = tickets;
     ticktsDateFormatter = [NSDateFormatter new];
     ticktsDateFormatter.dateFormat = @"dd MMMM yyyy hh:mm";
@@ -68,7 +68,7 @@ NSDateFormatter *ticktsDateFormatter;
     [self.collectionView registerClass:TicketCollectionViewCell.class forCellWithReuseIdentifier:@"TicketCellIdentifier"];
     self.collectionView.backgroundColor = UIColor.whiteColor;
     self.collectionView.delegate = self;
-    self.navigationItem.backBarButtonItem.title = @"Назад";
+    self.navigationItem.backBarButtonItem.title = NSLocalizedString(@"Back", @"Назад");
 }
 
 // MARK: - UICollectionViewDataSource
@@ -86,7 +86,7 @@ NSDateFormatter *ticktsDateFormatter;
 
     Ticket *ticket = _tickets[(NSUInteger) indexPath.row];
     // N.B. "valueForKey" used by voluntary to work around strange EXC_BAD_ACCESS fault:
-    cell.priceLabel.text = [NSString stringWithFormat:@"%@ руб.", ticket.price];
+    cell.priceLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ RUR", @"%@ руб."), ticket.price];
     cell.placesLabel.text = [NSString stringWithFormat:@"%@ - %@", ticket.from, ticket.to];
     cell.dateLabel.text = [ticktsDateFormatter stringFromDate:ticket.departure];
 
@@ -102,12 +102,12 @@ NSDateFormatter *ticktsDateFormatter;
     logCurrentMethod();
 
 
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Действия с билетом"
-                                                                             message:@"Что необходимо сделать с выбранным билетом?"
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Ticket actions", @"Ticket actions")
+                                                                             message:NSLocalizedString(@"What to do with the ticket?", @"What to do with the ticket?")
                                                                       preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *favoriteAction;
     if ([CoreDataHelper.sharedInstance isFavorite:_tickets[(NSUInteger) indexPath.row]]) {
-        favoriteAction = [UIAlertAction actionWithTitle:@ "Удалить из избранного"
+        favoriteAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Remove from favorites", @"Remove from favorites")
                                                   style:UIAlertActionStyleDestructive
                                                 handler:^(UIAlertAction *_Nonnull action) {
                                                     [CoreDataHelper.sharedInstance
@@ -115,7 +115,7 @@ NSDateFormatter *ticktsDateFormatter;
                                                 }];
 
     } else {
-        favoriteAction = [UIAlertAction actionWithTitle:@ "Добавить в избранное"
+        favoriteAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Add to favorites", @"Add to favorites")
                                                   style:UIAlertActionStyleDefault
                                                 handler:
                                                         ^(UIAlertAction *_Nonnull action) {
@@ -123,7 +123,7 @@ NSDateFormatter *ticktsDateFormatter;
                                                                     addToFavorites:_tickets[(NSUInteger) indexPath.row] fromMap:NO];
                                                         }];
     }
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Закрыть"
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Close", @"Close")
                                                            style:UIAlertActionStyleCancel
                                                          handler:nil];
     [alertController addAction:favoriteAction];
@@ -169,7 +169,7 @@ NSDateFormatter *ticktsDateFormatter;
         if (!indexPath) return;
         // N.B. "valueForKey" used by voluntary to work around strange EXC_BAD_ACCESS fault:
         NSNumber *price = [_tickets[(NSUInteger) indexPath.row] valueForKey:@"price"];
-        NSString *message = [NSString stringWithFormat:@"%@ - %@ за %@ руб.",
+        NSString *message = [NSString stringWithFormat:NSLocalizedString(@"%@ - %@ for %@ RUR", @"%@ - %@ for %@ RUR"),
                                                        _tickets[(NSUInteger) indexPath.row].from,
                                                        _tickets[(NSUInteger) indexPath.row].to,
                                                        price];
@@ -186,10 +186,11 @@ NSDateFormatter *ticktsDateFormatter;
             }
             imageURL = [NSURL fileURLWithPath:path];
         }
-        Notification notification = NotificationMake(@"Напоминание о билете", message, _datePicker.date, imageURL);
+        Notification notification = NotificationMake(NSLocalizedString(@"Ticket reminder", @"Ticket reminder"), message, _datePicker.date, imageURL);
         [[NotificationCenter sharedInstance] sendNotification:notification];
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Успешно" message:[NSString stringWithFormat:@"Уведомление будет отправлено - %@", _datePicker.date] preferredStyle:(UIAlertControllerStyleAlert)];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Закрыть"
+        UIAlertController *alertController;
+        alertController = [UIAlertController alertControllerWithTitle:@"Success" message:[NSString stringWithFormat:NSLocalizedString(@"Remainder set at %@", @"Remainder set at %@"), _datePicker.date] preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Close", @"Close")
                                                                style:UIAlertActionStyleCancel handler:nil];
         [alertController addAction:cancelAction];
         [self presentViewController:alertController animated:YES completion:nil];

@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     logCurrentMethod();
     [super viewDidLoad];
-    self.title = @"Карта цен";
+    self.title = NSLocalizedString(@"Prices map", @"Prices map");
     _mapView = [[MKMapView alloc] initWithFrame:self.view.bounds];
     _mapView.showsUserLocation = YES;
     _mapView.delegate = self;
@@ -42,7 +42,7 @@
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(handleLocalNotification)
                                                name:kDidReceiveNotificationResponse object:nil];
 
-    _selectPlaceButton = [[UIButton alloc] initWithFrame:self.view.bounds title:@"Выбрать место вылета"];
+    _selectPlaceButton = [[UIButton alloc] initWithFrame:self.view.bounds title:NSLocalizedString(@"Choose departure location", @"Выбрать место вылета")];
     [_selectPlaceButton addTarget:self action:@selector(selectPlaceButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_selectPlaceButton];
 }
@@ -105,7 +105,7 @@
     }
 
     [_locationService cityNameForLocation:location completeWithName:^(NSString *name) {
-        self.navigationItem.title = [NSString stringWithFormat:@"Карта цен из %@", (name) ?: @"неизвестного места"];
+        self.navigationItem.title = [NSString stringWithFormat:NSLocalizedString(@"Prices map from %@", @"Prices map from %@"), (name) ?: NSLocalizedString(@"unknown place", @"неизвестного места")];
     }];
 }
 
@@ -152,19 +152,19 @@
     for (MapPrice *price in _prices) {
         if (price.destination.name == view.annotation.title) {
             [APIManager.sharedInstance requestTicketWithMapPrice:price completion:^(Ticket *ticket) {
-                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@ "Билет в %@ за %@", view.annotation.title, view.annotation.subtitle]
-                                                                                         message:@"Что необходимо сделать с выбранным билетом?"
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Ticket to %@ for %@", @"Билет в %@ за %@"), view.annotation.title, view.annotation.subtitle]
+                                                                                         message:NSLocalizedString(@"What to do with the ticket?", @"What to do with the ticket?")
                                                                                   preferredStyle:UIAlertControllerStyleActionSheet];
                 UIAlertAction *favoriteAction;
                 if ([CoreDataHelper.sharedInstance isFavorite:ticket]) {
-                    favoriteAction = [UIAlertAction actionWithTitle:@ "Удалить из избранного"
+                    favoriteAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Remove from favorites", @"Remove from favorites")
                                                               style:UIAlertActionStyleDestructive
                                                             handler:^(UIAlertAction *_Nonnull action) {
                                                                 [CoreDataHelper.sharedInstance
                                                                         removeFromFavorites:ticket];
                                                             }];
                 } else {
-                    favoriteAction = [UIAlertAction actionWithTitle:@ "Добавить в избранное"
+                    favoriteAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Add to favorites", @"Добавить в избранное")
                                                               style:UIAlertActionStyleDefault
                                                             handler:
                                                                     ^(UIAlertAction *_Nonnull action) {
@@ -173,7 +173,7 @@
                                                                     }];
                 }
 
-                UIAlertAction *changeOriginAction = [UIAlertAction actionWithTitle:@ "Сделать это местом вылета"
+                UIAlertAction *changeOriginAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Set this as departure location", @"Сделать это местом вылета")
                                                           style:UIAlertActionStyleDefault
                                                         handler:^(UIAlertAction *_Nonnull action) {
                                                             __weak typeof(self) welf = self;
@@ -182,7 +182,7 @@
 
                                                         }];
 
-                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Закрыть"
+                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Close", @"Close")
                                                                        style:UIAlertActionStyleCancel
                                                                      handler:nil];
                 [alertController addAction:favoriteAction];

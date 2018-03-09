@@ -29,10 +29,10 @@
         [_locationManager startUpdatingLocation];
     } else if (status != kCLAuthorizationStatusNotDetermined) {
         UIAlertController *alertController =
-                [UIAlertController alertControllerWithTitle:@"Ошибка"
-                                                    message:@"Не удалось определить текущий город!"
+                [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", @"Error")
+                                                    message:NSLocalizedString(@"Couldn't detect current locality", @"Couldn't detect current locality")
                                              preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"Закрыть"
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Close", @"Close")
                                                             style:(UIAlertActionStyleDefault)
                                                           handler:nil]];
         [UIApplication.sharedApplication.keyWindow.rootViewController
