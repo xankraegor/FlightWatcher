@@ -7,6 +7,4 @@
 
 + (instancetype _Nonnull)newWithFrame:(CGRect)frame usingTitle:(NSString *__nullable)title alignment:(NSTextAlignment)alignment;
 
-+ (instancetype _Nonnull)newWithFrame:(CGRect)frame usingTitle:(NSString *__nullable)title;
-
 @end

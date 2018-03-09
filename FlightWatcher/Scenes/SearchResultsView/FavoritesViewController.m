@@ -73,6 +73,7 @@ NSDateFormatter *favoritesDateFormatter;
 
 - (void)viewDidLoad {
     logCurrentMethod();
+    [super viewDidLoad];
     [self setupAdditionalFavoritesViews];
     [self.collectionView registerClass:TicketCollectionViewCell.class forCellWithReuseIdentifier:@"TicketCellIdentifier"];
     self.collectionView.backgroundColor = UIColor.whiteColor;
@@ -81,6 +82,7 @@ NSDateFormatter *favoritesDateFormatter;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self loadFavoritesIfNeededSortedAndFiltered];
 }
 
@@ -167,9 +169,7 @@ NSDateFormatter *favoritesDateFormatter;
     [alertController addAction:notificationAction];
 
 
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Закрыть"
-                                                           style:UIAlertActionStyleCancel
-                                                         handler:nil];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Закрыть" style:UIAlertActionStyleCancel handler:nil];
     [alertController addAction:favoriteAction];
     [alertController addAction:cancelAction];
     [self presentViewController:alertController animated:YES completion:nil];
@@ -278,13 +278,6 @@ NSDateFormatter *favoritesDateFormatter;
     [alertController addAction:cancelAction];
 
     [self presentViewController:alertController animated:YES completion:nil];
-}
-
-
-// MARK: - Memory management
-
-- (void)didReceiveMemoryWarning {
-    logCurrentMethod();
 }
 
 // MARK: - Buttons
