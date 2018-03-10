@@ -17,8 +17,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(nullable NSString *)reuseIdentifier {
 
     if (self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier]) {
-        self.textLabel.layer.backgroundColor = [UIColor.whiteColor CGColor];
-        self.detailTextLabel.layer.backgroundColor = [UIColor.whiteColor CGColor];
+
     }
     return self;
 }

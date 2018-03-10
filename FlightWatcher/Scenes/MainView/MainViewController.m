@@ -87,7 +87,7 @@
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self
+    [NSNotificationCenter.defaultCenter removeObserver:self
                                                     name:kDataManagerLoadDataDidComplete
                                                   object:nil];
     [NSNotificationCenter.defaultCenter removeObserver:self
@@ -222,7 +222,6 @@
     if (returnType == PlaceSelectionReturnTypeDestination) {
         [self setPlace:place ofType:dataType isOrigin:NO];
     }
-
 }
 
 - (void)setPlace:(id)place ofType:(DataSourceType)dataType isOrigin:(BOOL)isOrigin {

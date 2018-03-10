@@ -116,11 +116,10 @@ static NSString *cellId = @"PlaceCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     logCurrentMethod();
-    id place = (_searchController.isActive &&_searchArray.count > 0) ? _searchArray[(NSUInteger) indexPath.row] : _currentArray[(NSUInteger) indexPath.row];
+    id place =  [self isSearching] ? _searchArray[(NSUInteger) indexPath.row] : _currentArray[(NSUInteger) indexPath.row];
+    NSLog(@"%ld selected %@", (long)indexPath.row, [place valueForKey:@"name"]);
     [self.delegate selectPlace:place withType:_returnType andDataType:self.dataSourceType];
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-
 
 @end

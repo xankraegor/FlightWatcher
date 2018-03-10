@@ -35,8 +35,7 @@
 "Favorites" = "Favorites";
 "Unnamed" = "Unnamed";
 "Remove" = "Remove";
-"Ticket search" = "Ticket search";
-"Search" = "Search";
+"Ticket search" = "Tickets search";
 "No tickets found with current settings" = "No tickets found with current settings";
 "any" = "any";
 "From: required" = "From: required";
@@ -64,4 +63,3 @@
 "Next" = "Next";
 "Done" = "Done";
 "Tickets" = "Tickets";
-"%@ RUR" = "%@ RUR";

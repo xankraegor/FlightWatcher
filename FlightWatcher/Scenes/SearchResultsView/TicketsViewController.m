@@ -1,5 +1,5 @@
 //
-//  CollectionViewController.m
+//  TicketsViewController.m
 //  FlightWatcher
 //
 //  Created by Xan Kraegor on 13.02.2018.

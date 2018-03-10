@@ -9,7 +9,6 @@
 #import <CloudKit/CloudKit.h>
 #import "SyncManager.h"
 #import "CoreDataHelper.h"
-#import "FavoriteTicket+CoreDataClass.h"
 
 @implementation SyncManager
 
@@ -25,7 +24,7 @@
 
 - (void)storeRecords {
     logCurrentMethod();
-    CKContainer  *container = CKContainer.defaultContainer;
+    CKContainer *container = CKContainer.defaultContainer;
     CKDatabase *privateDatabase = container.privateCloudDatabase;
 
     for (FavoriteTicket *item in CoreDataHelper.sharedInstance.favorites) {
@@ -51,8 +50,6 @@
             }
         }];
     }
-
-
 
 
 }
