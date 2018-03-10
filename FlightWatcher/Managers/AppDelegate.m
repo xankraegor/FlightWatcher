@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "TabBarController.h"
 #import "NotificationCenter.h"
-
+#import "SyncManager.h"
 
 
 @implementation AppDelegate
@@ -19,6 +19,7 @@
     logCurrentMethod();
     [self performViewInitialization];
     [NotificationCenter.sharedInstance registerService];
+    [SyncManager.sharedInstance storeRecords];
     return YES;
 }
 

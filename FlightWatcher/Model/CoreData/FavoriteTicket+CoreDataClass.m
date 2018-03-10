@@ -10,4 +10,14 @@
 
 @implementation FavoriteTicket
 
+-(NSString *)recordId {
+    return [NSString stringWithFormat:@"%lu%lu%lu%lu%lu%lu",
+                    self.airline.hash,
+                    self.from.hash,
+                    self.to.hash,
+                    self.departure.hash,
+                    @(self.flightNumber).hash,
+                    @(self.price).hash];
+}
+
 @end

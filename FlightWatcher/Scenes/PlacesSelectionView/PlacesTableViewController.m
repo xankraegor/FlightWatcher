@@ -94,7 +94,7 @@ static NSString *cellId = @"PlaceCell";
 }
 
 -(BOOL)isSearching {
-    return _searchController.isActive &&_searchArray.count > 0;
+    return _searchController.searchBar.text.length > 0 &&_searchArray.count > 0;
 }
 
 // MARK: - Table view data source

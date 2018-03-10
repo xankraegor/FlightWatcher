@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FavoriteTicket : NSManagedObject
 
+- (NSString *)recordId;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -12,6 +12,8 @@
 		2A0284AC2023CACE004EFC23 /* airports.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A0284A92023CACE004EFC23 /* airports.json */; };
 		2A2F6016202E61A9007962F7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A2F6015202E61A9007962F7 /* MapKit.framework */; };
 		2A39E76A2052E4D700ACF0DB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2A39E76C2052E4D700ACF0DB /* Localizable.strings */; };
+		2ABD82F2205375FF0039F018 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABD82F1205375FF0039F018 /* CloudKit.framework */; };
+		2ABD82F52053776C0039F018 /* SyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ABD82F42053776C0039F018 /* SyncManager.m */; };
 		2AEEBAEA2020ECC9005D5C60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AEEBAE92020ECC9005D5C60 /* Assets.xcassets */; };
 		2AEEBAED2020ECC9005D5C60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AEEBAEB2020ECC9005D5C60 /* LaunchScreen.storyboard */; };
 		2AEEBAF02020ECC9005D5C60 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEBAEF2020ECC9005D5C60 /* main.m */; };
@@ -57,6 +59,10 @@
 		2A39E76B2052E4D700ACF0DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2A39E76E2052E53500ACF0DB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		2A39E76F2052E53500ACF0DB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2ABD82F0205375F30039F018 /* FlightWatcher.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FlightWatcher.entitlements; sourceTree = "<group>"; };
+		2ABD82F1205375FF0039F018 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		2ABD82F32053776C0039F018 /* SyncManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncManager.h; sourceTree = "<group>"; };
+		2ABD82F42053776C0039F018 /* SyncManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyncManager.m; sourceTree = "<group>"; };
 		2ABF3C2E203A1BAF002E184B /* FlightWatcher-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FlightWatcher-Prefix.pch"; sourceTree = "<group>"; };
 		2AEEBADA2020ECC9005D5C60 /* FlightWatcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlightWatcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AEEBAE92020ECC9005D5C60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -139,6 +145,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ABD82F2205375FF0039F018 /* CloudKit.framework in Frameworks */,
 				2A2F6016202E61A9007962F7 /* MapKit.framework in Frameworks */,
 				8AB65C77CA6D4424DDD1B10C /* libPods-FlightWatcher.a in Frameworks */,
 			);
@@ -199,6 +206,7 @@
 		2AEEBADC2020ECC9005D5C60 /* FlightWatcher */ = {
 			isa = PBXGroup;
 			children = (
+				2ABD82F0205375F30039F018 /* FlightWatcher.entitlements */,
 				2ABF3C2E203A1BAF002E184B /* FlightWatcher-Prefix.pch */,
 				2AEEBAF72020ECFF005D5C60 /* Other */,
 				2AEEBB0820214BC2005D5C60 /* Categories */,
@@ -241,6 +249,7 @@
 		33A19D4812002F90F5A4E657 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2ABD82F1205375FF0039F018 /* CloudKit.framework */,
 				2A2F6015202E61A9007962F7 /* MapKit.framework */,
 				931DF525AB9F6B292ACADF2A /* libPods-FlightWatcher.a */,
 			);
@@ -363,6 +372,8 @@
 				3765FE7EF80086A3D042586B /* AppDelegate.h */,
 				3765F640D385615B7841D76F /* NotificationCenter.m */,
 				3765F2BC6B10D66B858CC0C7 /* NotificationCenter.h */,
+				2ABD82F32053776C0039F018 /* SyncManager.h */,
+				2ABD82F42053776C0039F018 /* SyncManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -422,6 +433,12 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
 								enabled = 1;
 							};
 						};
@@ -520,6 +537,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ABD82F52053776C0039F018 /* SyncManager.m in Sources */,
 				2AEEBAF02020ECC9005D5C60 /* main.m in Sources */,
 				3765F91D94D71DF3196572BE /* UIColor+ColorPalette.m in Sources */,
 				3765F446DEB215BDEF74B01E /* UIButton+Style.m in Sources */,
@@ -628,7 +646,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -679,7 +697,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -691,11 +709,13 @@
 			baseConfigurationReference = 7718B9BAD2D69D1731AC2313 /* Pods-FlightWatcher.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FlightWatcher/FlightWatcher.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L74ER2RZ64;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FlightWatcher/FlightWatcher-Prefix.pch";
 				INFOPLIST_FILE = FlightWatcher/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xankraegor.FlightWatcher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -709,11 +729,13 @@
 			baseConfigurationReference = D58CE391EA3DFBECDC8AEA96 /* Pods-FlightWatcher.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FlightWatcher/FlightWatcher.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L74ER2RZ64;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FlightWatcher/FlightWatcher-Prefix.pch";
 				INFOPLIST_FILE = FlightWatcher/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xankraegor.FlightWatcher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
